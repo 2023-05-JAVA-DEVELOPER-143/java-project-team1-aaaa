@@ -55,7 +55,7 @@ public class Main2 extends JFrame {
 		northPanel.add(logoLabel);
 		
 		JLabel cartLogoLabel = new JLabel("");
-		cartLogoLabel.setIcon(new ImageIcon("C:\\2023-05-JAVA-DEVELOPER\\java-project-team1-aaaa\\src\\com\\itwill\\shop\\image\\216477_shopping_cart_icon (2).png"));
+		cartLogoLabel.setIcon(new ImageIcon("C:\\2023-05-JAVA-DEVELOPER\\repositories\\java-project-team1-aaaa\\src\\com\\itwill\\shop\\image\\216477_shopping_cart_icon (2).png"));
 		cartLogoLabel.setBounds(418, 0, 30, 40);
 		northPanel.add(cartLogoLabel);
 		
@@ -88,6 +88,15 @@ public class Main2 extends JFrame {
 		
 		JTabbedPane productTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addTab("상품", null, productTabbedPane, null);
+		
+		JPanel productBestSellerPanel = new JPanel();
+		productTabbedPane.addTab("베스트셀러", null, productBestSellerPanel, null);
+		
+		JPanel productNovel = new JPanel();
+		productTabbedPane.addTab("소설", null, productNovel, null);
+		
+		JPanel productSelfImprovement = new JPanel();
+		productTabbedPane.addTab("자기계발", null, productSelfImprovement, null);
 		
 		JTabbedPane cartTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addTab("장바구니", null, cartTabbedPane, null);
