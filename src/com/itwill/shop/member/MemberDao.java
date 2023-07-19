@@ -17,15 +17,15 @@ public class MemberDao {
 	/*
 	 * create(insert):user테이블에 새로운사용자생성
 	 */
-	public int insert(Member user) throws Exception{
+	public int insert(Member member) throws Exception{
 		Connection con=dataSource.getConnection();
 		PreparedStatement pstmt=con.prepareStatement(MemberSQL.MEMBER_INSERT);
-		pstmt.setString(1, user.getM_Id());
-		pstmt.setString(2, user.getM_Pw());
-		pstmt.setString(3, user.getM_Name());
-		pstmt.setString(4, user.getM_Address());
-		pstmt.setString(5, user.getM_Email());
-		pstmt.setString(6, user.getM_Phone());
+		pstmt.setString(1, member.getM_Id());
+		pstmt.setString(2, member.getM_Pw());
+		pstmt.setString(3, member.getM_Name());
+		pstmt.setString(4, member.getM_Address());
+		pstmt.setString(5, member.getM_Email());
+		pstmt.setString(6, member.getM_Phone());
 		int rowCount=pstmt.executeUpdate();
 		pstmt.close();
 		con.close();
@@ -34,13 +34,14 @@ public class MemberDao {
 	/*
 	 * update: 기존의 사용자정보를 수정
 	 */
-	public int update(Member user) throws Exception{
+	public int update(Member member) throws Exception{
 		Connection con=dataSource.getConnection();
 		PreparedStatement pstmt=con.prepareStatement(MemberSQL.MEMBER_UPDATE);
-		pstmt.setString(1, user.getM_Name());
-		pstmt.setString(2, user.getM_Address());
-		pstmt.setString(3, user.getM_Email());
-		pstmt.setString(4, user.getM_Phone());
+		pstmt.setString(1, member.getM_Name());
+		pstmt.setString(2, member.getM_Phone());
+		pstmt.setString(3, member.getM_Email());
+		pstmt.setString(4, member.getM_Address());
+		pstmt.setString(5, member.getM_Id());
 		
 		int rowCount=pstmt.executeUpdate();
 		pstmt.close();
@@ -72,11 +73,11 @@ public class MemberDao {
 		if(rs.next()) {
 			member=new Member(
 					rs.getString("m_id"),
-					rs.getString("m_pw"), 
 					rs.getString("m_name"), 
-					rs.getString("m_address"),
+					rs.getString("m_pw"),
+					rs.getString("m_phone"),
 					rs.getString("m_email"),
-					rs.getString("m_phone"));
+					rs.getString("m_address"));
 		}
 		return member;
 	}
