@@ -21,7 +21,7 @@ public class ProductDao {
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(ProductSQL.PRODUCT_INSERT);
 
-		pstmt.setString(1,product.getP_title());
+		pstmt.setString(1,product.getP_name());
 		pstmt.setInt(2, product.getP_price());
 		pstmt.setString(3, product.getP_image());
 		pstmt.setString(4, product.getP_desc());
@@ -40,7 +40,7 @@ public int update(Product product) throws Exception {
 	Connection con = dataSource.getConnection();
 	PreparedStatement pstmt = con.prepareStatement(ProductSQL.PRODUCT_UPDATE_BY_NO);
 
-	pstmt.setString(1,product.getP_title());
+	pstmt.setString(1,product.getP_name());
 	pstmt.setInt(2, product.getP_price());
 	pstmt.setString(3, product.getP_image());
 	pstmt.setString(4, product.getP_desc());
@@ -78,7 +78,7 @@ public Product findByNo(int p_no) throws Exception {
 
 		do {
 			findNoProduct = new Product (rs.getInt("p_no"),
-										 rs.getString("p_title"),
+										 rs.getString("p_name"),
 										 rs.getInt("p_price"),
 										 rs.getString("p_image"),
 										 rs.getString("p_desc"));
@@ -113,7 +113,7 @@ public List<Product> findByTitle(String p_title) throws Exception {
 		do {
 			Product product 
 			= new Product (rs.getInt("p_no"), 
-							rs.getString("p_title"), 
+							rs.getString("p_name"), 
 							rs.getInt("p_price"), 
 							rs.getString("p_image"),
 							rs.getString("p_desc"));
@@ -136,7 +136,7 @@ public List <Product> productList() throws Exception {
 		do {
 			Product product 
 			= new Product (rs.getInt("p_no"), 
-						   rs.getString("p_title"), 
+						   rs.getString("p_name"), 
 					       rs.getInt("p_price"), 
 					       rs.getString("p_image"),
 					       rs.getString("p_desc"));

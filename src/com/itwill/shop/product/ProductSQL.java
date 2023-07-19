@@ -2,11 +2,10 @@ package com.itwill.shop.product;
 
 public class ProductSQL {
 	public static final String PRODUCT_INSERT 
-	= "insert into product(p_no, p_title, p_price, p_image, p_desc) "
-			+ "values(product_p_no_SEQ.nextval,?,?,?,?)";// 상품추가
+	= "insert into product(p_no, p_name, p_price, p_image, p_desc) values(product_p_no_SEQ.nextval,?,?,?,?)";// 상품추가
 	
 	public static final String PRODUCT_UPDATE_BY_NO
-	= "update product set p_title = ?, p_price = ?, p_desc = ?, p_image = ? where p_no = ?"; //상품번호로 업데이트
+	= "update product set p_name = ?, p_price = ?, p_image = ?, p_desc = ? where p_no = ?"; //상품번호로 업데이트
 	
 	public static final String PRODUCT_DELETE_BY_NO =
 			"delete from product where p_no = ?"; // 상품번호로 삭제
@@ -20,7 +19,7 @@ public class ProductSQL {
 	public static final String PRODUCT_ALL =
 			"select * from product order by p_no"; // 전체 상품 리스트
 	
-	public static final String PRODUCT_ALL_SALECOUNT =
-			"select * from product order by p_salecount"; // 전체 상품 리스트 판매량순
+//	public static final String PRODUCT_ALL_SALECOUNT =
+//			"select * from product order by p_salecount"; // 전체 상품 리스트 판매량순
 			
 }

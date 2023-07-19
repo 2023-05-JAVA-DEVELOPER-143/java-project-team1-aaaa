@@ -25,8 +25,8 @@ public class ProductService {
 		return productDao.findByNo(p_no);
 	}
 	// 상품명으로 검색
-	public List<Product> searchProductByTitle(String p_title) throws Exception {
-		return productDao.findByTitle(p_title);
+	public List<Product> searchProductByName(String p_name) throws Exception {
+		return productDao.findByTitle(p_name);
 	}
 	// 상품리스트
 	public List<Product> productList() throws Exception {
