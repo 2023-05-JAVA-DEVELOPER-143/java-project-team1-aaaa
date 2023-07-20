@@ -13,8 +13,8 @@ public class ProductSQL {
 	public static final String PRODUCT_BY_NO =
 			"select * from product where p_no = ? "; //상품번호로 찾기 
 	
-	public static final String PRODUCT_BY_TITLE =
-			"select * from product where p_title like '%'||?||'%'"; //특정 상품명으로 찾기
+	public static final String PRODUCT_BY_NAME =
+			"select * from product where p_name like '%'||?||'%'"; //특정 상품명으로 찾기
 	
 	public static final String PRODUCT_ALL =
 			"select * from product order by p_no"; // 전체 상품 리스트

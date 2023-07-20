@@ -105,7 +105,7 @@ public List<Product> findByTitle(String p_title) throws Exception {
 
 	List<Product> productList = new ArrayList<>();
 	Connection con = dataSource.getConnection();
-	PreparedStatement pstmt = con.prepareStatement(ProductSQL.PRODUCT_BY_TITLE);
+	PreparedStatement pstmt = con.prepareStatement(ProductSQL.PRODUCT_BY_NAME);
 	pstmt.setString(1, p_title);
 	ResultSet rs = pstmt.executeQuery();
 
