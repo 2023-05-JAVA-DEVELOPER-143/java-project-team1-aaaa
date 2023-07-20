@@ -27,6 +27,8 @@ import com.itwill.shop.ui.임범준.MemberLoginPanel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JScrollPane;
+import com.itwill.shop.ui.임범준.MemberCreatePanel;
+import com.itwill.shop.ui.임범준.OrderPanel;
 
 public class Main2 extends JFrame {
 	/************ 1.Service객체멤버변수선언 ************/
@@ -88,7 +90,7 @@ public class Main2 extends JFrame {
 		northPanel.add(logoLabel);
 		
 		JLabel cartLogoLabel = new JLabel("");
-		cartLogoLabel.setBounds(418, 0, 30, 40);
+		cartLogoLabel.setBounds(418, 0, 33, 40);
 		northPanel.add(cartLogoLabel);
 		
 		searchTextField = new JTextField();
@@ -119,7 +121,10 @@ public class Main2 extends JFrame {
 		
 		JPanel memberJoinPanel = new JPanel();
 		MemberTabbedpane.addTab("회원가입", null, memberJoinPanel, null);
-		memberJoinPanel.setLayout(null);
+		memberJoinPanel.setLayout(new BorderLayout(0, 0));
+		
+		MemberCreatePanel memberCreatePanel = new MemberCreatePanel();
+		memberJoinPanel.add(memberCreatePanel, BorderLayout.CENTER);
 		
 		JPanel memberInfoPanel = new JPanel();
 		MemberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
@@ -147,28 +152,14 @@ public class Main2 extends JFrame {
 		shopTabbedPane.addTab("주문내역", null, orderPanel, null);
 		orderPanel.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane orderContentPanelScrollPane = new JScrollPane();
-		orderPanel.add(orderContentPanelScrollPane, BorderLayout.CENTER);
+		OrderPanel orderListPanel = new OrderPanel();
+		orderPanel.add(orderListPanel, BorderLayout.CENTER);
 		
-		JPanel orderContentPanel = new JPanel();
-		orderContentPanel.setPreferredSize(new Dimension(450, 1000));
-		orderContentPanelScrollPane.setViewportView(orderContentPanel);
-		
-		JPanel orderListTitlePanel = new JPanel();
-		orderListTitlePanel.setPreferredSize(new Dimension(450, 40));
-		orderContentPanel.add(orderListTitlePanel);
-		orderListTitlePanel.setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(450, 10));
-		orderContentPanel.add(panel);
-		panel.setLayout(null);
 		
 		memberService=new MemberService();
 		loginMember = new Member();
 		
 		
-		loginPanel.setMainFrame(this);
 	}
 	
 	

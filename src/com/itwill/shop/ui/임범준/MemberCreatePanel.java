@@ -14,6 +14,8 @@ import javax.swing.SwingConstants;
 
 import com.itwill.shop.member.Member;
 import com.itwill.shop.test.Main2;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MemberCreatePanel extends JPanel {
 	private JTextField memberJoinIdTF;
@@ -42,6 +44,12 @@ public class MemberCreatePanel extends JPanel {
 		memberCreatePanel.add(memberJoinTitleLB);
 		
 		memberJoinIdTF = new JTextField();
+		memberJoinIdTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberJoinIdTF.setText("");
+			}
+		});
 		memberJoinIdTF.setText("아이디\r\n");
 		memberJoinIdTF.setHorizontalAlignment(SwingConstants.LEFT);
 		memberJoinIdTF.setFont(new Font("굴림", Font.PLAIN, 18));
@@ -50,6 +58,12 @@ public class MemberCreatePanel extends JPanel {
 		memberCreatePanel.add(memberJoinIdTF);
 		
 		memberJoinPwTF = new JTextField();
+		memberJoinPwTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberJoinPwTF.setText("");
+			}
+		});
 		memberJoinPwTF.setText("비밀번호");
 		memberJoinPwTF.setHorizontalAlignment(SwingConstants.LEFT);
 		memberJoinPwTF.setFont(new Font("굴림", Font.PLAIN, 18));
@@ -72,6 +86,12 @@ public class MemberCreatePanel extends JPanel {
 		memberCreatePanel.add(memberJoinIdMsgLB);
 		
 		memberJoinNameTF = new JTextField();
+		memberJoinNameTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberJoinNameTF.setText("");
+			}
+		});
 		memberJoinNameTF.setText("이름");
 		memberJoinNameTF.setHorizontalAlignment(SwingConstants.LEFT);
 		memberJoinNameTF.setFont(new Font("굴림", Font.PLAIN, 18));
@@ -85,6 +105,12 @@ public class MemberCreatePanel extends JPanel {
 		memberCreatePanel.add(memberJoinPwCheckMsgLB);
 		
 		memberJoinPhoneTF = new JTextField();
+		memberJoinPhoneTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberJoinPhoneTF.setText("");
+			}
+		});
 		memberJoinPhoneTF.setText("전화번호");
 		memberJoinPhoneTF.setHorizontalAlignment(SwingConstants.LEFT);
 		memberJoinPhoneTF.setFont(new Font("굴림", Font.PLAIN, 18));
@@ -93,6 +119,12 @@ public class MemberCreatePanel extends JPanel {
 		memberCreatePanel.add(memberJoinPhoneTF);
 		
 		memberJoinEmailTF = new JTextField();
+		memberJoinEmailTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberJoinEmailTF.setText("");
+			}
+		});
 		memberJoinEmailTF.setText("이메일");
 		memberJoinEmailTF.setHorizontalAlignment(SwingConstants.LEFT);
 		memberJoinEmailTF.setFont(new Font("굴림", Font.PLAIN, 18));
@@ -101,6 +133,12 @@ public class MemberCreatePanel extends JPanel {
 		memberCreatePanel.add(memberJoinEmailTF);
 		
 		memberJoinAddressTF = new JTextField();
+		memberJoinAddressTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberJoinAddressTF.setText("");
+			}
+		});
 		memberJoinAddressTF.setText("주소");
 		memberJoinAddressTF.setHorizontalAlignment(SwingConstants.LEFT);
 		memberJoinAddressTF.setFont(new Font("굴림", Font.PLAIN, 18));
