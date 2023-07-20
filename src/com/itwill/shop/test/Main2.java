@@ -22,6 +22,9 @@ import com.itwill.shop.member.Member;
 import com.itwill.shop.member.MemberService;
 import com.itwill.shop.order.OrderService;
 import com.itwill.shop.product.ProductService;
+import com.itwill.shop.ui.이동현.ProductBestSellerListPanel;
+import com.itwill.shop.ui.이동현.ProductNovelListPanel;
+import com.itwill.shop.ui.이동현.ProductSelfImprovementListPanel;
 import com.itwill.shop.ui.임범준.MemberLoginPanel;
 
 import java.awt.event.MouseAdapter;
@@ -135,12 +138,24 @@ public class Main2 extends JFrame {
 		
 		JPanel productBestSellerPanel = new JPanel();
 		productTabbedPane.addTab("베스트셀러", null, productBestSellerPanel, null);
+		productBestSellerPanel.setLayout(new BorderLayout(0, 0));
+		
+		ProductBestSellerListPanel productBestSellerListPanel = new ProductBestSellerListPanel();
+		productBestSellerPanel.add(productBestSellerListPanel, BorderLayout.CENTER);
 		
 		JPanel productNovel = new JPanel();
 		productTabbedPane.addTab("소설", null, productNovel, null);
+		productNovel.setLayout(new BorderLayout(0, 0));
+		
+		ProductNovelListPanel productNovelListPanel = new ProductNovelListPanel();
+		productNovel.add(productNovelListPanel, BorderLayout.CENTER);
 		
 		JPanel productSelfImprovement = new JPanel();
 		productTabbedPane.addTab("자기계발", null, productSelfImprovement, null);
+		productSelfImprovement.setLayout(new BorderLayout(0, 0));
+		
+		ProductSelfImprovementListPanel productSelfImprovementListPanel = new ProductSelfImprovementListPanel();
+		productSelfImprovement.add(productSelfImprovementListPanel, BorderLayout.CENTER);
 		
 		JPanel productDetail = new JPanel();
 		productTabbedPane.addTab("상세페이지", null, productDetail, null);
