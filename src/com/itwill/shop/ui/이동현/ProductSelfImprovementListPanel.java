@@ -64,7 +64,7 @@ public class ProductSelfImprovementListPanel extends JPanel {
 		bestSellerListPanel.add(buyButton);
 		
 		JButton cartButton = new JButton("");
-		cartButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/216477_shopping_cart_icon (2).png")));
+		cartButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
 		cartButton.setBounds(232, 119, 50, 40);
 		bestSellerListPanel.add(cartButton);
 		
@@ -115,7 +115,7 @@ public class ProductSelfImprovementListPanel extends JPanel {
 			bestSellerListPanel.add(buyButton);
 			
 			JButton cartButton = new JButton("");
-			cartButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/216477_shopping_cart_icon (2).png")));
+			cartButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
 			cartButton.setBounds(232, 119, 50, 40);
 			bestSellerListPanel.add(cartButton);
 			
