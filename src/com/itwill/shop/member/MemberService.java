@@ -36,7 +36,7 @@ public class MemberService {
 		if(memberDao.countByMemberId(m_Id)==1) {
 			//아이디존재하는경우
 			Member loginUser = memberDao.findById(m_Id);
-			if(loginUser.getM_Pw().equals(m_Id)) {
+			if(loginUser.getM_Pw().equals(m_Pw)) {
 				//패쓰워드일치
 				result=1;
 			}else {

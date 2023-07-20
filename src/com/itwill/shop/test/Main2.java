@@ -22,6 +22,8 @@ import com.itwill.shop.member.Member;
 import com.itwill.shop.member.MemberService;
 import com.itwill.shop.order.OrderService;
 import com.itwill.shop.product.ProductService;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Main2 extends JFrame {
 	/************ 1.Service객체멤버변수선언 ************/
@@ -35,7 +37,6 @@ public class Main2 extends JFrame {
 	
 
 	private JPanel contentPane;
-	private JTabbedPane memberTabbedpane;
 	private JTextField searchTextField;
 	private JTextField memberLoginIdTF;
 	private JTextField memberLoginPwTF;
@@ -70,8 +71,9 @@ public class Main2 extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws Exception 
 	 */
-	public Main2() {
+	public Main2() throws Exception {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 650);
 		contentPane = new JPanel();
@@ -117,6 +119,12 @@ public class Main2 extends JFrame {
 		memberLoginPanel.setLayout(null);
 		
 		memberLoginIdTF = new JTextField();
+		memberLoginIdTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberLoginIdTF.setText("");
+			}
+		});
 		memberLoginIdTF.setFont(new Font("굴림", Font.PLAIN, 18));
 		memberLoginIdTF.setText("아이디");
 		memberLoginIdTF.setBounds(92, 191, 245, 35);
@@ -124,6 +132,12 @@ public class Main2 extends JFrame {
 		memberLoginIdTF.setColumns(10);
 		
 		memberLoginPwTF = new JTextField();
+		memberLoginPwTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberLoginPwTF.setText("");
+			}
+		});
 		memberLoginPwTF.setFont(new Font("굴림", Font.PLAIN, 18));
 		memberLoginPwTF.setText("비밀번호");
 		memberLoginPwTF.setColumns(10);
@@ -161,11 +175,10 @@ public class Main2 extends JFrame {
 						loginProcess(loginUser);
 
 					} else if (result == 0) {
-						memberLoginIdMsgLB.setText("아이디또는비밀번호가 일치하지않습니다.");
+						memberLoginIdMsgLB.setText("정보 다틀린데?");
 						memberLoginIdTF.requestFocus();
 						memberLoginIdTF.setSelectionStart(0);
 						memberLoginIdTF.setSelectionEnd(userid.length());
-					
 					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
@@ -208,6 +221,13 @@ public class Main2 extends JFrame {
 		memberJoinPanel.add(memberJoinTitleLB);
 		
 		memberJoinIdTF = new JTextField();
+		memberJoinIdTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberJoinIdTF.setText("");
+			}
+		});
+		memberJoinIdTF.setText("아이디\r\n");
 		
 		memberJoinIdTF.setFont(new Font("굴림", Font.PLAIN, 18));
 		memberJoinIdTF.setHorizontalAlignment(SwingConstants.LEFT);
@@ -216,6 +236,13 @@ public class Main2 extends JFrame {
 		memberJoinIdTF.setColumns(10);
 		
 		memberJoinPwTF = new JTextField();
+		memberJoinPwTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberJoinPwTF.setText("");
+			}
+		});
+		memberJoinPwTF.setText("비밀번호");
 		memberJoinPwTF.setHorizontalAlignment(SwingConstants.LEFT);
 		memberJoinPwTF.setFont(new Font("굴림", Font.PLAIN, 18));
 		memberJoinPwTF.setColumns(10);
@@ -223,6 +250,13 @@ public class Main2 extends JFrame {
 		memberJoinPanel.add(memberJoinPwTF);
 		
 		memberJoinNameTF = new JTextField();
+		memberJoinNameTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberJoinNameTF.setText("");
+			}
+		});
+		memberJoinNameTF.setText("이름");
 		memberJoinNameTF.setHorizontalAlignment(SwingConstants.LEFT);
 		memberJoinNameTF.setFont(new Font("굴림", Font.PLAIN, 18));
 		memberJoinNameTF.setColumns(10);
@@ -230,6 +264,13 @@ public class Main2 extends JFrame {
 		memberJoinPanel.add(memberJoinNameTF);
 		
 		memberJoinPhoneTF = new JTextField();
+		memberJoinPhoneTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberJoinPhoneTF.setText("");
+			}
+		});
+		memberJoinPhoneTF.setText("전화번호");
 		memberJoinPhoneTF.setHorizontalAlignment(SwingConstants.LEFT);
 		memberJoinPhoneTF.setFont(new Font("굴림", Font.PLAIN, 18));
 		memberJoinPhoneTF.setColumns(10);
@@ -237,6 +278,13 @@ public class Main2 extends JFrame {
 		memberJoinPanel.add(memberJoinPhoneTF);
 		
 		memberJoinEmailTF = new JTextField();
+		memberJoinEmailTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberJoinEmailTF.setText("");
+			}
+		});
+		memberJoinEmailTF.setText("이메일");
 		memberJoinEmailTF.setHorizontalAlignment(SwingConstants.LEFT);
 		memberJoinEmailTF.setFont(new Font("굴림", Font.PLAIN, 18));
 		memberJoinEmailTF.setColumns(10);
@@ -244,6 +292,13 @@ public class Main2 extends JFrame {
 		memberJoinPanel.add(memberJoinEmailTF);
 		
 		memberJoinAddressTF = new JTextField();
+		memberJoinAddressTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberJoinAddressTF.setText("");
+			}
+		});
+		memberJoinAddressTF.setText("주소");
 		memberJoinAddressTF.setHorizontalAlignment(SwingConstants.LEFT);
 		memberJoinAddressTF.setFont(new Font("굴림", Font.PLAIN, 18));
 		memberJoinAddressTF.setColumns(10);
@@ -251,6 +306,7 @@ public class Main2 extends JFrame {
 		memberJoinPanel.add(memberJoinAddressTF);
 		
 		memberJoinPwCheckTF = new JTextField();
+		memberJoinPwCheckTF.setText("비밀번호 재확인");
 		memberJoinPwCheckTF.setHorizontalAlignment(SwingConstants.LEFT);
 		memberJoinPwCheckTF.setFont(new Font("굴림", Font.PLAIN, 18));
 		memberJoinPwCheckTF.setColumns(10);
@@ -262,14 +318,14 @@ public class Main2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String memberId = memberJoinIdTF.getText();
-//					boolean isDuplicate = memberService.isDuplicateId(memberId);
-//					if(isDuplicate) {
-//						memberJoinIdTF.setSelectionStart(0);
-//						memberJoinIdTF.setSelectionEnd(memberId.length());
-//						memberJoinIdTF.requestFocus();
+					boolean isDuplicate = memberService.isDuplicateId(memberId);
+					if(isDuplicate) {
+						memberJoinIdTF.setSelectionStart(0);
+						memberJoinIdTF.setSelectionEnd(memberId.length());
+						memberJoinIdTF.requestFocus();
 //						memberJoinIdMsgLB.setText("아이디가 존재합니다");
-//						return;
-//					}
+						return;
+					}
 					String password = memberJoinPwTF.getText();
 //					if(memberJoinPwTF.getText() != memberJoinPwCheckTF.getText()) {
 //						memberJoinPwCheckTF.setSelectionStart(0);
@@ -296,6 +352,7 @@ public class Main2 extends JFrame {
 		memberJoinPanel.add(memberJoinButton);
 		
 		JLabel memberJoinIdMsgLB = new JLabel("");
+		memberJoinIdMsgLB.setHorizontalAlignment(SwingConstants.CENTER);
 		memberJoinIdMsgLB.setForeground(new Color(255, 0, 0));
 		memberJoinIdMsgLB.setBounds(109, 90, 277, 20);
 		memberJoinPanel.add(memberJoinIdMsgLB);
@@ -326,6 +383,8 @@ public class Main2 extends JFrame {
 		
 		JTabbedPane orderInfoPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addTab("주문내역", null, orderInfoPane, null);
+		
+		this.memberService=new MemberService();
 	}
 	
 	
@@ -348,28 +407,21 @@ public class Main2 extends JFrame {
 		this.loginMember=loginMember;
 		setTitle(loginMember.getM_Id()+ " 님 로그인");
 		if(loginMember.getM_Id().equals("admin")) {
-			memberTabbedpane.setEnabledAt(1,false);
-			memberTabbedpane.setEnabledAt(2,false );
-			memberTabbedpane.setEnabledAt(3,true);
+			MemberTabbedpane.setEnabledAt(0,false);
+			MemberTabbedpane.setEnabledAt(1,false );
+			MemberTabbedpane.setEnabledAt(2,true);
 			
 //			memberTabbedPane.setEnabledAt(4,true);
-//			memberTabbedPane.setSelectedIndex(3);
+			MemberTabbedpane.setSelectedIndex(2);
+
+		}else {
+			MemberTabbedpane.setEnabledAt(0,false );
+			MemberTabbedpane.setEnabledAt(1,false );
+			MemberTabbedpane.setEnabledAt(2,true);
 			
-			
-//			loginMenuItem.setEnabled(false);
-//			joinMenuItem.setEnabled(false);
-//			logoutMenuItem.setEnabled(true);
-//		}else {
-//			memberTabbedPane.setEnabledAt(1,false );
-//			memberTabbedPane.setEnabledAt(2,false );
-//			memberTabbedPane.setEnabledAt(3,true);
-//			
-//			memberTabbedPane.setSelectedIndex(3);
-//			
-//			loginMenuItem.setEnabled(false);
-//			joinMenuItem.setEnabled(false);
-//			logoutMenuItem.setEnabled(true);
-//		}
+			MemberTabbedpane.setSelectedIndex(2);
+
+
 		
 		}
 	}
