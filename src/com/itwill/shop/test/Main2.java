@@ -212,22 +212,22 @@ public class Main2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String memberId = memberJoinIdTF.getText();
-					boolean isDuplicate = memberService.isDuplicateId(memberId);
-					if(isDuplicate) {
-						memberJoinIdTF.setSelectionStart(0);
-						memberJoinIdTF.setSelectionEnd(memberId.length());
-						memberJoinIdTF.requestFocus();
-						memberJoinIdMsgLB.setText("아이디가 존재합니다");
-						return;
-					}
+//					boolean isDuplicate = memberService.isDuplicateId(memberId);
+//					if(isDuplicate) {
+//						memberJoinIdTF.setSelectionStart(0);
+//						memberJoinIdTF.setSelectionEnd(memberId.length());
+//						memberJoinIdTF.requestFocus();
+//						memberJoinIdMsgLB.setText("아이디가 존재합니다");
+//						return;
+//					}
 					String password = memberJoinPwTF.getText();
-					if(memberJoinPwTF.getText() != memberJoinPwCheckTF.getText()) {
-						memberJoinPwCheckTF.setSelectionStart(0);
-						memberJoinPwCheckTF.setSelectionEnd(password.length());
-						memberJoinPwCheckTF.requestFocus();
-						memberJoinPwCheckMsgLB.setText("비밀번호가 맞지않습니다");
-						return;
-					}
+//					if(memberJoinPwTF.getText() != memberJoinPwCheckTF.getText()) {
+//						memberJoinPwCheckTF.setSelectionStart(0);
+//						memberJoinPwCheckTF.setSelectionEnd(password.length());
+//						memberJoinPwCheckTF.requestFocus();
+//						memberJoinPwCheckMsgLB.setText("비밀번호가 맞지않습니다");
+//						return;
+//					}
 					String name = memberJoinNameTF.getText();
 					String phone = memberJoinPhoneTF.getText();
 					String email = memberJoinEmailTF.getText();

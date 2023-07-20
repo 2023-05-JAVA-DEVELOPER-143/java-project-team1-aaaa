@@ -15,7 +15,7 @@ public class CartSQL {
 		//해당 카트번호의 카트내용(카트번호,수량)+제품내용(제품번호,이름,이미지,가격,설명) 찾기
 		public static final String CART_SELECT_C_NO = "select * from cart c join product p on c.p_no = p.p_no where c_no=?";
 		//해당 아이디가 카트에 담은 모든 제품의 카트내용(카트번호,수량)+제품내용(제품번호,이름,이미지,가격,설명) 찾기
-		public static final String CART_SELECT_ALL = "select * from car c join product p on c.p_no=p.p_no where m_id=?";
+		public static final String CART_SELECT_ALL = "select * from cart c join product p on c.p_no=p.p_no where m_id=?";
 		//해당 아이디의 카트 row 수
 		public static final String CART_COUNT_USERID_P_NO = "select count(*) from cart where m_id=? and p_no=?";
 	
