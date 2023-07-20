@@ -131,6 +131,7 @@ public class CartDao {
 		return cartList;
 	}
 	
+	//카트번호로 카트찾기
 	public Cart findSelectByCartNo(int c_no) throws Exception {
 		Cart findCart = new Cart();
 		Connection con = dataSource.getConnection();
