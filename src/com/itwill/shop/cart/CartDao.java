@@ -23,10 +23,10 @@ public class CartDao {
 		int count=0;
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(CartSQL.CART_COUNT_USERID_P_NO);
-		ResultSet rs = pstmt.executeQuery();
 		pstmt.setString(1, m_id);
 		pstmt.setInt(2, p_no);
 		
+		ResultSet rs = pstmt.executeQuery();
 		if(rs.next()) {
 			count = rs.getInt(1);
 		}
@@ -108,8 +108,8 @@ public class CartDao {
 		List<Cart> cartList=new ArrayList<Cart>();
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(CartSQL.CART_SELECT_ALL);
-		ResultSet rs = pstmt.executeQuery();
 		pstmt.setString(1, m_id);
+		ResultSet rs = pstmt.executeQuery();
 		
 		while(rs.next()) {
 			cartList.add(new Cart(rs.getInt("c_no"),
@@ -135,19 +135,19 @@ public class CartDao {
 		Cart findCart = new Cart();
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(CartSQL.CART_SELECT_C_NO);
-		ResultSet rs = pstmt.executeQuery();
 		pstmt.setInt(1, c_no);
+		ResultSet rs = pstmt.executeQuery();
 		
 		
 		if(rs.next() ) {
 			findCart = new Cart(rs.getInt("c_no"),
 					rs.getInt("c_qty"),
-					rs.getString("u_id"),
+					rs.getString("m_id"),
 					new Product(rs.getInt("p_no"),
 							rs.getString("p_name"),
 							rs.getInt("p_price"),
-							rs.getString("p_image"),
-							rs.getString("p_desc")
+							rs.getString("p_desc"),
+							rs.getString("p_image")
 							)
 					);
 		}
