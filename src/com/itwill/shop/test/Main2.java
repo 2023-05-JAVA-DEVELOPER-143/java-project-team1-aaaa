@@ -378,6 +378,9 @@ public class Main2 extends JFrame {
 		JPanel productSelfImprovement = new JPanel();
 		productTabbedPane.addTab("자기계발", null, productSelfImprovement, null);
 		
+		JPanel productDetail = new JPanel();
+		productTabbedPane.addTab("상세페이지", null, productDetail, null);
+		
 		JTabbedPane cartTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addTab("장바구니", null, cartTabbedPane, null);
 		
