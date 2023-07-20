@@ -84,16 +84,17 @@ public class Main2 extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JPanel northPanel = new JPanel();
+		northPanel.setBackground(new Color(255, 255, 255));
 		northPanel.setPreferredSize(new Dimension(10, 40));
 		contentPane.add(northPanel, BorderLayout.NORTH);
 		northPanel.setLayout(null);
 		
 		JLabel logoLabel = new JLabel("logo");
-		logoLabel.setBounds(0, 0, 78, 40);
+		logoLabel.setBounds(0, 0, 100, 40);
 		northPanel.add(logoLabel);
 		
 		JLabel cartLogoLabel = new JLabel("");
-		cartLogoLabel.setBounds(418, 0, 33, 40);
+		cartLogoLabel.setBounds(418, 0, 46, 40);
 		northPanel.add(cartLogoLabel);
 		
 		searchTextField = new JTextField();
@@ -102,7 +103,7 @@ public class Main2 extends JFrame {
 		searchTextField.setColumns(10);
 		
 		JLabel searchLabel = new JLabel("New label");
-		searchLabel.setBounds(288, 13, 57, 15);
+		searchLabel.setBounds(288, 0, 60, 40);
 		northPanel.add(searchLabel);
 		
 		JTabbedPane shopTabbedPane = new JTabbedPane(JTabbedPane.TOP);

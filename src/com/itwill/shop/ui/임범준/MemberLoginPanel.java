@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import com.itwill.shop.member.Member;
 import com.itwill.shop.member.MemberService;
 import com.itwill.shop.test.Main2;
+import java.awt.Dimension;
 
 public class MemberLoginPanel extends JPanel {
 	private JTextField memberLoginIdTF;
@@ -100,7 +101,8 @@ public class MemberLoginPanel extends JPanel {
 		memberLoginPanel.add(memberInsertButton);
 		
 		JLabel loginLogo = new JLabel("로고들어갈예정");
-		loginLogo.setBounds(132, 83, 213, 68);
+		loginLogo.setPreferredSize(new Dimension(60, 50));
+		loginLogo.setBounds(174, 70, 120, 120);
 		memberLoginPanel.add(loginLogo);
 		
 		memberLoginIdMsgLB = new JLabel("");
