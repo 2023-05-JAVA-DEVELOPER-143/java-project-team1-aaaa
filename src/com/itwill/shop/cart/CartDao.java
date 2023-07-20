@@ -119,7 +119,8 @@ public class CartDao {
 							rs.getString("p_name"),
 							rs.getInt("p_price"),
 							rs.getString("p_image"),
-							rs.getString("p_desc")
+							rs.getString("p_desc"),
+							rs.getInt("p_category")
 							))
 					);
 		}
@@ -148,7 +149,8 @@ public class CartDao {
 							rs.getString("p_name"),
 							rs.getInt("p_price"),
 							rs.getString("p_desc"),
-							rs.getString("p_image")
+							rs.getString("p_image"),
+							rs.getInt("p_category")
 							)
 					);
 		}

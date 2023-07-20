@@ -25,6 +25,7 @@ public class ProductDao {
 		pstmt.setInt(2, product.getP_price());
 		pstmt.setString(3, product.getP_image());
 		pstmt.setString(4, product.getP_desc());
+		pstmt.setInt(5, product.getP_category());
 		int rowCount = pstmt.executeUpdate();
 		pstmt.close();
 		dataSource.close(con);
@@ -44,7 +45,8 @@ public int update(Product product) throws Exception {
 	pstmt.setInt(2, product.getP_price());
 	pstmt.setString(3, product.getP_image());
 	pstmt.setString(4, product.getP_desc());
-	pstmt.setInt(5, product.getP_no());
+	pstmt.setInt(5, product.getP_category());
+	pstmt.setInt(6, product.getP_no());
 
 	int rowCount = pstmt.executeUpdate();
 
@@ -81,7 +83,8 @@ public Product findByNo(int p_no) throws Exception {
 										 rs.getString("p_name"),
 										 rs.getInt("p_price"),
 										 rs.getString("p_image"),
-										 rs.getString("p_desc"));
+										 rs.getString("p_desc"),
+										 rs.getInt("p_category"));
 		} while(rs.next());
 
 
@@ -101,12 +104,12 @@ public Product findByNo(int p_no) throws Exception {
 		P_DESC                 VARCHAR2(800) 
  */
 
-public List<Product> findByTitle(String p_title) throws Exception {
+public List<Product> findByTitle(String p_name) throws Exception {
 
 	List<Product> productList = new ArrayList<>();
 	Connection con = dataSource.getConnection();
 	PreparedStatement pstmt = con.prepareStatement(ProductSQL.PRODUCT_BY_NAME);
-	pstmt.setString(1, p_title);
+	pstmt.setString(1, p_name);
 	ResultSet rs = pstmt.executeQuery();
 
 	if(rs.next()) {
@@ -116,7 +119,8 @@ public List<Product> findByTitle(String p_title) throws Exception {
 							rs.getString("p_name"), 
 							rs.getInt("p_price"), 
 							rs.getString("p_image"),
-							rs.getString("p_desc"));
+							rs.getString("p_desc"),
+							rs.getInt("p_category"));
 
 			productList.add(product);
 
@@ -139,7 +143,8 @@ public List <Product> productList() throws Exception {
 						   rs.getString("p_name"), 
 					       rs.getInt("p_price"), 
 					       rs.getString("p_image"),
-					       rs.getString("p_desc"));
+					       rs.getString("p_desc"),
+					       rs.getInt("p_category"));
 
 			productList.add(product);
 			
@@ -149,6 +154,37 @@ public List <Product> productList() throws Exception {
 		dataSource.close(con);
 	}
 	return productList;
+	
+	
+}
+public List <Product> categoryList(int category) throws Exception {
+
+	List <Product> productList = new ArrayList<>();
+	Connection con = dataSource.getConnection();
+	PreparedStatement pstmt = con.prepareStatement(ProductSQL.PRODUCT_CATEGORY);
+	pstmt.setInt(1, category);
+	ResultSet rs = pstmt.executeQuery();
+
+	if(rs.next()) {
+		do {
+			Product product 
+			= new Product (rs.getInt("p_no"), 
+						   rs.getString("p_name"), 
+					       rs.getInt("p_price"), 
+					       rs.getString("p_image"),
+					       rs.getString("p_desc"),
+					       rs.getInt("p_category"));
+
+			productList.add(product);
+			
+		} while(rs.next());
+		
+		pstmt.close();
+		dataSource.close(con);
+	}
+	return productList;
+	
+	
 }
 
 }

@@ -32,4 +32,17 @@ public class ProductService {
 	public List<Product> productList() throws Exception {
 		return productDao.productList();
 	}
+	//상품카테고리별리스트
+	//베스트셀러
+	public List<Product> BestSellerList() throws Exception {
+		return productDao.categoryList(10);
+	}
+	//소설
+	public List<Product> NovelList() throws Exception {
+		return productDao.categoryList(20);
+	}
+	//자기계발
+	public List<Product> SelfImprovementList() throws Exception {
+		return productDao.categoryList(30);
+	}
 }
