@@ -25,6 +25,8 @@ public class CartServiceTestMain {
 		System.out.println("5. 카트 아이템 1개 보기");
 		//System.out.println(cartService.findCartItemByCartNo(1));
 		
+		
+		
 		System.out.println("4. 카트 아이템 전체 보기");
 		//System.out.println(cartService.findCartItemByAll("user1"));
 		
