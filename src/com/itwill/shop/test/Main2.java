@@ -24,6 +24,7 @@ import com.itwill.shop.order.OrderService;
 import com.itwill.shop.product.ProductService;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JScrollPane;
 
 public class Main2 extends JFrame {
 	/************ 1.Service객체멤버변수선언 ************/
@@ -47,12 +48,14 @@ public class Main2 extends JFrame {
 	private JTextField memberJoinEmailTF;
 	private JTextField memberJoinAddressTF;
 	private JTextField memberJoinPwCheckTF;
-	private JLabel memberJoinIdMsgLB;
-	private JLabel memberJoinPwCheckMsgLB;
+	
+	
+	private JTabbedPane MemberTabbedpane;
 	private JLabel memberLoginIdMsgLB;
 	private JLabel memberLoginPwMsgLB;
-	private JTabbedPane MemberTabbedpane;
-
+	
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -200,12 +203,12 @@ public class Main2 extends JFrame {
 		memberInsertButton.setBounds(92, 361, 362, 54);
 		memberLoginPanel.add(memberInsertButton);
 		
-		JLabel memberLoginIdMsgLB = new JLabel("");
+		memberLoginIdMsgLB = new JLabel("");
 		memberLoginIdMsgLB.setForeground(new Color(255, 0, 0));
 		memberLoginIdMsgLB.setBounds(102, 236, 235, 26);
 		memberLoginPanel.add(memberLoginIdMsgLB);
 		
-		JLabel memberLoginPwMsgLB = new JLabel("");
+		memberLoginPwMsgLB = new JLabel("");
 		memberLoginPwMsgLB.setForeground(new Color(255, 0, 0));
 		memberLoginPwMsgLB.setBounds(102, 317, 235, 26);
 		memberLoginPanel.add(memberLoginPwMsgLB);
@@ -384,8 +387,26 @@ public class Main2 extends JFrame {
 		JTabbedPane cartTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addTab("장바구니", null, cartTabbedPane, null);
 		
-		JTabbedPane orderInfoPane = new JTabbedPane(JTabbedPane.TOP);
-		shopTabbedPane.addTab("주문내역", null, orderInfoPane, null);
+		JPanel orderPanel = new JPanel();
+		shopTabbedPane.addTab("주문내역", null, orderPanel, null);
+		orderPanel.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane orderContentPanelScrollPane = new JScrollPane();
+		orderPanel.add(orderContentPanelScrollPane, BorderLayout.CENTER);
+		
+		JPanel orderContentPanel = new JPanel();
+		orderContentPanel.setPreferredSize(new Dimension(450, 1000));
+		orderContentPanelScrollPane.setViewportView(orderContentPanel);
+		
+		JPanel orderListTitlePanel = new JPanel();
+		orderListTitlePanel.setPreferredSize(new Dimension(450, 40));
+		orderContentPanel.add(orderListTitlePanel);
+		orderListTitlePanel.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(450, 10));
+		orderContentPanel.add(panel);
+		panel.setLayout(null);
 		
 		this.memberService=new MemberService();
 	}
