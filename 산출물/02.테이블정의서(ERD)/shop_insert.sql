@@ -23,12 +23,12 @@ insert into product(p_no,p_name,p_price,p_image,p_desc) values(product_p_no_SEQ.
 
 
 /**********************cart insert************************/
-insert into cart(cart_no,userId,p_no,cart_qty) values (cart_cart_no_SEQ.nextval,'user1',1,2);
-insert into cart(cart_no,userId,p_no,cart_qty) values (cart_cart_no_SEQ.nextval,'user1',2,1);
+insert into cart(c_no, m_id ,p_no, c_qty) values (cart_c_no_SEQ.nextval,'user1',1,2);
+insert into cart(c_no, m_id ,p_no, c_qty) values (cart_c_no_SEQ.nextval,'user1',2,1);
 
-insert into cart(cart_no,userId,p_no,cart_qty) values (cart_cart_no_SEQ.nextval,'user2',3,4);
-insert into cart(cart_no,userId,p_no,cart_qty) values (cart_cart_no_SEQ.nextval,'user2',4,2);
-insert into cart(cart_no,userId,p_no,cart_qty) values (cart_cart_no_SEQ.nextval,'user2',1,1);
+insert into cart(c_no, m_id ,p_no, c_qty) values (cart_c_no_SEQ.nextval,'user2',3,4);
+insert into cart(c_no, m_id ,p_no, c_qty) values (cart_c_no_SEQ.nextval,'user2',4,2);
+insert into cart(c_no, m_id ,p_no, c_qty) values (cart_c_no_SEQ.nextval,'user2',1,1);
 
 
 /**********************orders insert************************/

@@ -74,8 +74,8 @@ public class MemberDao {
 		if(rs.next()) {
 			member=new Member(
 					rs.getString("m_id"),
-					rs.getString("m_name"), 
 					rs.getString("m_pw"),
+					rs.getString("m_name"), 
 					rs.getString("m_phone"),
 					rs.getString("m_email"),
 					rs.getString("m_address"));
