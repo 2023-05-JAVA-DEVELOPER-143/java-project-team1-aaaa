@@ -7,8 +7,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,11 +30,15 @@ public class Main2 extends JFrame {
 	private CartService cartService;
 	private OrderService orderService;
 	
+	/*********2.로그인한회원 멤버필드선언*****/
+	private Member loginMember=null;
+	
 
 	private JPanel contentPane;
+	private JTabbedPane memberTabbedpane;
 	private JTextField searchTextField;
-	private JTextField memberIdField;
-	private JTextField memberPwField;
+	private JTextField memberLoginIdTF;
+	private JTextField memberLoginPwTF;
 	private JTextField memberJoinIdTF;
 	private JTextField memberJoinPwTF;
 	private JTextField memberJoinNameTF;
@@ -46,6 +48,9 @@ public class Main2 extends JFrame {
 	private JTextField memberJoinPwCheckTF;
 	private JLabel memberJoinIdMsgLB;
 	private JLabel memberJoinPwCheckMsgLB;
+	private JLabel memberLoginIdMsgLB;
+	private JLabel memberLoginPwMsgLB;
+	private JTabbedPane MemberTabbedpane;
 
 	/**
 	 * Launch the application.
@@ -104,51 +109,96 @@ public class Main2 extends JFrame {
 		JTabbedPane mainTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addTab("메인", null, mainTabbedPane, null);
 		
-		JTabbedPane MemberTabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		shopTabbedPane.addTab("회원", null, MemberTabbedPane, null);
+		MemberTabbedpane = new JTabbedPane(JTabbedPane.TOP);
+		shopTabbedPane.addTab("회원", null, MemberTabbedpane, null);
 		
-		JPanel loginPanel = new JPanel();
-		MemberTabbedPane.addTab("로그인", null, loginPanel, null);
-		loginPanel.setLayout(null);
+		JPanel memberLoginPanel = new JPanel();
+		MemberTabbedpane.addTab("로그인", null, memberLoginPanel, null);
+		memberLoginPanel.setLayout(null);
 		
-		memberIdField = new JTextField();
-		memberIdField.setFont(new Font("굴림", Font.PLAIN, 18));
-		memberIdField.setText("아이디");
-		memberIdField.setBounds(92, 191, 245, 45);
-		loginPanel.add(memberIdField);
-		memberIdField.setColumns(10);
+		memberLoginIdTF = new JTextField();
+		memberLoginIdTF.setFont(new Font("굴림", Font.PLAIN, 18));
+		memberLoginIdTF.setText("아이디");
+		memberLoginIdTF.setBounds(92, 191, 245, 35);
+		memberLoginPanel.add(memberLoginIdTF);
+		memberLoginIdTF.setColumns(10);
 		
-		memberPwField = new JTextField();
-		memberPwField.setFont(new Font("굴림", Font.PLAIN, 18));
-		memberPwField.setText("비밀번호");
-		memberPwField.setColumns(10);
-		memberPwField.setBounds(92, 262, 245, 45);
-		loginPanel.add(memberPwField);
+		memberLoginPwTF = new JTextField();
+		memberLoginPwTF.setFont(new Font("굴림", Font.PLAIN, 18));
+		memberLoginPwTF.setText("비밀번호");
+		memberLoginPwTF.setColumns(10);
+		memberLoginPwTF.setBounds(92, 272, 245, 35);
+		memberLoginPanel.add(memberLoginPwTF);
 		
 		JLabel loginTitleLabel = new JLabel("로그인");
 		loginTitleLabel.setFont(new Font("맑은 고딕", Font.BOLD, 30));
 		loginTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		loginTitleLabel.setBounds(135, 81, 202, 54);
-		loginPanel.add(loginTitleLabel);
+		memberLoginPanel.add(loginTitleLabel);
 		
 		JButton loginButton = new JButton("로그인");
+		loginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/***********입력 유효성체크********/
+				String userid = memberLoginIdTF.getText();
+				String password = memberLoginPwTF.getText();
+				if (userid.equals("")) {
+					memberLoginIdMsgLB.setText("아이디를 입력하세요.");
+					memberLoginIdMsgLB.requestFocus();
+					return;
+				}
+				if (password.equals("")) {
+					memberLoginPwMsgLB.setText("패쓰워드를 입력하세요.");
+					memberLoginPwMsgLB.requestFocus();
+					return;
+				}
+				/************memberService 객체 생성***********/
+				try {
+					int result = memberService.login(userid, password);
+					if (result == 1) {
+						
+						Member loginUser = memberService.findUser(userid);
+						loginProcess(loginUser);
+
+					} else if (result == 0) {
+						memberLoginIdMsgLB.setText("아이디또는비밀번호가 일치하지않습니다.");
+						memberLoginIdTF.requestFocus();
+						memberLoginIdTF.setSelectionStart(0);
+						memberLoginIdTF.setSelectionEnd(userid.length());
+					
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		loginButton.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		loginButton.setBounds(349, 191, 105, 116);
-		loginPanel.add(loginButton);
+		memberLoginPanel.add(loginButton);
 		
 		JButton memberInsertButton = new JButton("회원가입");
 		memberInsertButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MemberTabbedPane.setSelectedIndex(1);
+				MemberTabbedpane.setSelectedIndex(1);
 			}
 		});
 		memberInsertButton.setForeground(new Color(0, 0, 0));
 		memberInsertButton.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		memberInsertButton.setBounds(92, 361, 362, 54);
-		loginPanel.add(memberInsertButton);
+		memberLoginPanel.add(memberInsertButton);
+		
+		JLabel memberLoginIdMsgLB = new JLabel("");
+		memberLoginIdMsgLB.setForeground(new Color(255, 0, 0));
+		memberLoginIdMsgLB.setBounds(102, 236, 235, 26);
+		memberLoginPanel.add(memberLoginIdMsgLB);
+		
+		JLabel memberLoginPwMsgLB = new JLabel("");
+		memberLoginPwMsgLB.setForeground(new Color(255, 0, 0));
+		memberLoginPwMsgLB.setBounds(102, 317, 235, 26);
+		memberLoginPanel.add(memberLoginPwMsgLB);
 		
 		JPanel memberJoinPanel = new JPanel();
-		MemberTabbedPane.addTab("회원가입", null, memberJoinPanel, null);
+		MemberTabbedpane.addTab("회원가입", null, memberJoinPanel, null);
 		memberJoinPanel.setLayout(null);
 		
 		JLabel memberJoinTitleLB = new JLabel("회원가입");
@@ -255,8 +305,9 @@ public class Main2 extends JFrame {
 		memberJoinPwCheckMsgLB.setBounds(109, 184, 277, 20);
 		memberJoinPanel.add(memberJoinPwCheckMsgLB);
 		
-		JPanel loginInfoPanel = new JPanel();
-		MemberTabbedPane.addTab("회원정보", null, loginInfoPanel, null);
+		JPanel memberInfoPanel = new JPanel();
+		MemberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
+		memberInfoPanel.setLayout(null);
 		
 		JTabbedPane productTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addTab("상품", null, productTabbedPane, null);
@@ -275,5 +326,51 @@ public class Main2 extends JFrame {
 		
 		JTabbedPane orderInfoPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addTab("주문내역", null, orderInfoPane, null);
+	}
+	
+	
+	
+	
+	
+	/**************로그인성공시 호출할메쏘드***************/
+	void loginProcess(Member loginMember) throws Exception{
+		/***********로그인성공시 해야할일***********
+		 1.로그인성공한 멤버객체 멤버필드에저장
+		 2.MemberMainFrame타이틀변경
+		 3.로그인,회원가입탭 불활성화
+		   회원정보       탭 활성화
+		   로그인,회원가입 메뉴아이템 불활성화
+		   로그아웃 메뉴아이템 활성화
+		   
+		   
+		 4.회원정보보기 화면전환
+		********************************************/
+		this.loginMember=loginMember;
+		setTitle(loginMember.getM_Id()+ " 님 로그인");
+		if(loginMember.getM_Id().equals("admin")) {
+			memberTabbedpane.setEnabledAt(1,false);
+			memberTabbedpane.setEnabledAt(2,false );
+			memberTabbedpane.setEnabledAt(3,true);
+			
+//			memberTabbedPane.setEnabledAt(4,true);
+//			memberTabbedPane.setSelectedIndex(3);
+			
+			
+//			loginMenuItem.setEnabled(false);
+//			joinMenuItem.setEnabled(false);
+//			logoutMenuItem.setEnabled(true);
+//		}else {
+//			memberTabbedPane.setEnabledAt(1,false );
+//			memberTabbedPane.setEnabledAt(2,false );
+//			memberTabbedPane.setEnabledAt(3,true);
+//			
+//			memberTabbedPane.setSelectedIndex(3);
+//			
+//			loginMenuItem.setEnabled(false);
+//			joinMenuItem.setEnabled(false);
+//			logoutMenuItem.setEnabled(true);
+//		}
+		
+		}
 	}
 }
