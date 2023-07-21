@@ -32,6 +32,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JScrollPane;
 import com.itwill.shop.ui.임범준.MemberCreatePanel;
 import com.itwill.shop.ui.임범준.OrderPanel;
+import javax.swing.ImageIcon;
+import com.itwill.shop.ui.임범준.OrderPanel1;
 
 public class Main2 extends JFrame {
 	/************ 1.Service객체멤버변수선언 ************/
@@ -43,13 +45,12 @@ public class Main2 extends JFrame {
 	/*********2.로그인한회원 멤버필드선언*****/
 	public Member loginMember=null;
 	
-
+	
 	private JPanel contentPane;
 	private JTextField searchTextField;
 	
 	
-	public JTabbedPane MemberTabbedpane;
-	
+	public JTabbedPane memberTabbedpane;
 	public MemberLoginPanel loginPanel;
 	
 	
@@ -94,6 +95,7 @@ public class Main2 extends JFrame {
 		northPanel.add(logoLabel);
 		
 		JLabel cartLogoLabel = new JLabel("");
+		cartLogoLabel.setIcon(new ImageIcon(Main2.class.getResource("/com/itwill/shop/image/cart.png")));
 		cartLogoLabel.setBounds(418, 0, 46, 40);
 		northPanel.add(cartLogoLabel);
 		
@@ -110,28 +112,30 @@ public class Main2 extends JFrame {
 		shopTabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		contentPane.add(shopTabbedPane, BorderLayout.CENTER);
 		
-		JTabbedPane mainTabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		shopTabbedPane.addTab("메인", null, mainTabbedPane, null);
+		JPanel mainPane = new JPanel();
+		mainPane.setToolTipText("");
+		shopTabbedPane.addTab("메인", null, mainPane, null);
+		mainPane.setLayout(null);
 		
-		MemberTabbedpane = new JTabbedPane(JTabbedPane.TOP);
-		shopTabbedPane.addTab("회원", null, MemberTabbedpane, null);
+		memberTabbedpane = new JTabbedPane(JTabbedPane.TOP);
+		shopTabbedPane.addTab("회원", null, memberTabbedpane, null);
 		
 		JPanel mbLoginPanel = new JPanel();
-		MemberTabbedpane.addTab("로그인", null, mbLoginPanel, null);
+		memberTabbedpane.addTab("로그인", null, mbLoginPanel, null);
 		mbLoginPanel.setLayout(new BorderLayout(0, 0));
 		
 		MemberLoginPanel memberLoginPanel = new MemberLoginPanel();
 		mbLoginPanel.add(memberLoginPanel, BorderLayout.CENTER);
 		
 		JPanel memberJoinPanel = new JPanel();
-		MemberTabbedpane.addTab("회원가입", null, memberJoinPanel, null);
+		memberTabbedpane.addTab("회원가입", null, memberJoinPanel, null);
 		memberJoinPanel.setLayout(new BorderLayout(0, 0));
 		
 		MemberCreatePanel memberCreatePanel = new MemberCreatePanel();
 		memberJoinPanel.add(memberCreatePanel, BorderLayout.CENTER);
 		
 		JPanel memberInfoPanel = new JPanel();
-		MemberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
+		memberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
 		memberInfoPanel.setLayout(null);
 		
 		JTabbedPane productTabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -164,56 +168,56 @@ public class Main2 extends JFrame {
 		JTabbedPane cartTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addTab("장바구니", null, cartTabbedPane, null);
 		
-		JPanel orderPanel = new JPanel();
-		shopTabbedPane.addTab("주문내역", null, orderPanel, null);
-		orderPanel.setLayout(new BorderLayout(0, 0));
+		JPanel orderPane = new JPanel();
+		shopTabbedPane.addTab("주문", null, orderPane, null);
+		orderPane.setLayout(new BorderLayout(0, 0));
 		
-		OrderPanel orderListPanel = new OrderPanel();
-		orderPanel.add(orderListPanel, BorderLayout.CENTER);
+		OrderPanel1 orderPanel1 = new OrderPanel1();
+		orderPane.add(orderPanel1, BorderLayout.CENTER);
 		
+	
 		
+		/**********2. Service 객체생성*************/
 		memberService=new MemberService();
-		loginMember = new Member();
+		productService=new ProductService();
+		orderService = new OrderService();
+		cartService = new CartService();
 		
-		
-	}
-	
-	
-	
-	
-	
-	/**************로그인성공시 호출할메쏘드***************/
-	void loginProcess(Member loginMember) throws Exception{
-		/***********로그인성공시 해야할일***********
-		 1.로그인성공한 멤버객체 멤버필드에저장
-		 2.MemberMainFrame타이틀변경
-		 3.로그인,회원가입탭 불활성화
-		   회원정보       탭 활성화
-		   로그인,회원가입 메뉴아이템 불활성화
-		   로그아웃 메뉴아이템 활성화
-		   
-		   
-		 4.회원정보보기 화면전환
-		********************************************/
-		this.loginMember=loginMember;
-		setTitle(loginMember.getM_Id()+ " 님 로그인");
-		if(loginMember.getM_Id().equals("admin")) {
-			MemberTabbedpane.setEnabledAt(0,false);
-			MemberTabbedpane.setEnabledAt(1,false );
-			MemberTabbedpane.setEnabledAt(2,true);
-			
-//			memberTabbedPane.setEnabledAt(4,true);
-			MemberTabbedpane.setSelectedIndex(2);
-
-		}else {
-			MemberTabbedpane.setEnabledAt(0,false );
-			MemberTabbedpane.setEnabledAt(1,false );
-			MemberTabbedpane.setEnabledAt(2,true);
-			
-			MemberTabbedpane.setSelectedIndex(2);
-
-
-		
-		}
-	}
+	}//생성자
 }
+	
+	
+//	/**************로그인성공시 호출할메쏘드***************/
+//	void loginProcess(Member loginMember) throws Exception{
+//		/***********로그인성공시 해야할일***********
+//		 1.로그인성공한 멤버객체 멤버필드에저장
+//		 2.MemberMainFrame타이틀변경
+//		 3.로그인,회원가입탭 불활성화
+//		   회원정보       탭 활성화
+//		   로그인,회원가입 메뉴아이템 불활성화
+//		   로그아웃 메뉴아이템 활성화
+//		   
+//		   
+//		 4.회원정보보기 화면전환
+//		********************************************/
+//		this.loginMember=loginMember;
+//		setTitle(loginMember.getM_Id()+ " 님 로그인");
+//		if(loginMember.getM_Id().equals("admin")) {
+//			MemberTabbedpane.setEnabledAt(0,false);
+//			MemberTabbedpane.setEnabledAt(1,false );
+//			MemberTabbedpane.setEnabledAt(2,true);
+//			
+////			memberTabbedPane.setEnabledAt(4,true);
+//			MemberTabbedpane.setSelectedIndex(2);
+//
+//		}else {
+//			MemberTabbedpane.setEnabledAt(0,false );
+//			MemberTabbedpane.setEnabledAt(1,false );
+//			MemberTabbedpane.setEnabledAt(2,true);
+//			
+//			MemberTabbedpane.setSelectedIndex(2);
+
+
+		
+//		}
+//	}

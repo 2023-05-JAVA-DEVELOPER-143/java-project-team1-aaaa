@@ -15,6 +15,9 @@ import com.itwill.shop.member.Member;
 import com.itwill.shop.member.MemberService;
 import com.itwill.shop.test.Main2;
 import java.awt.Dimension;
+import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MemberLoginPanel extends JPanel {
 	private JTextField memberLoginIdTF;
@@ -36,6 +39,12 @@ public class MemberLoginPanel extends JPanel {
 		memberLoginPanel.setLayout(null);
 		
 		memberLoginIdTF = new JTextField();
+		memberLoginIdTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberLoginIdTF.setText("");
+			}
+		});
 		memberLoginIdTF.setText("아이디");
 		memberLoginIdTF.setFont(new Font("굴림", Font.PLAIN, 18));
 		memberLoginIdTF.setColumns(10);
@@ -43,6 +52,12 @@ public class MemberLoginPanel extends JPanel {
 		memberLoginPanel.add(memberLoginIdTF);
 		
 		memberLoginPwTF = new JTextField();
+		memberLoginPwTF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberLoginPwTF.setText("");
+			}
+		});
 		memberLoginPwTF.setText("비밀번호");
 		memberLoginPwTF.setFont(new Font("굴림", Font.PLAIN, 18));
 		memberLoginPwTF.setColumns(10);
@@ -92,7 +107,7 @@ public class MemberLoginPanel extends JPanel {
 		JButton memberInsertButton = new JButton("회원가입");
 		memberInsertButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.MemberTabbedpane.setSelectedIndex(1);
+				mainFrame.memberTabbedpane.setSelectedIndex(1);
 			}
 		});
 		memberInsertButton.setForeground(Color.BLACK);
@@ -101,6 +116,7 @@ public class MemberLoginPanel extends JPanel {
 		memberLoginPanel.add(memberInsertButton);
 		
 		JLabel loginLogo = new JLabel("로고들어갈예정");
+		loginLogo.setIcon(new ImageIcon(MemberLoginPanel.class.getResource("/com/itwill/shop/image/Login.png")));
 		loginLogo.setPreferredSize(new Dimension(60, 50));
 		loginLogo.setBounds(174, 70, 120, 120);
 		memberLoginPanel.add(loginLogo);
@@ -135,19 +151,19 @@ public class MemberLoginPanel extends JPanel {
 		********************************************/
 		mainFrame.loginMember = mainFrame.memberService.findUser(userId);
 		if(mainFrame.loginMember.getM_Id().equals("admin")) {
-			mainFrame.MemberTabbedpane.setEnabledAt(0,false);
-			mainFrame.MemberTabbedpane.setEnabledAt(1,false );
-			mainFrame.MemberTabbedpane.setEnabledAt(2,true);
+			mainFrame.memberTabbedpane.setEnabledAt(0,false);
+			mainFrame.memberTabbedpane.setEnabledAt(1,false );
+			mainFrame.memberTabbedpane.setEnabledAt(2,true);
 			
 //			memberTabbedPane.setEnabledAt(4,true);
-			mainFrame.MemberTabbedpane.setSelectedIndex(2);
+			mainFrame.memberTabbedpane.setSelectedIndex(2);
 
 		}else {
-			mainFrame.MemberTabbedpane.setEnabledAt(0,false );
-			mainFrame.MemberTabbedpane.setEnabledAt(1,false );
-			mainFrame.MemberTabbedpane.setEnabledAt(2,true);
+			mainFrame.memberTabbedpane.setEnabledAt(0,false );
+			mainFrame.memberTabbedpane.setEnabledAt(1,false );
+			mainFrame.memberTabbedpane.setEnabledAt(2,true);
 			
-			mainFrame.MemberTabbedpane.setSelectedIndex(2);
+			mainFrame.memberTabbedpane.setSelectedIndex(2);
 
 
 		

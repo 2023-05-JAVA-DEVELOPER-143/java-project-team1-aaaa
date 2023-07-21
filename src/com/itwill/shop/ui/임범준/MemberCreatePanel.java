@@ -173,7 +173,7 @@ public class MemberCreatePanel extends JPanel {
 					String address = memberJoinAddressTF.getText();
 					Member member = new Member(memberId, password, name, phone, email, address);
 					mainFrame.memberService.create(member);
-					mainFrame.MemberTabbedpane.setSelectedIndex(0);
+					mainFrame.memberTabbedpane.setSelectedIndex(0);
 					
 				} catch (Exception e1) {
 					e1.printStackTrace();
