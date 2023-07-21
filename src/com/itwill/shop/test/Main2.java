@@ -26,6 +26,7 @@ import com.itwill.shop.member.MemberService;
 import com.itwill.shop.product.ProductService;
 import com.itwill.shop.ui.이동현.ProductBestSellerListPanel;
 import com.itwill.shop.ui.이동현.ProductNovelListPanel;
+import com.itwill.shop.ui.이동현.ProductSelfImprovementListPanel;
 import com.itwill.shop.ui.임범준.MemberLoginPanel;
 
 import java.awt.event.MouseAdapter;
