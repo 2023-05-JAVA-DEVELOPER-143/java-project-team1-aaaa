@@ -20,11 +20,9 @@ import javax.swing.border.EmptyBorder;
 import com.itwill.shop.cart.CartService;
 import com.itwill.shop.member.Member;
 import com.itwill.shop.member.MemberService;
-import com.itwill.shop.order.OrderService;
 import com.itwill.shop.product.ProductService;
 import com.itwill.shop.ui.이동현.ProductBestSellerListPanel;
 import com.itwill.shop.ui.이동현.ProductNovelListPanel;
-import com.itwill.shop.ui.이동현.ProductSelfImprovementListPanel;
 import com.itwill.shop.ui.임범준.MemberLoginPanel;
 
 import java.awt.event.MouseAdapter;
@@ -40,7 +38,7 @@ public class Main2 extends JFrame {
 	public ProductService productService;
 	public MemberService memberService;
 	public CartService cartService;
-	public OrderService orderService;
+	
 	
 	/*********2.로그인한회원 멤버필드선언*****/
 	public Member loginMember=null;
@@ -159,8 +157,8 @@ public class Main2 extends JFrame {
 		productTabbedPane.addTab("자기계발", null, productSelfImprovement, null);
 		productSelfImprovement.setLayout(new BorderLayout(0, 0));
 		
-		ProductSelfImprovementListPanel productSelfImprovementListPanel = new ProductSelfImprovementListPanel();
-		productSelfImprovement.add(productSelfImprovementListPanel, BorderLayout.CENTER);
+//		ProductSelfImprovementListPanel productSelfImprovementListPanel = new ProductSelfImprovementListPanel();
+//		productSelfImprovement.add(productSelfImprovementListPanel, BorderLayout.CENTER);
 		
 		JPanel productDetail = new JPanel();
 		productTabbedPane.addTab("상세페이지", null, productDetail, null);
@@ -180,7 +178,6 @@ public class Main2 extends JFrame {
 		/**********2. Service 객체생성*************/
 		memberService=new MemberService();
 		productService=new ProductService();
-		orderService = new OrderService();
 		cartService = new CartService();
 		
 	}//생성자
