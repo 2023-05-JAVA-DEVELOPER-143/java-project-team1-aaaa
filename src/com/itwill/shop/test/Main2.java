@@ -47,11 +47,9 @@ public class Main2 extends JFrame {
 	public MemberService memberService;
 	public CartService cartService;
 
-	
-	/*********2.로그인한회원 멤버필드선언*****/
-	public Member loginMember=null;
-	
-	
+	/********* 2.로그인한회원 멤버필드선언 *****/
+	public Member loginMember = null;
+
 	private JPanel contentPane;
 	private JTextField searchTextField;
 	public MemberLoginPanel loginPanel;
@@ -68,9 +66,7 @@ public class Main2 extends JFrame {
 	private JPanel productSelfImprovement;
 	private JTabbedPane shopTabbedPane;
 	private ProductDetailPanel productDetailPanel;
-	
-	
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -89,7 +85,8 @@ public class Main2 extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	public Main2() throws Exception {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -99,69 +96,68 @@ public class Main2 extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel northPanel = new JPanel();
 		northPanel.setBackground(new Color(255, 255, 255));
 		northPanel.setPreferredSize(new Dimension(10, 40));
 		contentPane.add(northPanel, BorderLayout.NORTH);
 		northPanel.setLayout(null);
-		
+
 		JLabel logoLabel = new JLabel("logo");
 		logoLabel.setBounds(0, 0, 100, 40);
 		northPanel.add(logoLabel);
-		
+
 		JLabel cartLogoLabel = new JLabel("");
 		cartLogoLabel.setIcon(new ImageIcon(Main2.class.getResource("/com/itwill/shop/image/cart.png")));
 		cartLogoLabel.setBounds(418, 0, 46, 40);
 		northPanel.add(cartLogoLabel);
-		
+
 		searchTextField = new JTextField();
 		searchTextField.setBounds(145, 10, 131, 21);
 		northPanel.add(searchTextField);
 		searchTextField.setColumns(10);
-		
+
 		JLabel searchLabel = new JLabel("New label");
 		searchLabel.setBounds(288, 0, 60, 40);
 		northPanel.add(searchLabel);
-		
+
 		shopTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				if (shopTabbedPane.getSelectedIndex()==2) {
+				if (shopTabbedPane.getSelectedIndex() == 2) {
 					productTabbedPane.setSelectedIndex(0);
 				}
 			}
 		});
 		shopTabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		contentPane.add(shopTabbedPane, BorderLayout.CENTER);
-		
+
 		JPanel mainPane = new JPanel();
 		mainPane.setToolTipText("");
 		shopTabbedPane.addTab("메인", null, mainPane, null);
 		mainPane.setLayout(null);
-		
+
 		memberTabbedpane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addTab("회원", null, memberTabbedpane, null);
-		
+
 		memberLoginPanel = new MemberLoginPanel();
 		memberTabbedpane.addTab("로그인", null, memberLoginPanel, null);
-		
+
 		memberCreatePanel = new MemberCreatePanel();
 		memberTabbedpane.addTab("회원가입", null, memberCreatePanel, null);
-		
+
 		memberInfoPanel = new JPanel();
 		memberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
 		memberInfoPanel.setLayout(null);
-		
+
 		productTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		productTabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				/****************************************************************/
 
 				try {
-					if (productBestSellerListPanel == null || 
-						productNovelListPanel == null || 
-						productSelfImprovementListPanel == null) {
+					if (productBestSellerListPanel == null || productNovelListPanel == null
+							|| productSelfImprovementListPanel == null) {
 						return;
 					}
 					if (productTabbedPane.getSelectedIndex() == 0) {
@@ -188,7 +184,7 @@ public class Main2 extends JFrame {
 		productBestSellerPanel.setLayout(new BorderLayout(0, 0));
 
 		productBestSellerListPanel = new ProductBestSellerListPanel();
-		
+
 		productBestSellerPanel.add(productBestSellerListPanel, BorderLayout.CENTER);
 
 		productNovel = new JPanel();
@@ -238,33 +234,59 @@ public class Main2 extends JFrame {
 		productSelfImprovementListPanel.setMainFrame(this);
 
 		productTabbedPane.setSelectedIndex(-1);
-		
+
 		productDetailPanel = new ProductDetailPanel();
-		productTabbedPane.addTab("상세정보", null, productDetailPanel, null);
-		
+		productTabbedPane.addTab("New tab", null, productDetailPanel, null);
+
 		memberLoginPanel.setMainFrame(this);
 		memberCreatePanel.setMainFrame(this);
-		
-		
-	}//생성자
 
-	public void changePanel(int panelNo, Map data) {
-		if(panelNo==4) {
-			//디테일
-			Product p=(Product)data.get("product");
-			productDetailPanel.setProduct(p);
-			
-			
-			shopTabbedPane.setSelectedIndex(2);
-			productTabbedPane.setSelectedIndex(3);
-			
-			
+	}// 생성자
+
+	public void changePanel(int shopTabbedPaneNo, int productTabbedPaneNo, int memberTabbedPaneNo, Map data) {
+		if (shopTabbedPaneNo == 0) {
+
+			// 메인
+			shopTabbedPane.setSelectedIndex(shopTabbedPaneNo);
+		} else if (shopTabbedPaneNo == 1) {
+			// 회원
+			shopTabbedPane.setSelectedIndex(shopTabbedPaneNo);
+			if (memberTabbedPaneNo == 0) {
+				// 로그인
+				memberTabbedpane.setSelectedIndex(memberTabbedPaneNo);
+			} else if (memberTabbedPaneNo == 1) {
+				// 회원가입
+			}
+		} else if (shopTabbedPaneNo == 2) {
+			shopTabbedPane.setSelectedIndex(shopTabbedPaneNo);
+			// 상품
+			if (productTabbedPaneNo == 0) {
+				// 베스트셀러
+				productTabbedPane.setSelectedIndex(productTabbedPaneNo);
+			} else if (productTabbedPaneNo == 1) {
+				// 소설
+				productTabbedPane.setSelectedIndex(productTabbedPaneNo);
+			} else if (productTabbedPaneNo == 2) {
+				// 자기계발
+				productTabbedPane.setSelectedIndex(productTabbedPaneNo);
+			} else if (productTabbedPaneNo == 3) {
+				// 디테일
+				Product p = (Product) data.get("product");
+				productDetailPanel.setProduct(p);
+				shopTabbedPane.setSelectedIndex(2);
+				productTabbedPane.setSelectedIndex(3);
+			}
+		} else if (shopTabbedPaneNo == 3) {
+			// 장바구니
+			shopTabbedPane.setSelectedIndex(shopTabbedPaneNo);
+		} else if (shopTabbedPaneNo == 4) {
+			// 주문내역
+			shopTabbedPane.setSelectedIndex(shopTabbedPaneNo);
 		}
-		
+
 	}
 }
-	
-	
+
 //	/**************로그인성공시 호출할메쏘드***************/
 //	void loginProcess(Member loginMember) throws Exception{
 //		/***********로그인성공시 해야할일***********
@@ -295,7 +317,5 @@ public class Main2 extends JFrame {
 //			
 //			MemberTabbedpane.setSelectedIndex(2);
 
-
-		
 //		}
 //	}
