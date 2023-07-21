@@ -168,7 +168,7 @@ public class ProductNovelListPanel extends JPanel {
 					}
 					
 				}else {
-					mainFrame.changePanel(1, -1, -1, null);
+					mainFrame.changePanel(1, -1, 0, null);
 					JOptionPane.showMessageDialog(null, "로그인이 필요한 서비스입니다.");
 					cartComboBox.setSelectedItem("1");
 				}
