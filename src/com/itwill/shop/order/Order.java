@@ -10,10 +10,11 @@ public class Order {
 	private int o_price;
 	private Date o_date;
 	private String m_id;
+	private List<OrderItem> orderItemList;
 	
-	List<OrderItem> orderItemList;
-	
-	public Order() {}
+	public Order() {
+		orderItemList= new ArrayList<OrderItem>();
+	}
 	
 	public Order(int o_no, String o_desc, int o_price, Date o_date, String m_id, List<OrderItem> orderItemList) {
 		super();
