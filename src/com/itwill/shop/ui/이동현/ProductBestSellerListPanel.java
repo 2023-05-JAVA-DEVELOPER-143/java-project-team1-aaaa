@@ -136,6 +136,7 @@ public class ProductBestSellerListPanel extends JPanel {
 					Map data=new HashMap();
 					data.put("product", product);
 					mainFrame.changePanel(2,3,-1,data);
+					mainFrame.productTabbedPane.setEnabledAt(3, false);
 				}
 			});
 			bestSellerImageLabel.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/"+product.getP_image())));
@@ -189,6 +190,7 @@ public class ProductBestSellerListPanel extends JPanel {
 											new Product(p.getP_no(), p.getP_name(), p.getP_price(),
 														p.getP_image(), p.getP_desc(), p.getP_category())));
 						JOptionPane.showMessageDialog(null, "장바구니에 상품이 담겼습니다.");
+						cartComboBox.setSelectedItem("1");
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -197,6 +199,7 @@ public class ProductBestSellerListPanel extends JPanel {
 				}else {
 					mainFrame.changePanel(1, -1, -1, null);
 					JOptionPane.showMessageDialog(null, "로그인이 필요한 서비스입니다.");
+					cartComboBox.setSelectedItem("1");
 				}
 			}
 			});
