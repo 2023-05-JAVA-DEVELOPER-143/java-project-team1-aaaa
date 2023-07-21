@@ -213,7 +213,7 @@ public class Main2 extends JFrame {
 
 		productDetailPanel = new ProductDetailPanel();
 		productTabbedPane.addTab("상세보기", null, productDetailPanel, null);
-		productTabbedPane.setEnabledAt(3, true);
+		productTabbedPane.setEnabledAt(3, false);
 
 		cartPanel = new CartPanel();
 		shopTabbedPane.addTab("장바구니", null, cartPanel, null);

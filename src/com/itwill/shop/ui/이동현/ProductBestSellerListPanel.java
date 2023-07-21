@@ -136,7 +136,7 @@ public class ProductBestSellerListPanel extends JPanel {
 					Map data=new HashMap();
 					data.put("product", product);
 					mainFrame.changePanel(2,3,-1,data);
-					mainFrame.productTabbedPane.setEnabledAt(3, false);
+					mainFrame.productTabbedPane.setEnabledAt(3, true);
 				}
 			});
 			bestSellerImageLabel.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/"+product.getP_image())));
