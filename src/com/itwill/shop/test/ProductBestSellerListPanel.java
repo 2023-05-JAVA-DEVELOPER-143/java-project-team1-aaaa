@@ -1,4 +1,4 @@
-package com.itwill.shop.ui.이동현;
+package com.itwill.shop.test;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -9,7 +9,6 @@ import com.itwill.shop.member.Member;
 import com.itwill.shop.member.MemberService;
 import com.itwill.shop.product.Product;
 import com.itwill.shop.product.ProductService;
-import com.itwill.shop.test.Main2;
 
 import java.awt.Color;
 
@@ -103,7 +102,9 @@ public class ProductBestSellerListPanel extends JPanel {
 	}
 	
 	public void displayBestSellerList() throws Exception {
+		System.out.println("sdsadsadsa");
 		List<Product> bestSellerList = mainFrame.productService.bestSellerList();
+		System.out.println(bestSellerList);
 		productBestSellerListPanel.removeAll();
 		
 		for (Product product : bestSellerList) {
@@ -174,7 +175,7 @@ public class ProductBestSellerListPanel extends JPanel {
 				}
 			}
 			});
-			cartAddButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
+			cartAddButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/216477_shopping_cart_icon (2).png")));
 			cartAddButton.setBounds(232, 119, 50, 40);
 			bestSellerListPanel.add(cartAddButton);
 			

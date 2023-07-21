@@ -169,10 +169,9 @@ public class MemberLoginPanel extends JPanel {
 			mainFrame.memberTabbedpane.setEnabledAt(0,false );
 			mainFrame.memberTabbedpane.setEnabledAt(1,false );
 			mainFrame.memberTabbedpane.setEnabledAt(2,true);
-			
 			mainFrame.memberTabbedpane.setSelectedIndex(2);
-
-
+			
+		
 		
 		}
 	}

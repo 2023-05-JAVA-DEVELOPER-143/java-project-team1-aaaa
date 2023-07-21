@@ -1,4 +1,4 @@
-package com.itwill.shop.ui.이동현;
+package com.itwill.shop.test;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -16,7 +16,6 @@ import javax.swing.SwingConstants;
 
 import com.itwill.shop.product.Product;
 import com.itwill.shop.product.ProductService;
-import com.itwill.shop.test.Main2;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -24,13 +23,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-public class ProductNovelListPanel extends JPanel {
-	private JPanel productNovelListPanel;
+public class ProductSelfImprovementListPanel extends JPanel {
+	private JPanel productSelfImprovementListPanel;
 	public Main2 mainFrame;
 	/**
 	 * Create the panel.
 	 */
-	public ProductNovelListPanel() throws Exception {
+	public ProductSelfImprovementListPanel() throws Exception {
 		setBackground(Color.WHITE);
 		setLayout(null);
 		
@@ -39,18 +38,18 @@ public class ProductNovelListPanel extends JPanel {
 		scrollPane.setBounds(0, 0, 460, 500);
 		add(scrollPane);
 		
-		productNovelListPanel = new JPanel();
-		productNovelListPanel.setBackground(SystemColor.menu);
-		productNovelListPanel.setPreferredSize(new Dimension(420, 750));
-		scrollPane.setViewportView(productNovelListPanel);
-		productNovelListPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		productSelfImprovementListPanel = new JPanel();
+		productSelfImprovementListPanel.setBackground(SystemColor.menu);
+		productSelfImprovementListPanel.setPreferredSize(new Dimension(420, 750));
+		scrollPane.setViewportView(productSelfImprovementListPanel);
+		productSelfImprovementListPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
 		JPanel bestSellerListPanel = new JPanel();
 		bestSellerListPanel.setBackground(Color.WHITE);
 		bestSellerListPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bestSellerListPanel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		bestSellerListPanel.setPreferredSize(new Dimension(420, 175));
-		productNovelListPanel.add(bestSellerListPanel);
+		productSelfImprovementListPanel.add(bestSellerListPanel);
 		bestSellerListPanel.setLayout(null);
 		
 		JLabel bestSellerImageLabel = new JLabel("");
@@ -87,21 +86,20 @@ public class ProductNovelListPanel extends JPanel {
 		
 		
 		
-		
 	}
 	
 	public void displayBestSellerList() throws Exception {
-		List<Product> novelList = mainFrame.productService.novelList();
+		List<Product> selfImprovementList = mainFrame.productService.selfImprovementList();
 		
-		productNovelListPanel.removeAll();
+		productSelfImprovementListPanel.removeAll();
 		
-		for (Product product : novelList) {
+		for (Product product : selfImprovementList) {
 			JPanel bestSellerListPanel = new JPanel();
 			bestSellerListPanel.setBackground(Color.WHITE);
 			bestSellerListPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			bestSellerListPanel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 			bestSellerListPanel.setPreferredSize(new Dimension(420, 175));
-			productNovelListPanel.add(bestSellerListPanel);
+			productSelfImprovementListPanel.add(bestSellerListPanel);
 			bestSellerListPanel.setLayout(null);
 			
 			JLabel bestSellerImageLabel = new JLabel("");
@@ -131,7 +129,7 @@ public class ProductNovelListPanel extends JPanel {
 					int cartQty = Integer.parseInt(cartQtyStr);
 				}
 			});
-			cartButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
+			cartButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/216477_shopping_cart_icon (2).png")));
 			cartButton.setBounds(232, 119, 50, 40);
 			bestSellerListPanel.add(cartButton);
 			
@@ -147,8 +145,6 @@ public class ProductNovelListPanel extends JPanel {
 			priceLabel.setBounds(258, 64, 150, 30);
 			bestSellerListPanel.add(priceLabel);
 		}
-		
-		
 	}
 	public void setMainFrame(Main2 mainFrame) throws Exception{
 		this.mainFrame = mainFrame;

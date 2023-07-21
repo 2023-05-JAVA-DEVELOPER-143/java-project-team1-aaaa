@@ -33,6 +33,8 @@ import com.itwill.shop.ui.임범준.MemberLoginPanel;
 import com.itwill.shop.ui.임범준.OrderPanel1;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import com.itwill.shop.ui.이다영.CartPanel;
+import com.itwill.shop.ui.임범준.MemberInfoPanel;
 
 public class Main2 extends JFrame {
 	/************ 1.Service객체멤버변수선언 ************/
@@ -48,7 +50,6 @@ public class Main2 extends JFrame {
 	private JPanel contentPane;
 	private JTextField searchTextField;
 	public MemberLoginPanel loginPanel;
-	private JPanel memberInfoPanel;
 	private MemberCreatePanel memberCreatePanel;
 	private MemberLoginPanel memberLoginPanel;
 	public JTabbedPane memberTabbedpane;
@@ -62,8 +63,10 @@ public class Main2 extends JFrame {
 	private JPanel productDetail;
 	private JTabbedPane orderTabbedPane;
 	private OrderPanel1 orderPanel1;
-	private JTabbedPane cartTabbedPane;
 	private JTabbedPane shopTabbedPane;
+	private CartPanel cartPanel;
+	private JPanel mainPane;
+	private MemberInfoPanel memberInfoPanel;
 	
 	
 	
@@ -128,10 +131,18 @@ public class Main2 extends JFrame {
 		northPanel.add(searchLabel);
 		
 		shopTabbedPane = new JTabbedPane(JTabbedPane.TOP);
+
+		shopTabbedPane.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				if (shopTabbedPane.getSelectedIndex()==2) {
+					productTabbedPane.setSelectedIndex(0);
+				}
+			}
+		});
 		shopTabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		contentPane.add(shopTabbedPane, BorderLayout.CENTER);
 		
-		JPanel mainPane = new JPanel();
+		mainPane = new JPanel();
 		mainPane.setToolTipText("");
 		shopTabbedPane.addTab("메인", null, mainPane, null);
 		mainPane.setLayout(null);
@@ -143,11 +154,8 @@ public class Main2 extends JFrame {
 		memberTabbedpane.addTab("로그인", null, memberLoginPanel, null);
 		
 		memberCreatePanel = new MemberCreatePanel();
+		memberCreatePanel.setBackground(new Color(0, 255, 255));
 		memberTabbedpane.addTab("회원가입", null, memberCreatePanel, null);
-		
-		memberInfoPanel = new JPanel();
-		memberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
-		memberInfoPanel.setLayout(null);
 		
 		productTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		productTabbedPane.addChangeListener(new ChangeListener() {
@@ -247,23 +255,20 @@ public class Main2 extends JFrame {
 		lblNewLabel_1.setBounds(199, 370, 231, 50);
 		panel_1.add(lblNewLabel_1);
 
-		cartTabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		shopTabbedPane.addTab("장바구니", null, cartTabbedPane, null);
-
 
 		this.memberService = new MemberService();
 		this.orderService = new OrderService();
 		this.productService = new ProductService();
 		this.cartService = new CartService();
 
-		productBestSellerListPanel.setMainFrame(this);
-		productNovelListPanel.setMainFrame(this);
-		productSelfImprovementListPanel.setMainFrame(this);
+		
 
 		productTabbedPane.setSelectedIndex(-1);
 		
-		memberLoginPanel.setMainFrame(this);
-		memberCreatePanel.setMainFrame(this);
+		
+		
+		cartPanel = new CartPanel();
+		shopTabbedPane.addTab("장바구니", null, cartPanel, null);
 		
 		orderTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addTab("주문", null, orderTabbedPane, null);
@@ -274,6 +279,17 @@ public class Main2 extends JFrame {
 		memberLoginPanel.setMainFrame(this);
 		memberCreatePanel.setMainFrame(this);
 		
+		memberInfoPanel = new MemberInfoPanel();
+		memberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
+		
+		
+		/*******************************************/
+		memberLoginPanel.setMainFrame(this);
+		memberCreatePanel.setMainFrame(this);
+		memberInfoPanel.setMainFrame(this);
+		productBestSellerListPanel.setMainFrame(this);
+		productNovelListPanel.setMainFrame(this);
+		productSelfImprovementListPanel.setMainFrame(this);
 		orderPanel1.setMainFrame(this);
 		
 	}//생성자

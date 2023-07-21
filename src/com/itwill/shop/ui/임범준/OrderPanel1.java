@@ -31,6 +31,7 @@ public class OrderPanel1 extends JPanel {
 	Member loginMember = null;
 	private JPanel orderListPanelScroll;
 	private JScrollPane orderListScrollPane;
+	private JPanel orderTotalPricePanel;
 
 	/**
 	 * Create the panel.
@@ -84,7 +85,7 @@ public class OrderPanel1 extends JPanel {
 		orderPriceLB.setBounds(300, 127, 93, 41);
 		orderListPanelScroll.add(orderPriceLB);
 		
-		JPanel orderTotalPricePanel = new JPanel();
+		orderTotalPricePanel = new JPanel();
 		orderTotalPricePanel.setLayout(null);
 		orderTotalPricePanel.setBounds(12, 263, 434, 34);
 		orderPanel.add(orderTotalPricePanel);
@@ -196,6 +197,17 @@ public class OrderPanel1 extends JPanel {
 		orderItemPriceTitleLB.setFont(new Font("굴림", Font.BOLD, 12));
 		orderItemPriceTitleLB.setBounds(173, 127, 105, 41);
 		orderListPanelScroll.add(orderItemPriceTitleLB);
+		
+		JLabel orderTotalPriceNameLB = new JLabel("최종 결재 금액");
+		orderTotalPriceNameLB.setFont(new Font("굴림", Font.BOLD, 14));
+		orderTotalPriceNameLB.setBounds(12, 10, 150, 23);
+		orderTotalPricePanel.add(orderTotalPriceNameLB);
+		
+		JLabel orderTotalPriceLB = new JLabel("50000원");
+		orderTotalPriceLB.setHorizontalAlignment(SwingConstants.RIGHT);
+		orderTotalPriceLB.setFont(new Font("굴림", Font.BOLD, 14));
+		orderTotalPriceLB.setBounds(250, 10, 159, 23);
+		orderTotalPricePanel.add(orderTotalPriceLB);
 		
 	}
 	

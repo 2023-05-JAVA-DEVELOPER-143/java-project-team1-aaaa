@@ -130,7 +130,7 @@ public class ProductSelfImprovementListPanel extends JPanel {
 					int cartQty = Integer.parseInt(cartQtyStr);
 				}
 			});
-			cartButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/216477_shopping_cart_icon (2).png")));
+			cartButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
 			cartButton.setBounds(232, 119, 50, 40);
 			bestSellerListPanel.add(cartButton);
 			
