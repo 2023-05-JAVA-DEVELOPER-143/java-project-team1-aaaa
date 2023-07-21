@@ -5,14 +5,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -23,26 +23,23 @@ import javax.swing.event.ChangeListener;
 import com.itwill.shop.cart.CartService;
 import com.itwill.shop.member.Member;
 import com.itwill.shop.member.MemberService;
+import com.itwill.shop.order.OrderService;
 import com.itwill.shop.product.ProductService;
 import com.itwill.shop.ui.이동현.ProductBestSellerListPanel;
 import com.itwill.shop.ui.이동현.ProductNovelListPanel;
 import com.itwill.shop.ui.이동현.ProductSelfImprovementListPanel;
+import com.itwill.shop.ui.임범준.MemberCreatePanel;
 import com.itwill.shop.ui.임범준.MemberLoginPanel;
-
+import com.itwill.shop.ui.임범준.OrderPanel1;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JScrollPane;
-import com.itwill.shop.ui.임범준.MemberCreatePanel;
-import com.itwill.shop.ui.임범준.OrderPanel;
-import javax.swing.ImageIcon;
-import com.itwill.shop.ui.임범준.OrderPanel1;
 
 public class Main2 extends JFrame {
 	/************ 1.Service객체멤버변수선언 ************/
 	public ProductService productService;
 	public MemberService memberService;
 	public CartService cartService;
-
+	public OrderService orderService;
 	
 	/*********2.로그인한회원 멤버필드선언*****/
 	public Member loginMember=null;
@@ -63,6 +60,10 @@ public class Main2 extends JFrame {
 	private JPanel productNovel;
 	private JPanel productSelfImprovement;
 	private JPanel productDetail;
+	private JTabbedPane orderTabbedPane;
+	private OrderPanel1 orderPanel1;
+	private JTabbedPane cartTabbedPane;
+	private JTabbedPane shopTabbedPane;
 	
 	
 	
@@ -106,6 +107,13 @@ public class Main2 extends JFrame {
 		northPanel.add(logoLabel);
 		
 		JLabel cartLogoLabel = new JLabel("");
+		cartLogoLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				shopTabbedPane.setSelectedIndex(3);
+			}
+		});
+		
 		cartLogoLabel.setIcon(new ImageIcon(Main2.class.getResource("/com/itwill/shop/image/cart.png")));
 		cartLogoLabel.setBounds(418, 0, 46, 40);
 		northPanel.add(cartLogoLabel);
@@ -119,7 +127,7 @@ public class Main2 extends JFrame {
 		searchLabel.setBounds(288, 0, 60, 40);
 		northPanel.add(searchLabel);
 		
-		JTabbedPane shopTabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		shopTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		contentPane.add(shopTabbedPane, BorderLayout.CENTER);
 		
@@ -239,31 +247,12 @@ public class Main2 extends JFrame {
 		lblNewLabel_1.setBounds(199, 370, 231, 50);
 		panel_1.add(lblNewLabel_1);
 
-		JTabbedPane cartTabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		cartTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addTab("장바구니", null, cartTabbedPane, null);
 
-		JPanel orderPanel = new JPanel();
-		shopTabbedPane.addTab("주문내역", null, orderPanel, null);
-		orderPanel.setLayout(new BorderLayout(0, 0));
-
-		JScrollPane orderContentPanelScrollPane = new JScrollPane();
-		orderPanel.add(orderContentPanelScrollPane, BorderLayout.CENTER);
-
-		JPanel orderContentPanel = new JPanel();
-		orderContentPanel.setPreferredSize(new Dimension(450, 1000));
-		orderContentPanelScrollPane.setViewportView(orderContentPanel);
-
-		JPanel orderListTitlePanel = new JPanel();
-		orderListTitlePanel.setPreferredSize(new Dimension(450, 40));
-		orderContentPanel.add(orderListTitlePanel);
-		orderListTitlePanel.setLayout(null);
-
-		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(450, 10));
-		orderContentPanel.add(panel);
-		panel.setLayout(null);
 
 		this.memberService = new MemberService();
+		this.orderService = new OrderService();
 		this.productService = new ProductService();
 		this.cartService = new CartService();
 
@@ -276,6 +265,16 @@ public class Main2 extends JFrame {
 		memberLoginPanel.setMainFrame(this);
 		memberCreatePanel.setMainFrame(this);
 		
+		orderTabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		shopTabbedPane.addTab("주문", null, orderTabbedPane, null);
+		
+		orderPanel1 = new OrderPanel1();
+		orderTabbedPane.addTab("New tab", null, orderPanel1, null);
+		
+		memberLoginPanel.setMainFrame(this);
+		memberCreatePanel.setMainFrame(this);
+		
+		orderPanel1.setMainFrame(this);
 		
 	}//생성자
 }

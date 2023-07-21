@@ -213,7 +213,7 @@ public class OrderDao {
 	/*
 	 * 주문1개보기(주문상세리스트)
 	 */
-	public Order findByOrderNo(int o_no) throws Exception {
+	public Order findByOrderNo(String m_id, int o_no) throws Exception {
 
 		Order order = null;
 		Connection con = null;

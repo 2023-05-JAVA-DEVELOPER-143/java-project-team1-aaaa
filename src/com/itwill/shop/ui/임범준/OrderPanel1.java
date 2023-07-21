@@ -29,6 +29,8 @@ public class OrderPanel1 extends JPanel {
 	
 	/*******loginMember 객체 선언***********/
 	Member loginMember = null;
+	private JPanel orderListPanelScroll;
+	private JScrollPane orderListScrollPane;
 
 	/**
 	 * Create the panel.
@@ -56,10 +58,10 @@ public class OrderPanel1 extends JPanel {
 		orderPanel.add(orderListPanel);
 		orderListPanel.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane orderListScrollPane = new JScrollPane();
+		orderListScrollPane = new JScrollPane();
 		orderListPanel.add(orderListScrollPane, BorderLayout.CENTER);
 		
-		JPanel orderListPanelScroll = new JPanel();
+		orderListPanelScroll = new JPanel();
 		orderListPanelScroll.setPreferredSize(new Dimension(10, 2000));
 		orderListScrollPane.setViewportView(orderListPanelScroll);
 		orderListPanelScroll.setLayout(null);
@@ -166,8 +168,34 @@ public class OrderPanel1 extends JPanel {
 	}
 	
 	
-	public void displayOrderList() {
+	public void displayOrderList() throws Exception {
 		Order tempOrder = null;
+		int orderNo = 0;
+		List<Order> orderList = mainFrame.orderService.orderList(mainFrame.loginMember.getM_Id());
+		for (Order order : orderList) {
+			
+		}
+		tempOrder = mainFrame.orderService.orderWithOrderItem(mainFrame.loginMember.getM_Id(), orderNo );
+		
+		orderListPanelScroll.removeAll();
+		
+		orderListPanelScroll.setPreferredSize(new Dimension(10, 2000));
+		orderListScrollPane.setViewportView(orderListPanelScroll);
+		orderListPanelScroll.setLayout(null);
+		
+		JLabel orderItemImage = new JLabel("New label");
+		orderItemImage.setPreferredSize(new Dimension(120, 175));
+		orderItemImage.setBounds(12, 10, 120, 175);
+		orderListPanelScroll.add(orderItemImage);
+		
+		JLabel orderDescLB = new JLabel("New label");
+		orderDescLB.setBounds(191, 68, 180, 15);
+		orderListPanelScroll.add(orderDescLB);
+		
+		JLabel orderItemPriceTitleLB = new JLabel("총 금액:");
+		orderItemPriceTitleLB.setFont(new Font("굴림", Font.BOLD, 12));
+		orderItemPriceTitleLB.setBounds(173, 127, 105, 41);
+		orderListPanelScroll.add(orderItemPriceTitleLB);
 		
 	}
 	
