@@ -35,6 +35,8 @@ public class ProductBestSellerListPanel extends JPanel {
 		scrollPane.setBounds(0, 0, 460, 500);
 		add(scrollPane);
 		
+		
+		
 		productBestSellerListPanel = new JPanel();
 		productBestSellerListPanel.setBackground(SystemColor.menu);
 		productBestSellerListPanel.setPreferredSize(new Dimension(420, 750));
