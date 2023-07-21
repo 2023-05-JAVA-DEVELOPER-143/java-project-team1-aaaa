@@ -176,7 +176,7 @@ public class ProductBestSellerListPanel extends JPanel {
 				}
 			}
 			});
-			cartAddButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/216477_shopping_cart_icon (2).png")));
+			cartAddButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
 			cartAddButton.setBounds(232, 119, 50, 40);
 			bestSellerListPanel.add(cartAddButton);
 			
