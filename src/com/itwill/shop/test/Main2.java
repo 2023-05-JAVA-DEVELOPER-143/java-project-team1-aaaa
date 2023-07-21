@@ -25,6 +25,7 @@ import com.itwill.shop.member.Member;
 import com.itwill.shop.member.MemberService;
 import com.itwill.shop.product.Product;
 import com.itwill.shop.product.ProductService;
+import com.itwill.shop.ui.권경록.ProductDetailPanel;
 import com.itwill.shop.ui.이동현.ProductBestSellerListPanel;
 import com.itwill.shop.ui.이동현.ProductNovelListPanel;
 import com.itwill.shop.ui.이동현.ProductSelfImprovementListPanel;
@@ -39,7 +40,6 @@ import com.itwill.shop.ui.임범준.MemberCreatePanel;
 import com.itwill.shop.ui.임범준.OrderPanel;
 import javax.swing.ImageIcon;
 import com.itwill.shop.ui.임범준.OrderPanel1;
-import com.itwill.shop.ui.이동현.ProductDetailPanel;
 
 public class Main2 extends JFrame {
 	/************ 1.Service객체멤버변수선언 ************/
