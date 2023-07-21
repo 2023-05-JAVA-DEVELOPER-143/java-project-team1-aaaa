@@ -3,8 +3,13 @@ package com.itwill.shop.ui.이동현;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import com.itwill.shop.cart.Cart;
+import com.itwill.shop.cart.CartService;
+import com.itwill.shop.member.Member;
+import com.itwill.shop.member.MemberService;
 import com.itwill.shop.product.Product;
 import com.itwill.shop.product.ProductService;
+import com.itwill.shop.test.Main2;
 
 import java.awt.Color;
 
@@ -14,14 +19,23 @@ import java.awt.Font;
 import java.util.List;
 import java.awt.Cursor;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ProductBestSellerListPanel extends JPanel {
 	
-	private ProductService productService;
+	public Main2 mainFrame;
 	private JPanel productBestSellerListPanel;
 	/**
 	 * Create the panel.
@@ -34,8 +48,6 @@ public class ProductBestSellerListPanel extends JPanel {
 		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setBounds(0, 0, 460, 500);
 		add(scrollPane);
-		
-		
 		
 		productBestSellerListPanel = new JPanel();
 		productBestSellerListPanel.setBackground(SystemColor.menu);
@@ -56,9 +68,9 @@ public class ProductBestSellerListPanel extends JPanel {
 		bestSellerImageLabel.setBounds(0, 0, 120, 175);
 		bestSellerListPanel.add(bestSellerImageLabel);
 		
-		JLabel bestSellerNameLabel = new JLabel("");
+		JLabel bestSellerNameLabel = new JLabel("제목");
 		bestSellerNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		bestSellerNameLabel.setFont(new Font("맑은 고딕", Font.BOLD, 12));
+		bestSellerNameLabel.setFont(new Font("맑은 고딕", Font.BOLD, 17));
 		bestSellerNameLabel.setBounds(132, 10, 276, 44);
 		bestSellerListPanel.add(bestSellerNameLabel);
 		
@@ -66,10 +78,15 @@ public class ProductBestSellerListPanel extends JPanel {
 		buyButton.setBounds(294, 119, 80, 40);
 		bestSellerListPanel.add(buyButton);
 		
-		JButton cartButton = new JButton("");
-		cartButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
-		cartButton.setBounds(232, 119, 50, 40);
-		bestSellerListPanel.add(cartButton);
+		JComboBox cartComboBox = new JComboBox();
+		cartComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
+		cartComboBox.setBounds(170, 119, 50, 23);
+		bestSellerListPanel.add(cartComboBox);
+		
+		JButton cartAddButton = new JButton("");
+		cartAddButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
+		cartAddButton.setBounds(232, 119, 50, 40);
+		bestSellerListPanel.add(cartAddButton);
 		
 		JLabel saleLabel = new JLabel("판매가");
 		saleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -83,14 +100,12 @@ public class ProductBestSellerListPanel extends JPanel {
 		priceLabel.setBounds(258, 64, 150, 30);
 		bestSellerListPanel.add(priceLabel);
 		
-		productService = new ProductService();
-		displayBestSellerList();
-		
 	}
 	
 	public void displayBestSellerList() throws Exception {
-		List<Product> bestSellerList = productService.bestSellerList();
-		
+		System.out.println("sdsadsadsa");
+		List<Product> bestSellerList = mainFrame.productService.bestSellerList();
+		System.out.println(bestSellerList);
 		productBestSellerListPanel.removeAll();
 		
 		for (Product product : bestSellerList) {
@@ -113,14 +128,57 @@ public class ProductBestSellerListPanel extends JPanel {
 			bestSellerNameLabel.setBounds(132, 10, 276, 44);
 			bestSellerListPanel.add(bestSellerNameLabel);
 			
+			JComboBox cartComboBox = new JComboBox();
+			cartComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
+			cartComboBox.setBounds(170, 119, 50, 23);
+			bestSellerListPanel.add(cartComboBox);
+			
 			JButton buyButton = new JButton("바로구매");
+			/*buyButton.addActionListener(new ActionListener() {
+				Product p = product;
+				public void actionPerformed(ActionEvent e) {
+					if (loginMember != null) {
+						// 장바구니 상품 추가
+						try {
+							String cartQtyStr = (String) cartComboBox.getSelectedItem();
+							int cartQty = Integer.parseInt(cartQtyStr);
+							orderService.addOrderItem(new Cart(0, cartQty, loginMember.getM_Id(), new Product(p.getP_no(),
+									p.getP_name(), p.getP_price(), p.getP_image(), p.getP_desc(), p.getP_category())));
+							JOptionPane.showMessageDialog(null, "장바구니에 상품이 담겼습니다.");
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				}
+			});*/
 			buyButton.setBounds(294, 119, 90, 40);
 			bestSellerListPanel.add(buyButton);
 			
-			JButton cartButton = new JButton("");
-			cartButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
-			cartButton.setBounds(232, 119, 50, 40);
-			bestSellerListPanel.add(cartButton);
+			JButton cartAddButton = new JButton("");
+			cartAddButton.addActionListener(new ActionListener() {
+				Product p = product;
+				
+				public void actionPerformed(ActionEvent e) {
+					if (mainFrame.loginMember != null) {
+						// 장바구니 상품 추가
+					try {
+						String cartQtyStr = (String)cartComboBox.getSelectedItem();
+						int cartQty = Integer.parseInt(cartQtyStr);
+						mainFrame.cartService.addCart(new Cart(0, cartQty, mainFrame.loginMember.getM_Id(), 
+											new Product(p.getP_no(), p.getP_name(), p.getP_price(),
+														p.getP_image(), p.getP_desc(), p.getP_category())));
+						JOptionPane.showMessageDialog(null, "장바구니에 상품이 담겼습니다.");
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}
+			});
+			cartAddButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/216477_shopping_cart_icon (2).png")));
+			cartAddButton.setBounds(232, 119, 50, 40);
+			bestSellerListPanel.add(cartAddButton);
 			
 			JLabel saleLabel = new JLabel("판매가");
 			saleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -133,9 +191,12 @@ public class ProductBestSellerListPanel extends JPanel {
 			priceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 			priceLabel.setBounds(258, 64, 150, 30);
 			bestSellerListPanel.add(priceLabel);
+			
 		}
 		
+	}
+	public void setMainFrame(Main2 mainFrame)throws Exception{
+		this.mainFrame = mainFrame;
 		
 	}
-	
 }

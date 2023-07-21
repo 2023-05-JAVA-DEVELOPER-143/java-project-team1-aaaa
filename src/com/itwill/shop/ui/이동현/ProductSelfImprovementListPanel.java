@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -14,14 +16,17 @@ import javax.swing.SwingConstants;
 
 import com.itwill.shop.product.Product;
 import com.itwill.shop.product.ProductService;
+import com.itwill.shop.test.Main2;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
 public class ProductSelfImprovementListPanel extends JPanel {
 	private JPanel productSelfImprovementListPanel;
-	private ProductService productService;
+	public Main2 mainFrame;
 	/**
 	 * Create the panel.
 	 */
@@ -64,7 +69,7 @@ public class ProductSelfImprovementListPanel extends JPanel {
 		bestSellerListPanel.add(buyButton);
 		
 		JButton cartButton = new JButton("");
-		cartButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
+		cartButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/216477_shopping_cart_icon (2).png")));
 		cartButton.setBounds(232, 119, 50, 40);
 		bestSellerListPanel.add(cartButton);
 		
@@ -80,13 +85,12 @@ public class ProductSelfImprovementListPanel extends JPanel {
 		priceLabel.setBounds(258, 64, 150, 30);
 		bestSellerListPanel.add(priceLabel);
 		
-		productService = new ProductService();
-		displayBestSellerList();
+		
 		
 	}
 	
 	public void displayBestSellerList() throws Exception {
-		List<Product> selfImprovementList = productService.selfImprovementList();
+		List<Product> selfImprovementList = mainFrame.productService.selfImprovementList();
 		
 		productSelfImprovementListPanel.removeAll();
 		
@@ -114,8 +118,19 @@ public class ProductSelfImprovementListPanel extends JPanel {
 			buyButton.setBounds(294, 119, 90, 40);
 			bestSellerListPanel.add(buyButton);
 			
+			JComboBox cartComboBox = new JComboBox();
+			cartComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
+			cartComboBox.setBounds(170, 119, 50, 23);
+			bestSellerListPanel.add(cartComboBox);
+			
 			JButton cartButton = new JButton("");
-			cartButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
+			cartButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String cartQtyStr = (String)cartComboBox.getSelectedItem();
+					int cartQty = Integer.parseInt(cartQtyStr);
+				}
+			});
+			cartButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/216477_shopping_cart_icon (2).png")));
 			cartButton.setBounds(232, 119, 50, 40);
 			bestSellerListPanel.add(cartButton);
 			
@@ -131,6 +146,9 @@ public class ProductSelfImprovementListPanel extends JPanel {
 			priceLabel.setBounds(258, 64, 150, 30);
 			bestSellerListPanel.add(priceLabel);
 		}
+	}
+	public void setMainFrame(Main2 mainFrame) throws Exception{
+		this.mainFrame = mainFrame;
 	}
 
 }
