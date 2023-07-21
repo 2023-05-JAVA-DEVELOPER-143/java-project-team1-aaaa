@@ -25,8 +25,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 
 public class CartPanel extends JPanel {
@@ -40,14 +38,12 @@ public class CartPanel extends JPanel {
 	private JLabel cartTotalPriceLabel;
 	private JPanel cartListContentPanel;
 	private JPanel cartListPanel;
-	private JPanel cartBottomPanel;
 	private JPanel itemPanel;
 	private JLabel bookItemImageLabel;
 	private JLabel bookTitleLabel;
 	private JComboBox itemQtyComboBox;
 	private JButton deleteButton;
-	private JLabel bookPriceLabel;
-	public JButton selectedItemOrderButton;
+	
 	/****Frame*****/
 	private Main2 mainFrame;
 	
@@ -82,7 +78,7 @@ public class CartPanel extends JPanel {
 					mainFrame.cartService.deleteCartItemByUserId(mainFrame.loginMember.getM_Id());
 					JOptionPane.showMessageDialog(null, "전체상품이 삭제되었습니다.");
 					displayCartList();
-					resetCartTotalPrice();
+					// resetCartTotalPrice();
 					
 				} catch (Exception e1) {
 					//
@@ -97,7 +93,7 @@ public class CartPanel extends JPanel {
 		chckbxNewCheckBox.setBounds(12, 21, 29, 23);
 		cartTopPanel.add(chckbxNewCheckBox);
 		
-		cartBottomPanel = new JPanel();
+		JPanel cartBottomPanel = new JPanel();
 		cartBottomPanel.setPreferredSize(new Dimension(10, 80));
 		cartContentPanel.add(cartBottomPanel, BorderLayout.SOUTH);
 		cartBottomPanel.setLayout(null);
@@ -111,7 +107,7 @@ public class CartPanel extends JPanel {
 		cartTotalPriceLabel.setBounds(110, 25, 99, 28);
 		cartBottomPanel.add(cartTotalPriceLabel);
 		
-		selectedItemOrderButton = new JButton("선택 상품 주문하기");
+		JButton selectedItemOrderButton = new JButton("선택 상품 주문하기");
 		selectedItemOrderButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -161,7 +157,6 @@ public class CartPanel extends JPanel {
 		// 카트 상품 이미지 
 		bookItemImageLabel = new JLabel("이미지");
 		bookItemImageLabel.setBounds(49, 9, 63, 80);
-	
 		itemPanel.add(bookItemImageLabel);
 		
 		bookTitleLabel = new JLabel("책 이름");
@@ -179,10 +174,20 @@ public class CartPanel extends JPanel {
 		itemPanel.add(itemQtyComboBox);
 		
 		JButton orderButton = new JButton("주문");
+		orderButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		orderButton.setBounds(345, 20, 72, 30);
 		itemPanel.add(orderButton);
 		
 		deleteButton = new JButton("삭제");
+		deleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		deleteButton.setBounds(345, 60, 72, 29);
 		itemPanel.add(deleteButton);
 
@@ -194,6 +199,10 @@ public class CartPanel extends JPanel {
 		}
 	} // 생성자 끝
 	
+	public void setMainFrame(Main2 mainFrame) {
+		this.mainFrame=mainFrame;
+	}
+	
 	
 	public void displayCartList() throws Exception{
 		
@@ -201,7 +210,6 @@ public class CartPanel extends JPanel {
 			
 			List<Cart> cartList = mainFrame.cartService.findCartItemByAll(mainFrame.loginMember.getM_Id());
 			totPrice = 0;
-			
 			
 			/*********************for문 시작*****************/
 			for(Cart cart : cartList) {
@@ -231,33 +239,11 @@ public class CartPanel extends JPanel {
 				itemQtyComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
 				itemQtyComboBox.setBounds(248, 40, 32, 23);
 				
-				/*********카트 상품이 수정이 되고 카트 총액이 바뀌고 ************/
+				
 				itemQtyComboBox.setSelectedItem(Integer.toString(cart.getCart_qty()));
-				itemQtyComboBox.addItemListener(new ItemListener() {
-					@Override
-					public void itemStateChanged(ItemEvent e) {
-						if(e.getStateChange()==ItemEvent.SELECTED) {
-							try {
-								int c_qty = Integer.parseInt((String)itemQtyComboBox.getSelectedItem());
-								mainFrame.cartService.updateCart(cart.getCart_no(), c_qty);
-								List<Cart> cartList = mainFrame.cartService.findCartItemByAll(mainFrame.loginMember.getM_Id());
-								int totPrice = 0;
-								for (Cart cart : cartList) {
-									totPrice += cart.getCart_qty()*cart.getProduct().getP_price();
-								}
-							
-							// 수량 수정하면 가격 변경
-							 bookPriceLabel.setText(new DecimalFormat("#,###원").format(totPrice));
-							 JOptionPane.showMessageDialog(null, "상품이 수정되었습니다.");
-							
-							}catch(Exception e1){
-								e1.printStackTrace();
-								
-							}
-						}
-						
-					}
-				});
+				
+				/*********카트 상품이 수정이 되고 카트 총액이 바뀌고 ************/
+				
 				
 				itemPanel.add(itemQtyComboBox); // 상품 수정 후 마지막에 콤보박스가 추가되야함.
 				
@@ -267,32 +253,7 @@ public class CartPanel extends JPanel {
 				deleteButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						// 삭제 메소드, m_id인자 들어와야함.
-						try {
-							mainFrame.cartService.deleteCartItemByCartNo(cart.getCart_no());
-							JOptionPane.showMessageDialog(null, "상품이 삭제되었습니다.");
-							itemPanel.removeAll();
-							
-							// 카트 총액이 변경
-							if(cartList.size()==0) {
-								cartTotalPriceLabel.setText("");
-								cartTotalPriceLabel.setBounds(110, 25, 99, 28);
-								cartBottomPanel.add(cartTotalPriceLabel);
-							}else {
-								cartTotalPriceLabel.setText(new DecimalFormat("#,###원").format(totPrice));
-								cartTotalPriceLabel.setBounds(110, 25, 99, 28);
-								cartBottomPanel.add(cartTotalPriceLabel);
-							}
-							
-							displayCartList();
-							cartTotalPriceLabel.setText(new DecimalFormat("#,###원").format(totPrice));
-							cartTotalPriceLabel.setBounds(110, 25, 99, 28);
-							cartBottomPanel.add(cartTotalPriceLabel);
-							
-							
-						} catch (Exception e1) {
-							e1.printStackTrace();
-						}
-						
+						// 카트 총액
 					}
 				});
 				//카트 아이템 디테일 끝
@@ -306,16 +267,11 @@ public class CartPanel extends JPanel {
 	
 	
 	public void resetCartTotalPrice() {
-		cartTotalPriceLabel.removeAll();
-		cartTotalPriceLabel.setBounds(110, 25, 99, 28);
-		cartBottomPanel.add(cartTotalPriceLabel);
 		
 	}
 	
 	
-	public void setMainFrame(Main2 mainFrame) {
-		this.mainFrame = mainFrame;
-	}
+	
 	
 	
 }

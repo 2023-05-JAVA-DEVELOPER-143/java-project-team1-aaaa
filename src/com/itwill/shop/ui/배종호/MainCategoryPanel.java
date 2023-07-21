@@ -1,4 +1,4 @@
-package com.itwill.shop.ui.임범준;
+package com.itwill.shop.ui.배종호;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
@@ -42,7 +42,7 @@ public class MainCategoryPanel extends JPanel {
 				}
 		});
 		bestSellerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		bestSellerLabel.setIcon(new ImageIcon("/com/itwill/shop/image/bestSeller1.jpg"));
+		bestSellerLabel.setIcon(new ImageIcon(MainCategoryPanel.class.getResource("/com/itwill/shop/image/bestSeller1.jpg")));
 		bestSellerLabel.setBounds(31, 52, 125, 185);
 		categoryPane.add(bestSellerLabel);
 			
@@ -56,7 +56,7 @@ public class MainCategoryPanel extends JPanel {
 					mainFrame.changePanel(2, 1,-1,null);
 				}
 			});
-			nonFictionLabel.setIcon(new ImageIcon("/com/itwill/shop/image/bestSeller2.jpg"));
+			nonFictionLabel.setIcon(new ImageIcon(MainCategoryPanel.class.getResource("/com/itwill/shop/image/bestSeller2.jpg")));
 			nonFictionLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			nonFictionLabel.setBounds(168, 52, 125, 185);
 			categoryPane.add(nonFictionLabel);
@@ -71,12 +71,13 @@ public class MainCategoryPanel extends JPanel {
 					mainFrame.changePanel(2, 2,-1,null);
 				}
 			});
-			localBookLabel.setIcon(new ImageIcon("/com/itwill/shop/image/bestSeller3.jpg"));
+			localBookLabel.setIcon(new ImageIcon(MainCategoryPanel.class.getResource("/com/itwill/shop/image/bestSeller3.jpg")));
 			localBookLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			localBookLabel.setBounds(305, 52, 125, 185);
 			categoryPane.add(localBookLabel);
 			
 			JButton bestSellerButton = new JButton("베스트셀러");
+			
 			
 			bestSellerButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {

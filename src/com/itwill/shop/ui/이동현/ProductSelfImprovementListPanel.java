@@ -115,7 +115,7 @@ public class ProductSelfImprovementListPanel extends JPanel {
 					System.out.println("click");
 					Map data=new HashMap();
 					data.put("product", product);
-					mainFrame.changePanel(2,4,-1,data);
+					mainFrame.changePanel(2,3,-1,data);
 				}
 			});
 			bestSellerImageLabel.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/"+product.getP_image())));
@@ -161,7 +161,7 @@ public class ProductSelfImprovementListPanel extends JPanel {
 			bestSellerListPanel.add(priceLabel);
 		}
 	}
-	public void setMainFrame(Main2 mainFrame) throws Exception{
+	public void setMainFrame(Main2 mainFrame) {
 		this.mainFrame = mainFrame;
 	}
 

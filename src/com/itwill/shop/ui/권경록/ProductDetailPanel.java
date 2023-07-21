@@ -82,6 +82,11 @@ public class ProductDetailPanel extends JPanel {
 
 	}
 	
+	public void setMainFrame(Main2 mainFrame) {
+		this.mainFrame = mainFrame;
+	}
+	
+	
 	public void setProduct(Product product) {
 		this.product = product;
 	}
