@@ -112,7 +112,7 @@ public class ProductDetailPanel extends JPanel {
 		cartComboBox.setBounds(88, 438, 60, 35);
 		panel.add(cartComboBox);
 		
-		JButton cartAddButton = new JButton("New button");
+		JButton cartAddButton = new JButton("장바구니");
 		cartAddButton.addActionListener(new ActionListener() {
 			Product p = product;
 			
@@ -126,6 +126,7 @@ public class ProductDetailPanel extends JPanel {
 										new Product(p.getP_no(), p.getP_name(), p.getP_price(),
 													p.getP_image(), p.getP_desc(), p.getP_category())));
 					JOptionPane.showMessageDialog(null, "장바구니에 상품이 담겼습니다.");
+					cartComboBox.setSelectedItem("1");
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -133,6 +134,7 @@ public class ProductDetailPanel extends JPanel {
 			}else {
 				mainFrame.changePanel(1, -1, -1, null);
 				JOptionPane.showMessageDialog(null, "로그인이 필요한 서비스입니다.");
+				cartComboBox.setSelectedItem("1");
 			}
 		}
 		});

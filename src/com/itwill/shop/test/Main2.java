@@ -53,7 +53,7 @@ public class Main2 extends JFrame {
 	private MemberCreatePanel memberCreatePanel;
 	private MemberLoginPanel memberLoginPanel;
 	public JTabbedPane memberTabbedpane;
-	private JTabbedPane productTabbedPane;
+	public JTabbedPane productTabbedPane;
 	private ProductNovelListPanel productNovelListPanel;
 	private ProductBestSellerListPanel productBestSellerListPanel;
 	private ProductSelfImprovementListPanel productSelfImprovementListPanel;
@@ -226,6 +226,7 @@ public class Main2 extends JFrame {
 
 		productDetailPanel = new ProductDetailPanel();
 		productTabbedPane.addTab("상세보기", null, productDetailPanel, null);
+		productTabbedPane.setEnabledAt(3, false);
 
 		cartPanel = new CartPanel();
 		shopTabbedPane.addTab("장바구니", null, cartPanel, null);

@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
+import com.itwill.shop.cart.Cart;
 import com.itwill.shop.product.Product;
 import com.itwill.shop.product.ProductService;
 import com.itwill.shop.test.Main2;
@@ -27,6 +28,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class ProductSelfImprovementListPanel extends JPanel {
 	private JPanel productSelfImprovementListPanel;
@@ -116,6 +118,7 @@ public class ProductSelfImprovementListPanel extends JPanel {
 					Map data=new HashMap();
 					data.put("product", product);
 					mainFrame.changePanel(2,3,-1,data);
+					mainFrame.productTabbedPane.setEnabledAt(3, true);
 				}
 			});
 			bestSellerImageLabel.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/"+product.getP_image())));
@@ -137,16 +140,36 @@ public class ProductSelfImprovementListPanel extends JPanel {
 			cartComboBox.setBounds(170, 119, 50, 23);
 			bestSellerListPanel.add(cartComboBox);
 			
-			JButton cartButton = new JButton("");
-			cartButton.addActionListener(new ActionListener() {
+			JButton cartAddButton = new JButton("");
+			cartAddButton.addActionListener(new ActionListener() {
+				Product p = product;
+				
 				public void actionPerformed(ActionEvent e) {
-					String cartQtyStr = (String)cartComboBox.getSelectedItem();
-					int cartQty = Integer.parseInt(cartQtyStr);
+					if (mainFrame.loginMember != null) {
+						// 장바구니 상품 추가
+					try {
+						String cartQtyStr = (String)cartComboBox.getSelectedItem();
+						int cartQty = Integer.parseInt(cartQtyStr);
+						mainFrame.cartService.addCart(new Cart(0, cartQty, mainFrame.loginMember.getM_Id(), 
+											new Product(p.getP_no(), p.getP_name(), p.getP_price(),
+														p.getP_image(), p.getP_desc(), p.getP_category())));
+						JOptionPane.showMessageDialog(null, "장바구니에 상품이 담겼습니다.");
+						cartComboBox.setSelectedItem("1");
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				}else {
+					mainFrame.changePanel(1, -1, 0, null);
+					JOptionPane.showMessageDialog(null, "로그인이 필요한 서비스입니다.");
+					cartComboBox.setSelectedItem("1");
 				}
+			}
 			});
-			cartButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
-			cartButton.setBounds(232, 119, 50, 40);
-			bestSellerListPanel.add(cartButton);
+			cartAddButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
+			cartAddButton.setBounds(232, 119, 50, 40);
+			bestSellerListPanel.add(cartAddButton);
 			
 			JLabel saleLabel = new JLabel("판매가");
 			saleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
