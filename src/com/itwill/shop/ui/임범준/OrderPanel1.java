@@ -1,21 +1,34 @@
 package com.itwill.shop.ui.임범준;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JScrollPane;
-import java.awt.Dimension;
 import java.awt.Color;
-import javax.swing.JCheckBox;
-import javax.swing.JTextField;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.util.List;
+
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import com.itwill.shop.member.Member;
+import com.itwill.shop.order.Order;
+import com.itwill.shop.test.Main2;
 
 public class OrderPanel1 extends JPanel {
 	private JTextField orderDeliveryAddressTF;
 	private JTextField orderDeliveryNameTF;
 	private JTextField orderDeliveryPhoneTF;
+	
+	public Main2 mainFrame;
+	
+	
+	
+	/*******loginMember 객체 선언***********/
+	Member loginMember = null;
 
 	/**
 	 * Create the panel.
@@ -146,5 +159,20 @@ public class OrderPanel1 extends JPanel {
 		orderCancelBtn.setBounds(251, 489, 114, 23);
 		orderPanel.add(orderCancelBtn);
 
+	} // 생성자 종료
+	
+	public void setMainFrame(Main2 mainFrame) {
+		this.mainFrame = mainFrame;
 	}
+	
+	
+	public void displayOrderList() {
+		Order tempOrder = null;
+		
+	}
+	
+	
+	
+	
+	
 }

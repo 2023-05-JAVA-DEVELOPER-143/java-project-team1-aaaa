@@ -46,10 +46,11 @@ public class Main2 extends JFrame {
 	
 	private JPanel contentPane;
 	private JTextField searchTextField;
-	
-	
-	public JTabbedPane memberTabbedpane;
 	public MemberLoginPanel loginPanel;
+	private JPanel memberInfoPanel;
+	private MemberCreatePanel memberCreatePanel;
+	private MemberLoginPanel memberLoginPanel;
+	public JTabbedPane memberTabbedpane;
 	
 	
 	
@@ -118,21 +119,13 @@ public class Main2 extends JFrame {
 		memberTabbedpane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addTab("회원", null, memberTabbedpane, null);
 		
-		JPanel mbLoginPanel = new JPanel();
-		memberTabbedpane.addTab("로그인", null, mbLoginPanel, null);
-		mbLoginPanel.setLayout(new BorderLayout(0, 0));
+		memberLoginPanel = new MemberLoginPanel();
+		memberTabbedpane.addTab("로그인", null, memberLoginPanel, null);
 		
-		MemberLoginPanel memberLoginPanel = new MemberLoginPanel();
-		mbLoginPanel.add(memberLoginPanel, BorderLayout.CENTER);
+		memberCreatePanel = new MemberCreatePanel();
+		memberTabbedpane.addTab("회원가입", null, memberCreatePanel, null);
 		
-		JPanel memberJoinPanel = new JPanel();
-		memberTabbedpane.addTab("회원가입", null, memberJoinPanel, null);
-		memberJoinPanel.setLayout(new BorderLayout(0, 0));
-		
-		MemberCreatePanel memberCreatePanel = new MemberCreatePanel();
-		memberJoinPanel.add(memberCreatePanel, BorderLayout.CENTER);
-		
-		JPanel memberInfoPanel = new JPanel();
+		memberInfoPanel = new JPanel();
 		memberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
 		memberInfoPanel.setLayout(null);
 		
@@ -179,6 +172,10 @@ public class Main2 extends JFrame {
 		memberService=new MemberService();
 		productService=new ProductService();
 		cartService = new CartService();
+		
+		memberLoginPanel.setMainFrame(this);
+		memberCreatePanel.setMainFrame(this);
+		
 		
 	}//생성자
 }

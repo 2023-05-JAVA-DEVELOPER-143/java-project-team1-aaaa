@@ -24,14 +24,18 @@ public class MemberLoginPanel extends JPanel {
 	private JTextField memberLoginPwTF;
 	
 	
-	private Main2 mainFrame;
+	
+	private Main2 mainFrame;	
+	private MemberService memberService;
+	
 	private JLabel memberLoginIdMsgLB;
 	private JLabel memberLoginPwMsgLB;
 
 	/**
 	 * Create the panel.
+	 * @throws Exception 
 	 */
-	public MemberLoginPanel() {
+	public MemberLoginPanel() throws Exception {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel memberLoginPanel = new JPanel();
@@ -85,7 +89,6 @@ public class MemberLoginPanel extends JPanel {
 				
 					int result = mainFrame.memberService.login(userid, password);
 					if (result == 1) {
-						
 						loginProcess(userid);
 					} else if (result == 0) {
 						memberLoginIdMsgLB.setText("정보 다틀린데?");
@@ -131,9 +134,13 @@ public class MemberLoginPanel extends JPanel {
 		memberLoginPwMsgLB.setBounds(80, 330, 235, 26);
 		memberLoginPanel.add(memberLoginPwMsgLB);
 		
-		
+		memberService = new MemberService();
 
+	} // 생성자끝
+	public void setMainFrame(Main2 mainFrame) {
+		this.mainFrame = mainFrame;
 	}
+	
 
 
 	/**************로그인성공시 호출할메쏘드***************/
@@ -170,9 +177,7 @@ public class MemberLoginPanel extends JPanel {
 		}
 	}
 	
-	public void setMainFrame(Main2 mainFrame) {
-		this.mainFrame = mainFrame;
-	}
+	
 	
 	
 }
