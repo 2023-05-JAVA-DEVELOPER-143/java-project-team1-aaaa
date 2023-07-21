@@ -191,6 +191,7 @@ public class ProductBestSellerListPanel extends JPanel {
 														p.getP_image(), p.getP_desc(), p.getP_category())));
 						JOptionPane.showMessageDialog(null, "장바구니에 상품이 담겼습니다.");
 						cartComboBox.setSelectedItem("1");
+						
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
