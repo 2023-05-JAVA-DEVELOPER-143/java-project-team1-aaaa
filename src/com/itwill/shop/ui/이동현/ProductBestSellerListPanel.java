@@ -193,6 +193,10 @@ public class ProductBestSellerListPanel extends JPanel {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+					
+				}else {
+					mainFrame.changePanel(1, -1, -1, null);
+					JOptionPane.showMessageDialog(null, "로그인이 필요한 서비스입니다.");
 				}
 			}
 			});

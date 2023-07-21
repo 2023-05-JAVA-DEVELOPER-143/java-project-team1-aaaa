@@ -151,8 +151,9 @@ public class Main2 extends JFrame {
 				/****************************************************************/
 
 				try {
-					if (productBestSellerListPanel == null || productNovelListPanel == null
-							|| productSelfImprovementListPanel == null) {
+					if (productBestSellerListPanel == null ||
+							productNovelListPanel == null  || 
+							productSelfImprovementListPanel == null) {
 						return;
 					}
 					if (productTabbedPane.getSelectedIndex() == 0) {
@@ -162,7 +163,7 @@ public class Main2 extends JFrame {
 					} else if (productTabbedPane.getSelectedIndex() == 2) {
 						productSelfImprovementListPanel.displayBestSellerList();
 					} else if (productTabbedPane.getSelectedIndex() == 3) {
-						//productDetailPanel.displayProductDetail();
+						productDetailPanel.displayProductDetail();
 					}
 
 				} catch (Exception e1) {
@@ -274,7 +275,7 @@ public class Main2 extends JFrame {
 			} else if (productTabbedPaneNo == 3) {
 				// 디테일
 				Product p = (Product) data.get("product");
-				//productDetailPanel.setProduct(p);
+				productDetailPanel.setProduct(p);
 				shopTabbedPane.setSelectedIndex(2);
 				productTabbedPane.setSelectedIndex(3);
 			}
