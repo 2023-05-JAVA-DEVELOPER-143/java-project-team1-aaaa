@@ -51,7 +51,7 @@ public class MemberInfoPanel extends JPanel {
 //					}
 //				
 				
-				if(loginMember )
+//				if(loginMember )
 				
 				}
 				
