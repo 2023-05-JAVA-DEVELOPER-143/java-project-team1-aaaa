@@ -31,6 +31,9 @@ import com.itwill.shop.ui.이동현.ProductSelfImprovementListPanel;
 import com.itwill.shop.ui.임범준.MemberCreatePanel;
 import com.itwill.shop.ui.임범준.MemberLoginPanel;
 import com.itwill.shop.ui.임범준.OrderPanel1;
+import com.itwill.shop.ui.임범준.MemberInfoPanel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Main2 extends JFrame {
 	/************ 1.Service객체멤버변수선언 ************/
@@ -47,7 +50,6 @@ public class Main2 extends JFrame {
 	private JPanel contentPane;
 	private JTextField searchTextField;
 	public MemberLoginPanel loginPanel;
-	private JPanel memberInfoPanel;
 	private MemberCreatePanel memberCreatePanel;
 	private MemberLoginPanel memberLoginPanel;
 	public JTabbedPane memberTabbedpane;
@@ -63,6 +65,7 @@ public class Main2 extends JFrame {
 	private OrderPanel1 orderPanel1;
 	private CartPanel cartPanel;
 	private MainCategoryPanel mainCategoryPanel;
+	private MemberInfoPanel memberInfoPanel;
 
 	/**
 	 * Launch the application.
@@ -105,6 +108,20 @@ public class Main2 extends JFrame {
 		northPanel.add(logoLabel);
 
 		JLabel cartLogoLabel = new JLabel("");
+		cartLogoLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(loginMember != null) {
+					shopTabbedPane.setSelectedIndex(3);
+				} else {
+					memberTabbedpane.setSelectedIndex(0);
+				}
+				
+			}
+		});
+				
+//					shopTabbedPane.setSelectedIndex(3);
+				
 		cartLogoLabel.setIcon(new ImageIcon(Main2.class.getResource("/com/itwill/shop/image/cart.png")));
 		cartLogoLabel.setBounds(418, 0, 46, 40);
 		northPanel.add(cartLogoLabel);
@@ -140,10 +157,6 @@ public class Main2 extends JFrame {
 
 		memberCreatePanel = new MemberCreatePanel();
 		memberTabbedpane.addTab("회원가입", null, memberCreatePanel, null);
-
-		memberInfoPanel = new JPanel();
-		memberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
-		memberInfoPanel.setLayout(null);
 
 		productTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		productTabbedPane.addChangeListener(new ChangeListener() {
@@ -231,6 +244,9 @@ public class Main2 extends JFrame {
 
 		memberLoginPanel.setMainFrame(this);
 		memberCreatePanel.setMainFrame(this);
+		
+		memberInfoPanel = new MemberInfoPanel();
+		memberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
 		productBestSellerListPanel.setMainFrame(this);
 		productNovelListPanel.setMainFrame(this);
 		productSelfImprovementListPanel.setMainFrame(this);

@@ -48,6 +48,7 @@ public class CartPanel extends JPanel {
 	private Main2 mainFrame;
 	
 	int totPrice = 0;
+	private JLabel bookPriceLabel;
 	
 	/**
 	 * Create the panel.
@@ -163,7 +164,7 @@ public class CartPanel extends JPanel {
 		bookTitleLabel.setBounds(124, 20, 112, 58);
 		itemPanel.add(bookTitleLabel);
 		
-		JLabel bookPriceLabel = new JLabel("가격");
+		bookPriceLabel = new JLabel("가격");
 		bookPriceLabel.setBounds(292, 40, 51, 23);
 		itemPanel.add(bookPriceLabel);
 		
@@ -215,6 +216,9 @@ public class CartPanel extends JPanel {
 			for(Cart cart : cartList) {
 				totPrice += cart.getCart_qty()*cart.getProduct().getP_price();
 				cartTotalPriceLabel.setText(new DecimalFormat("#,###원").format(totPrice));
+				cartTotalPriceLabel = new JLabel("");
+				cartTotalPriceLabel.setBounds(110, 25, 99, 28);
+				cartTotalPriceLabel.add(cartTotalPriceLabel);
 				
 				// 카트 상품 디테일 패널
 				itemPanel = new JPanel();
@@ -224,9 +228,17 @@ public class CartPanel extends JPanel {
 				
 				// 카트 상품 이미지 가져오기
 				bookItemImageLabel = new JLabel();
-				bookItemImageLabel.setIcon(new ImageIcon(CartPanel.class.getResource("/com.itwill.shop/image"+cart.getProduct().getP_image())));
+//				bookItemImageLabel.setIcon(new ImageIcon(CartPanel.class.getResource("/com.itwill.shop/image"+cart.getProduct().getP_image())));
+				bookItemImageLabel.setIcon(new ImageIcon(CartPanel.class.getResource("/com/itwill/shop/image"+cart.getProduct().getP_image())));
 				bookItemImageLabel.setBounds(49, 9, 63, 80);
 				itemPanel.add(bookItemImageLabel);
+				
+				// 카트 상품 수량에따른 가격
+				bookPriceLabel = new JLabel("가격");
+				bookPriceLabel.setText(new DecimalFormat("#,###원").format(cart.getProduct().getP_price()*cart.getCart_qty()));
+				bookPriceLabel.setBounds(292, 40, 51, 23);
+				itemPanel.add(bookPriceLabel);
+				
 				
 				// 카트 상품 제목 가져오기
 				bookTitleLabel = new JLabel();
@@ -238,11 +250,10 @@ public class CartPanel extends JPanel {
 				itemQtyComboBox = new JComboBox();
 				itemQtyComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
 				itemQtyComboBox.setBounds(248, 40, 32, 23);
-				
-				
 				itemQtyComboBox.setSelectedItem(Integer.toString(cart.getCart_qty()));
 				
 				/*********카트 상품이 수정이 되고 카트 총액이 바뀌고 ************/
+				
 				
 				
 				itemPanel.add(itemQtyComboBox); // 상품 수정 후 마지막에 콤보박스가 추가되야함.
@@ -254,6 +265,7 @@ public class CartPanel extends JPanel {
 					public void actionPerformed(ActionEvent e) {
 						// 삭제 메소드, m_id인자 들어와야함.
 						// 카트 총액
+						
 					}
 				});
 				//카트 아이템 디테일 끝
