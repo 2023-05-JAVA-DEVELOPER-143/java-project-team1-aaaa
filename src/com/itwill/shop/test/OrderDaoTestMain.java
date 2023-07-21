@@ -16,7 +16,7 @@ public class OrderDaoTestMain {
 
 		System.out.println(orderDao.findOrderByUserId("user2")); //orderitem없이 뽑음
 		System.out.println("***********************");
-//		System.out.println(orderDao.findByOrderNo(2));
+		System.out.println(orderDao.findByOrderNo(2));
 		System.out.println("***********************");
 		System.out.println(orderDao.findOrderWithOrderItemByUserId("user2")); //orderitem까지 뽑음
 		

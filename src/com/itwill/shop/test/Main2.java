@@ -5,14 +5,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -23,33 +23,37 @@ import javax.swing.event.ChangeListener;
 import com.itwill.shop.cart.CartService;
 import com.itwill.shop.member.Member;
 import com.itwill.shop.member.MemberService;
-import com.itwill.shop.order.OrderService;
+import com.itwill.shop.product.Product;
 import com.itwill.shop.product.ProductService;
+import com.itwill.shop.ui.권경록.ProductDetailPanel;
 import com.itwill.shop.ui.이동현.ProductBestSellerListPanel;
 import com.itwill.shop.ui.이동현.ProductNovelListPanel;
 import com.itwill.shop.ui.이동현.ProductSelfImprovementListPanel;
-import com.itwill.shop.ui.임범준.MemberCreatePanel;
 import com.itwill.shop.ui.임범준.MemberLoginPanel;
-import com.itwill.shop.ui.임범준.OrderPanel1;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import com.itwill.shop.ui.이다영.CartPanel;
-import com.itwill.shop.ui.임범준.MemberInfoPanel;
+import java.util.Map;
+
+import javax.swing.JScrollPane;
+import com.itwill.shop.ui.임범준.MemberCreatePanel;
+import com.itwill.shop.ui.임범준.OrderPanel;
+import javax.swing.ImageIcon;
+import com.itwill.shop.ui.임범준.OrderPanel1;
 
 public class Main2 extends JFrame {
 	/************ 1.Service객체멤버변수선언 ************/
 	public ProductService productService;
 	public MemberService memberService;
 	public CartService cartService;
-	public OrderService orderService;
-	
-	/*********2.로그인한회원 멤버필드선언*****/
-	public Member loginMember=null;
-	
-	
+
+	/********* 2.로그인한회원 멤버필드선언 *****/
+	public Member loginMember = null;
+
 	private JPanel contentPane;
 	private JTextField searchTextField;
 	public MemberLoginPanel loginPanel;
+	private JPanel memberInfoPanel;
 	private MemberCreatePanel memberCreatePanel;
 	private MemberLoginPanel memberLoginPanel;
 	public JTabbedPane memberTabbedpane;
@@ -60,16 +64,9 @@ public class Main2 extends JFrame {
 	private JPanel productBestSellerPanel;
 	private JPanel productNovel;
 	private JPanel productSelfImprovement;
-	private JPanel productDetail;
-	private JTabbedPane orderTabbedPane;
-	private OrderPanel1 orderPanel1;
 	private JTabbedPane shopTabbedPane;
-	private CartPanel cartPanel;
-	private JPanel mainPane;
-	private MemberInfoPanel memberInfoPanel;
-	
-	
-	
+	private ProductDetailPanel productDetailPanel;
+
 	/**
 	 * Launch the application.
 	 */
@@ -88,7 +85,8 @@ public class Main2 extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	public Main2() throws Exception {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,74 +96,68 @@ public class Main2 extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel northPanel = new JPanel();
 		northPanel.setBackground(new Color(255, 255, 255));
 		northPanel.setPreferredSize(new Dimension(10, 40));
 		contentPane.add(northPanel, BorderLayout.NORTH);
 		northPanel.setLayout(null);
-		
+
 		JLabel logoLabel = new JLabel("logo");
 		logoLabel.setBounds(0, 0, 100, 40);
 		northPanel.add(logoLabel);
-		
+
 		JLabel cartLogoLabel = new JLabel("");
-		cartLogoLabel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				shopTabbedPane.setSelectedIndex(3);
-			}
-		});
-		
 		cartLogoLabel.setIcon(new ImageIcon(Main2.class.getResource("/com/itwill/shop/image/cart.png")));
 		cartLogoLabel.setBounds(418, 0, 46, 40);
 		northPanel.add(cartLogoLabel);
-		
+
 		searchTextField = new JTextField();
 		searchTextField.setBounds(145, 10, 131, 21);
 		northPanel.add(searchTextField);
 		searchTextField.setColumns(10);
-		
+
 		JLabel searchLabel = new JLabel("New label");
 		searchLabel.setBounds(288, 0, 60, 40);
 		northPanel.add(searchLabel);
-		
-		shopTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
+		shopTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				if (shopTabbedPane.getSelectedIndex()==2) {
+				if (shopTabbedPane.getSelectedIndex() == 2) {
 					productTabbedPane.setSelectedIndex(0);
 				}
 			}
 		});
 		shopTabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		contentPane.add(shopTabbedPane, BorderLayout.CENTER);
-		
-		mainPane = new JPanel();
+
+		JPanel mainPane = new JPanel();
 		mainPane.setToolTipText("");
 		shopTabbedPane.addTab("메인", null, mainPane, null);
 		mainPane.setLayout(null);
-		
+
 		memberTabbedpane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addTab("회원", null, memberTabbedpane, null);
-		
+
 		memberLoginPanel = new MemberLoginPanel();
 		memberTabbedpane.addTab("로그인", null, memberLoginPanel, null);
-		
+
 		memberCreatePanel = new MemberCreatePanel();
-		memberCreatePanel.setBackground(new Color(0, 255, 255));
 		memberTabbedpane.addTab("회원가입", null, memberCreatePanel, null);
-		
+
+		memberInfoPanel = new JPanel();
+		memberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
+		memberInfoPanel.setLayout(null);
+
 		productTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		productTabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				/****************************************************************/
 
 				try {
-					if (productBestSellerListPanel == null || 
-						productNovelListPanel == null || 
-						productSelfImprovementListPanel == null) {
+					if (productBestSellerListPanel == null || productNovelListPanel == null
+							|| productSelfImprovementListPanel == null) {
 						return;
 					}
 					if (productTabbedPane.getSelectedIndex() == 0) {
@@ -175,7 +167,7 @@ public class Main2 extends JFrame {
 					} else if (productTabbedPane.getSelectedIndex() == 2) {
 						productSelfImprovementListPanel.displayBestSellerList();
 					} else if (productTabbedPane.getSelectedIndex() == 3) {
-
+						productDetailPanel.displayProductDetail();
 					}
 
 				} catch (Exception e1) {
@@ -192,6 +184,7 @@ public class Main2 extends JFrame {
 		productBestSellerPanel.setLayout(new BorderLayout(0, 0));
 
 		productBestSellerListPanel = new ProductBestSellerListPanel();
+
 		productBestSellerPanel.add(productBestSellerListPanel, BorderLayout.CENTER);
 
 		productNovel = new JPanel();
@@ -208,94 +201,92 @@ public class Main2 extends JFrame {
 		productSelfImprovementListPanel = new ProductSelfImprovementListPanel();
 		productSelfImprovement.add(productSelfImprovementListPanel, BorderLayout.CENTER);
 
-		productDetail = new JPanel();
-		productTabbedPane.addTab("상세페이지", null, productDetail, null);
-		productDetail.setLayout(null);
+		JTabbedPane cartTabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		shopTabbedPane.addTab("장바구니", null, cartTabbedPane, null);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 464, 503);
-		productDetail.add(scrollPane);
+		JPanel orderPanel = new JPanel();
+		shopTabbedPane.addTab("주문내역", null, orderPanel, null);
+		orderPanel.setLayout(new BorderLayout(0, 0));
 
-		JPanel panel_1 = new JPanel();
-		panel_1.setPreferredSize(new Dimension(446, 800));
-		scrollPane.setViewportView(panel_1);
-		panel_1.setLayout(null);
+		JScrollPane orderContentPanelScrollPane = new JScrollPane();
+		orderPanel.add(orderContentPanelScrollPane, BorderLayout.CENTER);
 
-		JLabel productDetailImageLabel = new JLabel("이미지");
-		productDetailImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		productDetailImageLabel.setBounds(0, 0, 446, 300);
-		panel_1.add(productDetailImageLabel);
+		JPanel orderContentPanel = new JPanel();
+		orderContentPanel.setPreferredSize(new Dimension(450, 1000));
+		orderContentPanelScrollPane.setViewportView(orderContentPanel);
 
-		JLabel productDetailNameLabel = new JLabel("제목");
-		productDetailNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		productDetailNameLabel.setBounds(0, 310, 446, 50);
-		panel_1.add(productDetailNameLabel);
+		JPanel orderListTitlePanel = new JPanel();
+		orderListTitlePanel.setPreferredSize(new Dimension(450, 40));
+		orderContentPanel.add(orderListTitlePanel);
+		orderListTitlePanel.setLayout(null);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(88, 438, 60, 35);
-		panel_1.add(comboBox);
-
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(160, 430, 130, 50);
-		panel_1.add(btnNewButton);
-
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(300, 430, 130, 50);
-		panel_1.add(btnNewButton_1);
-
-		JLabel lblNewLabel = new JLabel("판매가");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		lblNewLabel.setBounds(121, 370, 66, 50);
-		panel_1.add(lblNewLabel);
-
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		lblNewLabel_1.setBounds(199, 370, 231, 50);
-		panel_1.add(lblNewLabel_1);
-
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(450, 10));
+		orderContentPanel.add(panel);
+		panel.setLayout(null);
 
 		this.memberService = new MemberService();
-		this.orderService = new OrderService();
 		this.productService = new ProductService();
 		this.cartService = new CartService();
 
-		
-
-		productTabbedPane.setSelectedIndex(-1);
-		
-		
-		
-		cartPanel = new CartPanel();
-		shopTabbedPane.addTab("장바구니", null, cartPanel, null);
-		
-		orderTabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		shopTabbedPane.addTab("주문", null, orderTabbedPane, null);
-		
-		orderPanel1 = new OrderPanel1();
-		orderTabbedPane.addTab("New tab", null, orderPanel1, null);
-		
-		memberLoginPanel.setMainFrame(this);
-		memberCreatePanel.setMainFrame(this);
-		
-		memberInfoPanel = new MemberInfoPanel();
-		memberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
-		
-		
-		/*******************************************/
-		memberLoginPanel.setMainFrame(this);
-		memberCreatePanel.setMainFrame(this);
-		memberInfoPanel.setMainFrame(this);
 		productBestSellerListPanel.setMainFrame(this);
 		productNovelListPanel.setMainFrame(this);
 		productSelfImprovementListPanel.setMainFrame(this);
-		orderPanel1.setMainFrame(this);
-		
-	}//생성자
+
+		productTabbedPane.setSelectedIndex(-1);
+
+		productDetailPanel = new ProductDetailPanel();
+		productTabbedPane.addTab("New tab", null, productDetailPanel, null);
+
+		memberLoginPanel.setMainFrame(this);
+		memberCreatePanel.setMainFrame(this);
+
+	}// 생성자
+
+	public void changePanel(int shopTabbedPaneNo, int productTabbedPaneNo, int memberTabbedPaneNo, Map data) {
+		if (shopTabbedPaneNo == 0) {
+
+			// 메인
+			shopTabbedPane.setSelectedIndex(shopTabbedPaneNo);
+		} else if (shopTabbedPaneNo == 1) {
+			// 회원
+			shopTabbedPane.setSelectedIndex(shopTabbedPaneNo);
+			if (memberTabbedPaneNo == 0) {
+				// 로그인
+				memberTabbedpane.setSelectedIndex(memberTabbedPaneNo);
+			} else if (memberTabbedPaneNo == 1) {
+				// 회원가입
+			}
+		} else if (shopTabbedPaneNo == 2) {
+			shopTabbedPane.setSelectedIndex(shopTabbedPaneNo);
+			// 상품
+			if (productTabbedPaneNo == 0) {
+				// 베스트셀러
+				productTabbedPane.setSelectedIndex(productTabbedPaneNo);
+			} else if (productTabbedPaneNo == 1) {
+				// 소설
+				productTabbedPane.setSelectedIndex(productTabbedPaneNo);
+			} else if (productTabbedPaneNo == 2) {
+				// 자기계발
+				productTabbedPane.setSelectedIndex(productTabbedPaneNo);
+			} else if (productTabbedPaneNo == 3) {
+				// 디테일
+				Product p = (Product) data.get("product");
+				productDetailPanel.setProduct(p);
+				shopTabbedPane.setSelectedIndex(2);
+				productTabbedPane.setSelectedIndex(3);
+			}
+		} else if (shopTabbedPaneNo == 3) {
+			// 장바구니
+			shopTabbedPane.setSelectedIndex(shopTabbedPaneNo);
+		} else if (shopTabbedPaneNo == 4) {
+			// 주문내역
+			shopTabbedPane.setSelectedIndex(shopTabbedPaneNo);
+		}
+
+	}
 }
-	
-	
+
 //	/**************로그인성공시 호출할메쏘드***************/
 //	void loginProcess(Member loginMember) throws Exception{
 //		/***********로그인성공시 해야할일***********
@@ -326,7 +317,5 @@ public class Main2 extends JFrame {
 //			
 //			MemberTabbedpane.setSelectedIndex(2);
 
-
-		
 //		}
 //	}

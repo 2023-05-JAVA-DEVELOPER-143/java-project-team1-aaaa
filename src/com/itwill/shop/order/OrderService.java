@@ -45,8 +45,8 @@ public class OrderService {
 	/*
 	 * 주문+주문아이템 상세보기
 	 */
-	public Order orderWithOrderItem(String m_id, int o_no)throws Exception{
-		return orderDao.findByOrderNo(m_id,o_no);
+	public Order orderWithOrderItem(int o_no)throws Exception{
+		return orderDao.findByOrderNo(o_no);
 	}
 	/*
 	 * 상품에서 직접주문
