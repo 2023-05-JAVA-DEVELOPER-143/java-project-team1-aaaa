@@ -109,7 +109,7 @@ public class ProductDetailPanel extends JPanel {
 		lblNewLabel.setBounds(121, 370, 66, 50);
 		panel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
+		JLabel lblNewLabel_1 = new JLabel(product.getP_price()+"");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		lblNewLabel_1.setBounds(199, 370, 231, 50);

@@ -8,7 +8,11 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -54,6 +58,7 @@ public class ProductSelfImprovementListPanel extends JPanel {
 		bestSellerListPanel.setLayout(null);
 		
 		JLabel bestSellerImageLabel = new JLabel("");
+		bestSellerImageLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bestSellerImageLabel.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/bestSeller2.jpg")));
 		bestSellerImageLabel.setBounds(0, 0, 120, 175);
 		bestSellerListPanel.add(bestSellerImageLabel);
@@ -104,6 +109,15 @@ public class ProductSelfImprovementListPanel extends JPanel {
 			bestSellerListPanel.setLayout(null);
 			
 			JLabel bestSellerImageLabel = new JLabel("");
+			bestSellerImageLabel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					System.out.println("click");
+					Map data=new HashMap();
+					data.put("product", product);
+					mainFrame.changePanel(4,data);
+				}
+			});
 			bestSellerImageLabel.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/"+product.getP_image())));
 			bestSellerImageLabel.setBounds(0, 0, 120, 175);
 			bestSellerListPanel.add(bestSellerImageLabel);
