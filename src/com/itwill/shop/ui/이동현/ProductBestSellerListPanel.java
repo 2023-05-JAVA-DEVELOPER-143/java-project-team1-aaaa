@@ -93,6 +93,10 @@ public class ProductBestSellerListPanel extends JPanel {
 		bestSellerListPanel.add(cartComboBox);
 		
 		JButton cartAddButton = new JButton("");
+		cartAddButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		cartAddButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
 		cartAddButton.setBounds(232, 119, 50, 40);
 		bestSellerListPanel.add(cartAddButton);

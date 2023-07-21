@@ -240,7 +240,7 @@ public class Main2 extends JFrame {
 		productTabbedPane.setSelectedIndex(-1);
 		
 		productDetailPanel = new ProductDetailPanel();
-		productTabbedPane.addTab("New tab", null, productDetailPanel, null);
+		productTabbedPane.addTab("상세정보", null, productDetailPanel, null);
 		
 		memberLoginPanel.setMainFrame(this);
 		memberCreatePanel.setMainFrame(this);

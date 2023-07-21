@@ -2,18 +2,27 @@ package com.itwill.shop.ui.권경록;
 
 import javax.swing.JPanel;
 
+import com.itwill.shop.cart.Cart;
 import com.itwill.shop.product.Product;
+import com.itwill.shop.test.Main2;
+import com.itwill.shop.ui.이동현.ProductBestSellerListPanel;
+
 import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.Font;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ProductDetailPanel extends JPanel {
-	
+	public Main2 mainFrame;
 	Product product;
 	private JScrollPane scrollPane;
 	private JPanel panel;
@@ -45,29 +54,31 @@ public class ProductDetailPanel extends JPanel {
 		productDetailNameLabel.setBounds(0, 310, 446, 50);
 		panel.add(productDetailNameLabel);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(88, 438, 60, 35);
-		panel.add(comboBox);
+		JComboBox cartComboBox = new JComboBox();
+		cartComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
+		cartComboBox.setBounds(88, 438, 60, 35);
+		panel.add(cartComboBox);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(160, 430, 130, 50);
-		panel.add(btnNewButton);
+		JButton cartAddButton = new JButton("");
+		cartAddButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
+		cartAddButton.setBounds(160, 430, 130, 50);
+		panel.add(cartAddButton);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(300, 430, 130, 50);
-		panel.add(btnNewButton_1);
+		JButton buyButton = new JButton("바로구매");
+		buyButton.setBounds(300, 430, 130, 50);
+		panel.add(buyButton);
 		
-		JLabel lblNewLabel = new JLabel("판매가");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		lblNewLabel.setBounds(121, 370, 66, 50);
-		panel.add(lblNewLabel);
+		JLabel saleLabel = new JLabel("판매가");
+		saleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		saleLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		saleLabel.setBounds(121, 370, 66, 50);
+		panel.add(saleLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		lblNewLabel_1.setBounds(199, 370, 231, 50);
-		panel.add(lblNewLabel_1);
+		JLabel priceLabel = new JLabel("priceLabel");
+		priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		priceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		priceLabel.setBounds(199, 370, 231, 50);
+		panel.add(priceLabel);
 
 	}
 	
@@ -91,29 +102,50 @@ public class ProductDetailPanel extends JPanel {
 		productDetailNameLabel.setBounds(0, 310, 446, 50);
 		panel.add(productDetailNameLabel);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(88, 438, 60, 35);
-		panel.add(comboBox);
+		JComboBox cartComboBox = new JComboBox();
+		cartComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
+		cartComboBox.setBounds(88, 438, 60, 35);
+		panel.add(cartComboBox);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(160, 430, 130, 50);
-		panel.add(btnNewButton);
+		JButton cartAddButton = new JButton("New button");
+		cartAddButton.addActionListener(new ActionListener() {
+			Product p = product;
+			
+			public void actionPerformed(ActionEvent e) {
+				if (mainFrame.loginMember != null) {
+					// 장바구니 상품 추가
+				try {
+					String cartQtyStr = (String)cartComboBox.getSelectedItem();
+					int cartQty = Integer.parseInt(cartQtyStr);
+					mainFrame.cartService.addCart(new Cart(0, cartQty, mainFrame.loginMember.getM_Id(), 
+										new Product(p.getP_no(), p.getP_name(), p.getP_price(),
+													p.getP_image(), p.getP_desc(), p.getP_category())));
+					JOptionPane.showMessageDialog(null, "장바구니에 상품이 담겼습니다.");
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		}
+		});
+		cartAddButton.setBounds(160, 430, 130, 50);
+		panel.add(cartAddButton);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(300, 430, 130, 50);
-		panel.add(btnNewButton_1);
+		JButton buyButton = new JButton("바로구매");
+		buyButton.setBounds(300, 430, 130, 50);
+		panel.add(buyButton);
 		
-		JLabel lblNewLabel = new JLabel("판매가");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		lblNewLabel.setBounds(121, 370, 66, 50);
-		panel.add(lblNewLabel);
+		JLabel saleLabel = new JLabel("판매가");
+		saleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		saleLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		saleLabel.setBounds(121, 370, 66, 50);
+		panel.add(saleLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel(product.getP_price()+"");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		lblNewLabel_1.setBounds(199, 370, 231, 50);
-		panel.add(lblNewLabel_1);
+		JLabel priceLabel = new JLabel(product.getP_price()+"");
+		priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		priceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		priceLabel.setBounds(199, 370, 231, 50);
+		panel.add(priceLabel);
 	}
-
+	
 }
