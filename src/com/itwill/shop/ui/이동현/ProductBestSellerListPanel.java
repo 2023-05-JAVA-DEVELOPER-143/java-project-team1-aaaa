@@ -103,9 +103,8 @@ public class ProductBestSellerListPanel extends JPanel {
 	}
 	
 	public void displayBestSellerList() throws Exception {
-		System.out.println("sdsadsadsa");
+		
 		List<Product> bestSellerList = mainFrame.productService.bestSellerList();
-		System.out.println(bestSellerList);
 		productBestSellerListPanel.removeAll();
 		
 		for (Product product : bestSellerList) {

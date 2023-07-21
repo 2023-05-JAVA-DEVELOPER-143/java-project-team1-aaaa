@@ -63,6 +63,7 @@ public class Main2 extends JFrame {
 	private JPanel productNovel;
 	private JPanel productSelfImprovement;
 	private JPanel productDetail;
+	private JTabbedPane shopTabbedPane;
 	
 	
 	
@@ -119,7 +120,14 @@ public class Main2 extends JFrame {
 		searchLabel.setBounds(288, 0, 60, 40);
 		northPanel.add(searchLabel);
 		
-		JTabbedPane shopTabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		shopTabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		shopTabbedPane.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				if (shopTabbedPane.getSelectedIndex()==2) {
+					productTabbedPane.setSelectedIndex(0);
+				}
+			}
+		});
 		shopTabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		contentPane.add(shopTabbedPane, BorderLayout.CENTER);
 		
