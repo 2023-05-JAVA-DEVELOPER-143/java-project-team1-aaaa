@@ -103,7 +103,6 @@ public class ProductBestSellerListPanel extends JPanel {
 	}
 	
 	public void displayBestSellerList() throws Exception {
-		
 		List<Product> bestSellerList = mainFrame.productService.bestSellerList();
 		productBestSellerListPanel.removeAll();
 		
