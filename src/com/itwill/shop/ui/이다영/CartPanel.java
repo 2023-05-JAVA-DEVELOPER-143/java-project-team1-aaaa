@@ -161,6 +161,7 @@ public class CartPanel extends JPanel {
 		// 카트 상품 이미지 
 		bookItemImageLabel = new JLabel("이미지");
 		bookItemImageLabel.setBounds(49, 9, 63, 80);
+	
 		itemPanel.add(bookItemImageLabel);
 		
 		bookTitleLabel = new JLabel("책 이름");
@@ -178,11 +179,6 @@ public class CartPanel extends JPanel {
 		itemPanel.add(itemQtyComboBox);
 		
 		JButton orderButton = new JButton("주문");
-		orderButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
 		orderButton.setBounds(345, 20, 72, 30);
 		itemPanel.add(orderButton);
 		
@@ -205,6 +201,7 @@ public class CartPanel extends JPanel {
 			
 			List<Cart> cartList = mainFrame.cartService.findCartItemByAll(mainFrame.loginMember.getM_Id());
 			totPrice = 0;
+			
 			
 			/*********************for문 시작*****************/
 			for(Cart cart : cartList) {

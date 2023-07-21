@@ -25,7 +25,7 @@ import com.itwill.shop.member.Member;
 import com.itwill.shop.member.MemberService;
 import com.itwill.shop.product.Product;
 import com.itwill.shop.product.ProductService;
-import com.itwill.shop.ui.권경록.ProductDetailPanel;
+
 import com.itwill.shop.ui.이동현.ProductBestSellerListPanel;
 import com.itwill.shop.ui.이동현.ProductNovelListPanel;
 import com.itwill.shop.ui.이동현.ProductSelfImprovementListPanel;
@@ -65,7 +65,7 @@ public class Main2 extends JFrame {
 	private JPanel productNovel;
 	private JPanel productSelfImprovement;
 	private JTabbedPane shopTabbedPane;
-	private ProductDetailPanel productDetailPanel;
+
 
 	/**
 	 * Launch the application.
@@ -167,7 +167,7 @@ public class Main2 extends JFrame {
 					} else if (productTabbedPane.getSelectedIndex() == 2) {
 						productSelfImprovementListPanel.displayBestSellerList();
 					} else if (productTabbedPane.getSelectedIndex() == 3) {
-						productDetailPanel.displayProductDetail();
+						//productDetailPanel.displayProductDetail();
 					}
 
 				} catch (Exception e1) {
@@ -235,8 +235,8 @@ public class Main2 extends JFrame {
 
 		productTabbedPane.setSelectedIndex(-1);
 
-		productDetailPanel = new ProductDetailPanel();
-		productTabbedPane.addTab("New tab", null, productDetailPanel, null);
+		//productDetailPanel = new ProductDetailPanel();
+		//productTabbedPane.addTab("New tab", null, productDetailPanel, null);
 
 		memberLoginPanel.setMainFrame(this);
 		memberCreatePanel.setMainFrame(this);
@@ -272,7 +272,7 @@ public class Main2 extends JFrame {
 			} else if (productTabbedPaneNo == 3) {
 				// 디테일
 				Product p = (Product) data.get("product");
-				productDetailPanel.setProduct(p);
+				//productDetailPanel.setProduct(p);
 				shopTabbedPane.setSelectedIndex(2);
 				productTabbedPane.setSelectedIndex(3);
 			}
