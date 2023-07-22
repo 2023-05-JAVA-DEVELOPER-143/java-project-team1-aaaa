@@ -81,7 +81,9 @@ public class ProductDetailPanel extends JPanel {
 		panel.add(priceLabel);
 		
 		JLabel detailDescLabel = new JLabel("");
-		detailDescLabel.setBounds(0, 150, 446, 200);
+		detailDescLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		detailDescLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		detailDescLabel.setBounds(0, 450, 446, 150);
 		panel.add(detailDescLabel);
 
 	}
@@ -161,8 +163,11 @@ public class ProductDetailPanel extends JPanel {
 		priceLabel.setBounds(199, 370, 231, 50);
 		panel.add(priceLabel);
 		
-		JLabel detailDescLabel = new JLabel(product.getP_desc()+"");
-		detailDescLabel.setBounds(0, 400, 446, 491);
+		JLabel detailDescLabel = new JLabel("상세설명"+": "+product.getP_desc()+"");
+		detailDescLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		detailDescLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		detailDescLabel.setBounds(0, 450, 446, 150);
 		panel.add(detailDescLabel);
+
 	}
 }
