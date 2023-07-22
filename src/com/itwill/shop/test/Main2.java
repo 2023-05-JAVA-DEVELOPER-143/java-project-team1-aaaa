@@ -109,8 +109,9 @@ public class Main2 extends JFrame {
 		contentPane.add(northPanel, BorderLayout.NORTH);
 		northPanel.setLayout(null);
 
-		JLabel logoLabel = new JLabel("logo");
-		logoLabel.setBounds(0, 0, 100, 40);
+		JLabel logoLabel = new JLabel("");
+		logoLabel.setIcon(new ImageIcon(Main2.class.getResource("/com/itwill/shop/image/logo.png")));
+		logoLabel.setBounds(42, 0, 50, 40);
 		northPanel.add(logoLabel);
 
 		JLabel cartLogoLabel = new JLabel("");

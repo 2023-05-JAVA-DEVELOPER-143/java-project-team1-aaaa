@@ -178,7 +178,7 @@ public class CartPanel extends JPanel {
 		
 		// 카트 상품 수량
 		itemQtyComboBox = new JComboBox();
-		itemQtyComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		itemQtyComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
 		itemQtyComboBox.setBounds(244, 176, 40, 30);
 		itemPanel.add(itemQtyComboBox);
 		
@@ -268,7 +268,7 @@ public class CartPanel extends JPanel {
 				
 				// 카트 상품 수량 수정 (콤보박스)
 				itemQtyComboBox = new JComboBox();
-				itemQtyComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+				itemQtyComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
 				itemQtyComboBox.setBounds(244, 176, 40, 30);
 				itemQtyComboBox.setSelectedItem(cart.getCart_qty() + "");
 				itemQtyComboBox.addItemListener(new ItemListener() {
