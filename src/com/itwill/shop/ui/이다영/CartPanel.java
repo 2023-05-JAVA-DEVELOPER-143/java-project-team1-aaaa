@@ -208,7 +208,7 @@ public class CartPanel extends JPanel {
 	
 	
 	public void displayCartList() throws Exception{
-		
+			
 			JCheckBox[] cartCB = null;
 			cartListContentPanel.removeAll();
 			List<Cart> cartList = mainFrame.cartService.findCartItemByAll(mainFrame.loginMember.getM_Id());
