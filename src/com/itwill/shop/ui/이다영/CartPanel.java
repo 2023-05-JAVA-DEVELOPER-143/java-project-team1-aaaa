@@ -178,7 +178,7 @@ public class CartPanel extends JPanel {
 		
 		// 카트 상품 수량
 		itemQtyComboBox = new JComboBox();
-		itemQtyComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		itemQtyComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
 		itemQtyComboBox.setBounds(244, 176, 40, 30);
 		itemPanel.add(itemQtyComboBox);
 		
@@ -208,7 +208,7 @@ public class CartPanel extends JPanel {
 	
 	
 	public void displayCartList() throws Exception{
-		
+			
 			JCheckBox[] cartCB = null;
 			cartListContentPanel.removeAll();
 			List<Cart> cartList = mainFrame.cartService.findCartItemByAll(mainFrame.loginMember.getM_Id());
@@ -216,7 +216,6 @@ public class CartPanel extends JPanel {
 			cartCB = new JCheckBox[cartList.size()];
 			/*********************for문 시작*****************/
 			for(Cart cart : cartList) {
-				
 				// 카트 상품 디테일 패널
 				itemPanel = new JPanel();
 				itemPanel.setBackground(new Color(255, 255, 255));
@@ -234,9 +233,10 @@ public class CartPanel extends JPanel {
 
 				
 				totPrice += cart.getCart_qty() * cart.getProduct().getP_price();
+				cartBottomPanel.remove(cartTotalPriceLabel);
 				cartTotalPriceLabel = new JLabel("");
-				cartTotalPriceLabel.setText(new DecimalFormat("#,###원").format(totPrice));
 				cartTotalPriceLabel.setBounds(134, 10, 132, 47);
+				cartTotalPriceLabel.setText(new DecimalFormat("#,###원").format(totPrice));
 				cartBottomPanel.add(cartTotalPriceLabel);
 				
 				
@@ -268,7 +268,7 @@ public class CartPanel extends JPanel {
 				
 				// 카트 상품 수량 수정 (콤보박스)
 				itemQtyComboBox = new JComboBox();
-				itemQtyComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+				itemQtyComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
 				itemQtyComboBox.setBounds(244, 176, 40, 30);
 				itemQtyComboBox.setSelectedItem(cart.getCart_qty() + "");
 				itemQtyComboBox.addItemListener(new ItemListener() {
