@@ -20,6 +20,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
 
 public class ProductDetailPanel extends JPanel {
 	public Main2 mainFrame;
@@ -80,11 +82,17 @@ public class ProductDetailPanel extends JPanel {
 		priceLabel.setBounds(199, 370, 231, 50);
 		panel.add(priceLabel);
 		
-		JLabel detailDescLabel = new JLabel("");
-		detailDescLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		detailDescLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		detailDescLabel.setBounds(0, 450, 446, 150);
-		panel.add(detailDescLabel);
+		JLabel ProductDescLabel = new JLabel("상세설명");
+		ProductDescLabel.setBounds(0, 500, 86, 35);
+		panel.add(ProductDescLabel);
+		
+		JScrollPane ProductDescScrollPane = new JScrollPane();
+		ProductDescScrollPane.setBounds(98, 510, 300, 200);
+		panel.add(ProductDescScrollPane);
+		
+		JTextArea ProductDesctextArea = new JTextArea();
+		ProductDesctextArea.setBounds(98, 510, 300, 200);
+		panel.add(ProductDesctextArea);
 
 	}
 	
@@ -163,11 +171,18 @@ public class ProductDetailPanel extends JPanel {
 		priceLabel.setBounds(199, 370, 231, 50);
 		panel.add(priceLabel);
 		
-		JLabel detailDescLabel = new JLabel("상세설명"+": "+product.getP_desc()+"");
-		detailDescLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		detailDescLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		detailDescLabel.setBounds(0, 450, 446, 150);
-		panel.add(detailDescLabel);
-
+		
+		JLabel ProductDescLabel = new JLabel("상세설명");
+		ProductDescLabel.setBounds(0, 500, 86, 35);
+		panel.add(ProductDescLabel);
+		
+		JScrollPane ProductDescScrollPane = new JScrollPane();
+		ProductDescScrollPane.setBounds(98, 510, 300, 200);
+		panel.add(ProductDescScrollPane);
+		
+		JTextArea ProductDesctextArea = new JTextArea();
+		ProductDesctextArea.setLineWrap(true);
+		ProductDesctextArea.setText(product.getP_desc());
+		ProductDescScrollPane.setViewportView(ProductDesctextArea);
 	}
 }
