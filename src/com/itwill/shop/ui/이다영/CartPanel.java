@@ -195,7 +195,7 @@ public class CartPanel extends JPanel {
 
 	
 			
-		cartService = new CartService();
+		this.cartService = new CartService();
 		
 			
 	} // 생성자 끝
