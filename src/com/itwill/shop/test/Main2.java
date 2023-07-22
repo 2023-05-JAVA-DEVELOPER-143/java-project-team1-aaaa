@@ -4,11 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
@@ -27,6 +30,7 @@ import com.itwill.shop.ui.배종호.MainCategoryPanel;
 import com.itwill.shop.ui.이다영.CartPanel;
 import com.itwill.shop.ui.이동현.ProductBestSellerListPanel;
 import com.itwill.shop.ui.이동현.ProductNovelListPanel;
+import com.itwill.shop.ui.이동현.ProductSearchPanel;
 import com.itwill.shop.ui.이동현.ProductSelfImprovementListPanel;
 import com.itwill.shop.ui.임범준.MemberCreatePanel;
 import com.itwill.shop.ui.임범준.MemberLoginPanel;
@@ -34,6 +38,7 @@ import com.itwill.shop.ui.임범준.OrderPanel1;
 import com.itwill.shop.ui.임범준.MemberInfoPanel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
 
 public class Main2 extends JFrame {
 	/************ 1.Service객체멤버변수선언 ************/
@@ -48,7 +53,7 @@ public class Main2 extends JFrame {
 	public Member loginMember = null;
 
 	private JPanel contentPane;
-	private JTextField searchTextField;
+	public JTextField searchTextField;
 	public MemberLoginPanel loginPanel;
 	private MemberCreatePanel memberCreatePanel;
 	private MemberLoginPanel memberLoginPanel;
@@ -66,6 +71,7 @@ public class Main2 extends JFrame {
 	public CartPanel cartPanel;
 	private MainCategoryPanel mainCategoryPanel;
 	private MemberInfoPanel memberInfoPanel;
+	private ProductSearchPanel productSearchPanel;
 
 	/**
 	 * Launch the application.
@@ -132,8 +138,23 @@ public class Main2 extends JFrame {
 		northPanel.add(searchTextField);
 		searchTextField.setColumns(10);
 
-		JLabel searchLabel = new JLabel("New label");
-		searchLabel.setBounds(288, 0, 60, 40);
+		JLabel searchLabel = new JLabel("");
+		searchLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		searchLabel.setIcon(new ImageIcon(Main2.class.getResource("/com/itwill/shop/image/search_image20.png")));
+		searchLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (searchTextField.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "검색어를 입력하세요.");
+				}else {
+					productTabbedPane.setSelectedIndex(-1);
+					productTabbedPane.setSelectedIndex(4);
+					changePanel(2, 4, -1, null);
+					productTabbedPane.setEnabledAt(4, true);
+				}
+			}
+		});
+		searchLabel.setBounds(277, 0, 26, 40);
 		northPanel.add(searchLabel);
 
 		shopTabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -167,7 +188,8 @@ public class Main2 extends JFrame {
 				try {
 					if (productBestSellerListPanel == null ||
 							productNovelListPanel == null  || 
-							productSelfImprovementListPanel == null) {
+							productSelfImprovementListPanel == null ||
+							productSearchPanel == null) {
 						return;
 					}
 					if (productTabbedPane.getSelectedIndex() == 0) {
@@ -178,6 +200,8 @@ public class Main2 extends JFrame {
 						productSelfImprovementListPanel.displayBestSellerList();
 					} else if (productTabbedPane.getSelectedIndex() == 3) {
 						productDetailPanel.displayProductDetail();
+					} else if (productTabbedPane.getSelectedIndex() == 4) {
+						productSearchPanel.displaySearchList(searchTextField.getText());
 					}
 
 				} catch (Exception e1) {
@@ -211,6 +235,23 @@ public class Main2 extends JFrame {
 		productSelfImprovementListPanel = new ProductSelfImprovementListPanel();
 		productSelfImprovement.add(productSelfImprovementListPanel, BorderLayout.CENTER);
 
+		productDetailPanel = new ProductDetailPanel();
+		productDetailPanel.setBackground(Color.WHITE);
+		productTabbedPane.addTab("상세보기", null, productDetailPanel, null);
+		productTabbedPane.setEnabledAt(3, false);
+		
+		productSearchPanel = new ProductSearchPanel();
+		productTabbedPane.addTab("검색결과", null, productSearchPanel, null);
+		productTabbedPane.setEnabledAt(4, false);
+		
+		cartPanel = new CartPanel();
+		shopTabbedPane.addTab("장바구니", null, cartPanel, null);
+		shopTabbedPane.setEnabledAt(3, false);
+		
+		orderPanel1 = new OrderPanel1();
+		shopTabbedPane.addTab("주문", null, orderPanel1, null);
+		shopTabbedPane.setEnabledAt(4, false);
+		
 		
 		
 
@@ -222,34 +263,7 @@ public class Main2 extends JFrame {
 	
 
 		productTabbedPane.setSelectedIndex(-1);
-		
-		
-		
 
-		productDetailPanel = new ProductDetailPanel();
-		productDetailPanel.setBackground(Color.WHITE);
-		productTabbedPane.addTab("상세보기", null, productDetailPanel, null);
-		productTabbedPane.setEnabledAt(3, false);
-
-		cartPanel = new CartPanel();
-		shopTabbedPane.addTab("장바구니", null, cartPanel, null);
-		shopTabbedPane.setEnabledAt(3, false);
-		
-		orderPanel1 = new OrderPanel1();
-		shopTabbedPane.addTab("주문", null, orderPanel1, null);
-		shopTabbedPane.setEnabledAt(4, false);
-		
-		
-		
-		
-
-		productTabbedPane.setSelectedIndex(-1);
-
-		
-		
-
-		memberLoginPanel.setMainFrame(this);
-		memberCreatePanel.setMainFrame(this);
 		
 		memberInfoPanel = new MemberInfoPanel();
 		memberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
@@ -258,7 +272,15 @@ public class Main2 extends JFrame {
 		productSelfImprovementListPanel.setMainFrame(this);
 		mainCategoryPanel.setMainFrame(this);
 		productDetailPanel.setMainFrame(this);
+		productSearchPanel.setMainFrame(this);
+		
+		
+		
 		cartPanel.setMainFrame(this);
+		memberLoginPanel.setMainFrame(this);
+		memberCreatePanel.setMainFrame(this);
+		
+		
 		
 		
 
@@ -300,6 +322,8 @@ public class Main2 extends JFrame {
 				productDetailPanel.setProduct(p);
 				shopTabbedPane.setSelectedIndex(2);
 				productTabbedPane.setSelectedIndex(3);
+			} else if(productTabbedPaneNo == 4) {
+				productTabbedPane.setSelectedIndex(productTabbedPaneNo);
 			}
 		} else if (shopTabbedPaneNo == 3) {
 			// 장바구니
