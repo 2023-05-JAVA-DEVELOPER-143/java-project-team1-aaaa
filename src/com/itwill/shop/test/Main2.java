@@ -70,8 +70,8 @@ public class Main2 extends JFrame {
 	private OrderPanel1 orderPanel1;
 	public CartPanel cartPanel;
 	private MainCategoryPanel mainCategoryPanel;
-	private MemberInfoPanel memberInfoPanel;
 	private ProductSearchPanel productSearchPanel;
+	private MemberInfoPanel memberInfoPanel;
 
 	/**
 	 * Launch the application.
@@ -181,6 +181,9 @@ public class Main2 extends JFrame {
 		memberCreatePanel = new MemberCreatePanel();
 		memberTabbedpane.addTab("회원가입", null, memberCreatePanel, null);
 
+		memberInfoPanel = new MemberInfoPanel();
+		memberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
+
 		productTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		productTabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -254,33 +257,26 @@ public class Main2 extends JFrame {
 		shopTabbedPane.setEnabledAt(4, false);
 		
 		
+		productTabbedPane.setSelectedIndex(-1);
 		
 
 		memberService = new MemberService();
 		productService = new ProductService();
 		cartService = new CartService();
 		orderService = new OrderService();
-		cartPanel = new CartPanel();
-	
-
-		productTabbedPane.setSelectedIndex(-1);
 
 		
-		memberInfoPanel = new MemberInfoPanel();
-		memberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
 		productBestSellerListPanel.setMainFrame(this);
 		productNovelListPanel.setMainFrame(this);
 		productSelfImprovementListPanel.setMainFrame(this);
 		mainCategoryPanel.setMainFrame(this);
 		productDetailPanel.setMainFrame(this);
 		productSearchPanel.setMainFrame(this);
-		
-		
-		
 		cartPanel.setMainFrame(this);
 		memberLoginPanel.setMainFrame(this);
 		memberCreatePanel.setMainFrame(this);
 		
+		memberInfoPanel.setMainFrame(this);
 		
 		
 		
