@@ -26,7 +26,7 @@ public class MemberInfoPanel extends JPanel {
 	
 	public Main2 mainFrame;
 	
-	public Member loginMember =null;
+//	public Member loginMember =null;
 
 	/**
 	 * Create the panel.
@@ -38,20 +38,18 @@ public class MemberInfoPanel extends JPanel {
 		memberInfoPanel.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentShown(ComponentEvent e) {
-//				if(loginMember == null) {
-//					System.out.println("멘토날렸어");
-//					
-//					} else {
-//						memberInfoIdTF.setText(mainFrame.loginMember.getM_Id());
-//						memberInfoPwTF.setText(mainFrame.loginMember.getM_Pw());
-//						memberInfoNameTF.setText(mainFrame.loginMember.getM_Name());
-//						memberInfoPhoneTF.setText(mainFrame.loginMember.getM_Phone());
-//						memberInfoPhoneEmailTF.setText(mainFrame.loginMember.getM_Email());
-//						memberInfoAddressTF.setText(mainFrame.loginMember.getM_Address());
-//					}
-//				
+				if(mainFrame.loginMember == null) {
+					System.out.println("멘토날렸어");
+					
+					} else {
+						memberInfoIdTF.setText(mainFrame.loginMember.getM_Id());
+						memberInfoPwTF.setText(mainFrame.loginMember.getM_Pw());
+						memberInfoNameTF.setText(mainFrame.loginMember.getM_Name());
+						memberInfoPhoneTF.setText(mainFrame.loginMember.getM_Phone());
+						memberInfoPhoneEmailTF.setText(mainFrame.loginMember.getM_Email());
+						memberInfoAddressTF.setText(mainFrame.loginMember.getM_Address());
+					}
 				
-//				if(loginMember )
 				
 				}
 				
