@@ -131,14 +131,39 @@ public class ProductSelfImprovementListPanel extends JPanel {
 			bestSellerNameLabel.setBounds(132, 10, 276, 44);
 			bestSellerListPanel.add(bestSellerNameLabel);
 			
-			JButton buyButton = new JButton("바로구매");
-			buyButton.setBounds(294, 119, 90, 40);
-			bestSellerListPanel.add(buyButton);
 			
 			JComboBox cartComboBox = new JComboBox();
 			cartComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
 			cartComboBox.setBounds(170, 119, 50, 23);
 			bestSellerListPanel.add(cartComboBox);
+			
+			JButton buyButton = new JButton("바로구매");
+			buyButton.addActionListener(new ActionListener() {
+				Product p = product;
+				public void actionPerformed(ActionEvent e) {
+					if (mainFrame.loginMember != null) {
+						// 바로구매 누를시 주문창으로 가면서 oi생성
+					try {
+						String cartQtyStr = (String)cartComboBox.getSelectedItem();
+						int cartQty = Integer.parseInt(cartQtyStr);
+						mainFrame.orderService.create(mainFrame.loginMember.getM_Id(), product.getP_no(), cartQty);
+						mainFrame.changePanel(4, -1, -1, null);
+						cartComboBox.setSelectedItem("1");
+						
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				}else {
+					mainFrame.changePanel(1, -1, 0, null);
+					JOptionPane.showMessageDialog(null, "로그인이 필요한 서비스입니다.");
+					cartComboBox.setSelectedItem("1");
+				}
+			}
+			});
+			buyButton.setBounds(294, 119, 90, 40);
+			bestSellerListPanel.add(buyButton);
 			
 			JButton cartAddButton = new JButton("");
 			cartAddButton.addActionListener(new ActionListener() {

@@ -162,6 +162,9 @@ public class MemberLoginPanel extends JPanel {
 		 4.회원정보보기 화면전환
 		********************************************/
 		mainFrame.loginMember = mainFrame.memberService.findUser(userId);
+		System.out.println("로그인성공");
+		mainFrame.shopTabbedPane.setEnabledAt(3, true);
+		mainFrame.shopTabbedPane.setEnabledAt(4, true);
 		if(mainFrame.loginMember.getM_Id().equals("admin")) {
 			mainFrame.memberTabbedpane.setEnabledAt(0,false);
 			mainFrame.memberTabbedpane.setEnabledAt(1,false );

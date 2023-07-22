@@ -232,9 +232,11 @@ public class Main2 extends JFrame {
 
 		cartPanel = new CartPanel();
 		shopTabbedPane.addTab("장바구니", null, cartPanel, null);
+		shopTabbedPane.setEnabledAt(3, false);
 		
 		orderPanel1 = new OrderPanel1();
 		shopTabbedPane.addTab("주문", null, orderPanel1, null);
+		shopTabbedPane.setEnabledAt(4, false);
 		
 		
 		
