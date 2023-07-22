@@ -153,6 +153,7 @@ public class ProductSelfImprovementListPanel extends JPanel {
 						mainFrame.cartService.addCart(new Cart(0, cartQty, mainFrame.loginMember.getM_Id(), 
 											new Product(p.getP_no(), p.getP_name(), p.getP_price(),
 														p.getP_image(), p.getP_desc(), p.getP_category())));
+						mainFrame.cartPanel.displayCartList();
 						JOptionPane.showMessageDialog(null, "장바구니에 상품이 담겼습니다.");
 						cartComboBox.setSelectedItem("1");
 					} catch (Exception e1) {

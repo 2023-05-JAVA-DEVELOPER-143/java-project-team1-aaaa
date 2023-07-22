@@ -40,4 +40,23 @@ public class CartService {
 	public List<Cart> findCartItemByAll(String u_id) throws Exception {
 		return cartDao.findSelectAll(u_id);
 	}
+	
+	// 카트 리스르 가격 총합
+	public int addCartListTotal(String m_id) throws Exception {
+		int total =0;
+		List<Cart> cartList = cartDao.findSelectAll(m_id);
+		for (Cart cart : cartList) {
+			total+= cart.getCart_qty()* cart.getProduct().getP_price();
+		}
+		return total;
+	}
+	
+	// 카트 1개의 총합
+	public int addCartTotal (int c_no) throws Exception {
+		int total =0;
+		Cart cart = cartDao.findSelectByCartNo(c_no);
+		total+= cart.getCart_qty() * cart.getProduct().getP_price();
+		return total;
+	}
+	
 }

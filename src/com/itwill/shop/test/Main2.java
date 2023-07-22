@@ -60,10 +60,10 @@ public class Main2 extends JFrame {
 	private JPanel productBestSellerPanel;
 	private JPanel productNovel;
 	private JPanel productSelfImprovement;
-	private JTabbedPane shopTabbedPane;
+	public JTabbedPane shopTabbedPane;
 	private ProductDetailPanel productDetailPanel;
 	private OrderPanel1 orderPanel1;
-	private CartPanel cartPanel;
+	public CartPanel cartPanel;
 	private MainCategoryPanel mainCategoryPanel;
 	private MemberInfoPanel memberInfoPanel;
 
@@ -114,6 +114,7 @@ public class Main2 extends JFrame {
 				if(loginMember != null) {
 					shopTabbedPane.setSelectedIndex(3);
 				} else {
+					shopTabbedPane.setSelectedIndex(1);
 					memberTabbedpane.setSelectedIndex(0);
 				}
 				
@@ -217,6 +218,7 @@ public class Main2 extends JFrame {
 		productService = new ProductService();
 		cartService = new CartService();
 		orderService = new OrderService();
+		cartPanel = new CartPanel();
 	
 
 		productTabbedPane.setSelectedIndex(-1);

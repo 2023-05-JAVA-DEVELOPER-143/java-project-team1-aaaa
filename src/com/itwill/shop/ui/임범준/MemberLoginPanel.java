@@ -90,15 +90,19 @@ public class MemberLoginPanel extends JPanel {
 					int result = mainFrame.memberService.login(userid, password);
 					if (result == 1) {
 						loginProcess(userid);
+						mainFrame.shopTabbedPane.setSelectedIndex(0);
+						
 					} else if (result == 0) {
 						memberLoginIdMsgLB.setText("정보 다틀린데?");
 						memberLoginIdTF.requestFocus();
 						memberLoginIdTF.setSelectionStart(0);
 						memberLoginIdTF.setSelectionEnd(userid.length());
 					}
+					
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
+				
 			}
 		
 			
@@ -133,6 +137,7 @@ public class MemberLoginPanel extends JPanel {
 		memberLoginPwMsgLB.setForeground(Color.RED);
 		memberLoginPwMsgLB.setBounds(80, 330, 235, 26);
 		memberLoginPanel.add(memberLoginPwMsgLB);
+
 		
 		memberService = new MemberService();
 
