@@ -1,21 +1,38 @@
 package com.itwill.shop.ui.임범준;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JScrollPane;
-import java.awt.Dimension;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.util.List;
+
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import com.itwill.shop.member.Member;
+import com.itwill.shop.order.Order;
+import com.itwill.shop.test.Main2;
 
 public class OrderPanel extends JPanel {
 	private JTextField orderDeliveryAddressTF;
 	private JTextField orderDeliveryNameTF;
 	private JTextField orderDeliveryPhoneTF;
+	
+	public Main2 mainFrame;
+	
+	
+	
+	/*******loginMember 객체 선언***********/
+	Member loginMember = null;
+	private JPanel orderListTitlePanel;
+	private JPanel orderListPanel;
+	private JPanel orderTotalPricePanel;
+	private JPanel orderDeliveryPanel;
 
 	/**
 	 * Create the panel.
@@ -23,52 +40,57 @@ public class OrderPanel extends JPanel {
 	public OrderPanel() {
 		setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane orderScrollPane = new JScrollPane();
-		orderScrollPane.setPreferredSize(new Dimension(460, 1500));
-		add(orderScrollPane, BorderLayout.CENTER);
+		JPanel orderPanel = new JPanel();
+		add(orderPanel, BorderLayout.CENTER);
+		orderPanel.setLayout(null);
 		
-		JPanel orderListPanel = new JPanel();
-		orderScrollPane.setViewportView(orderListPanel);
-		orderListPanel.setLayout(null);
-		
-		JPanel orderListTitlePanel = new JPanel();
-		orderListTitlePanel.setBounds(12, 10, 434, 29);
-		orderListPanel.add(orderListTitlePanel);
+		orderListTitlePanel = new JPanel();
 		orderListTitlePanel.setLayout(null);
+		orderListTitlePanel.setBounds(12, 10, 434, 29);
+		orderPanel.add(orderListTitlePanel);
 		
 		JLabel orderItemLB = new JLabel("주문 내역");
-		orderItemLB.setFont(new Font("굴림", Font.BOLD, 20));
 		orderItemLB.setHorizontalAlignment(SwingConstants.CENTER);
+		orderItemLB.setFont(new Font("굴림", Font.BOLD, 20));
 		orderItemLB.setBounds(117, 0, 189, 25);
 		orderListTitlePanel.add(orderItemLB);
 		
-		JPanel orderLIst = new JPanel();
-		orderLIst.setBounds(12, 49, 434, 200);
-		orderListPanel.add(orderLIst);
-		orderLIst.setLayout(null);
+		orderListPanel = new JPanel();
+		orderListPanel.setBounds(12, 49, 434, 205);
+		orderPanel.add(orderListPanel);
+		orderListPanel.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane orderListScrollPane = new JScrollPane();
+		orderListPanel.add(orderListScrollPane, BorderLayout.CENTER);
+		
+		JPanel orderListPanelScroll = new JPanel();
+		orderListPanelScroll.setPreferredSize(new Dimension(10, 2000));
+		orderListScrollPane.setViewportView(orderListPanelScroll);
+		orderListPanelScroll.setLayout(null);
 		
 		JLabel orderItemImage = new JLabel("New label");
 		orderItemImage.setPreferredSize(new Dimension(120, 175));
 		orderItemImage.setBounds(12, 10, 120, 175);
-		orderLIst.add(orderItemImage);
+		orderListPanelScroll.add(orderItemImage);
 		
-		JLabel orderDescLB = new JLabel("New label");
-		orderDescLB.setBounds(180, 61, 180, 15);
-		orderLIst.add(orderDescLB);
+		JLabel orderDescLB = new JLabel("주문내역");
+		orderDescLB.setHorizontalAlignment(SwingConstants.CENTER);
+		orderDescLB.setBounds(191, 68, 180, 15);
+		orderListPanelScroll.add(orderDescLB);
 		
 		JLabel orderItemPriceTitleLB = new JLabel("총 금액:");
 		orderItemPriceTitleLB.setFont(new Font("굴림", Font.BOLD, 12));
-		orderItemPriceTitleLB.setBounds(182, 125, 105, 41);
-		orderLIst.add(orderItemPriceTitleLB);
+		orderItemPriceTitleLB.setBounds(173, 127, 105, 41);
+		orderListPanelScroll.add(orderItemPriceTitleLB);
 		
-		JLabel orderPriceLB = new JLabel("New label");
-		orderPriceLB.setBounds(309, 125, 93, 41);
-		orderLIst.add(orderPriceLB);
+		JLabel orderPriceLB = new JLabel("10000원");
+		orderPriceLB.setBounds(300, 127, 93, 41);
+		orderListPanelScroll.add(orderPriceLB);
 		
-		JPanel orderTotalPricePanel = new JPanel();
-		orderTotalPricePanel.setBounds(12, 259, 434, 34);
-		orderListPanel.add(orderTotalPricePanel);
+		orderTotalPricePanel = new JPanel();
 		orderTotalPricePanel.setLayout(null);
+		orderTotalPricePanel.setBounds(12, 263, 434, 34);
+		orderPanel.add(orderTotalPricePanel);
 		
 		JLabel orderTotalPriceNameLB = new JLabel("최종 결재 금액");
 		orderTotalPriceNameLB.setFont(new Font("굴림", Font.BOLD, 14));
@@ -76,17 +98,17 @@ public class OrderPanel extends JPanel {
 		orderTotalPricePanel.add(orderTotalPriceNameLB);
 		
 		JLabel orderTotalPriceLB = new JLabel("50000원");
-		orderTotalPriceLB.setFont(new Font("굴림", Font.BOLD, 14));
 		orderTotalPriceLB.setHorizontalAlignment(SwingConstants.RIGHT);
+		orderTotalPriceLB.setFont(new Font("굴림", Font.BOLD, 14));
 		orderTotalPriceLB.setBounds(250, 10, 159, 23);
 		orderTotalPricePanel.add(orderTotalPriceLB);
 		
-		JPanel orderDeliveryPanel = new JPanel();
+		orderDeliveryPanel = new JPanel();
 		orderDeliveryPanel.setLayout(null);
 		orderDeliveryPanel.setBorder(null);
 		orderDeliveryPanel.setBackground(new Color(226, 226, 226));
-		orderDeliveryPanel.setBounds(12, 303, 434, 146);
-		orderListPanel.add(orderDeliveryPanel);
+		orderDeliveryPanel.setBounds(12, 312, 434, 146);
+		orderPanel.add(orderDeliveryPanel);
 		
 		JLabel orderDeliveryInfoLB = new JLabel("배송정보");
 		orderDeliveryInfoLB.setHorizontalAlignment(SwingConstants.CENTER);
@@ -105,13 +127,13 @@ public class OrderPanel extends JPanel {
 		
 		orderDeliveryAddressTF = new JTextField();
 		orderDeliveryAddressTF.setColumns(10);
-		orderDeliveryAddressTF.setBounds(103, 70, 229, 21);
+		orderDeliveryAddressTF.setBounds(116, 70, 229, 21);
 		orderDeliveryPanel.add(orderDeliveryAddressTF);
 		
 		orderDeliveryNameTF = new JTextField();
 		orderDeliveryNameTF.setToolTipText("");
 		orderDeliveryNameTF.setColumns(10);
-		orderDeliveryNameTF.setBounds(103, 39, 229, 21);
+		orderDeliveryNameTF.setBounds(116, 39, 229, 21);
 		orderDeliveryPanel.add(orderDeliveryNameTF);
 		
 		JLabel orderDeliveryAddressLB = new JLabel("주소");
@@ -126,21 +148,49 @@ public class OrderPanel extends JPanel {
 		
 		JLabel orderDeliveryPhoneLB = new JLabel("전화번호");
 		orderDeliveryPhoneLB.setFont(new Font("굴림", Font.PLAIN, 14));
-		orderDeliveryPhoneLB.setBounds(17, 106, 57, 15);
+		orderDeliveryPhoneLB.setBounds(17, 106, 67, 15);
 		orderDeliveryPanel.add(orderDeliveryPhoneLB);
 		
 		orderDeliveryPhoneTF = new JTextField();
-		orderDeliveryPhoneTF.setBounds(103, 103, 229, 21);
-		orderDeliveryPanel.add(orderDeliveryPhoneTF);
 		orderDeliveryPhoneTF.setColumns(10);
+		orderDeliveryPhoneTF.setBounds(116, 103, 229, 21);
+		orderDeliveryPanel.add(orderDeliveryPhoneTF);
 		
-		JButton btnNewButton = new JButton("주문하기");
-		btnNewButton.setBounds(93, 477, 107, 23);
-		orderListPanel.add(btnNewButton);
+		JButton orderBtn = new JButton("주문하기");
+		orderBtn.setBounds(90, 489, 107, 23);
+		orderPanel.add(orderBtn);
 		
-		JButton btnNewButton_1 = new JButton("취소하기");
-		btnNewButton_1.setBounds(254, 477, 114, 23);
-		orderListPanel.add(btnNewButton_1);
+		JButton orderCancelBtn = new JButton("취소하기");
+		orderCancelBtn.setBounds(251, 489, 114, 23);
+		orderPanel.add(orderCancelBtn);
 
+	} // 생성자 종료
+	
+	public void setMainFrame(Main2 mainFrame) {
+		this.mainFrame = mainFrame;
 	}
+	
+	
+	public void displayOrderList() throws Exception {
+		orderListTitlePanel = new JPanel();
+		orderListTitlePanel.setLayout(null);
+		orderListTitlePanel.setBounds(12, 10, 434, 29);
+		mainFrame.orderPanel.add(orderListTitlePanel);
+		JLabel orderItemLB = new JLabel("주문 내역");
+		orderItemLB.setHorizontalAlignment(SwingConstants.CENTER);
+		orderItemLB.setFont(new Font("굴림", Font.BOLD, 20));
+		orderItemLB.setBounds(117, 0, 189, 25);
+		orderListTitlePanel.add(orderItemLB);
+		
+		Order tempOrder = null;
+
+		List<Order> orderList = mainFrame.orderService.orderWithOrderItemList(loginMember.getM_Id());
+		
+		
+	}
+	
+	
+	
+	
+	
 }

@@ -34,11 +34,11 @@ import com.itwill.shop.ui.이동현.ProductSearchPanel;
 import com.itwill.shop.ui.이동현.ProductSelfImprovementListPanel;
 import com.itwill.shop.ui.임범준.MemberCreatePanel;
 import com.itwill.shop.ui.임범준.MemberLoginPanel;
-import com.itwill.shop.ui.임범준.OrderPanel1;
 import com.itwill.shop.ui.임범준.MemberInfoPanel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingConstants;
+import com.itwill.shop.ui.임범준.OrderPanel;
 
 public class Main2 extends JFrame {
 	/************ 1.Service객체멤버변수선언 ************/
@@ -67,11 +67,11 @@ public class Main2 extends JFrame {
 	private JPanel productSelfImprovement;
 	public JTabbedPane shopTabbedPane;
 	private ProductDetailPanel productDetailPanel;
-	private OrderPanel1 orderPanel1;
 	public CartPanel cartPanel;
 	private MainCategoryPanel mainCategoryPanel;
 	private ProductSearchPanel productSearchPanel;
 	private MemberInfoPanel memberInfoPanel;
+	public OrderPanel orderPanel;
 
 	/**
 	 * Launch the application.
@@ -251,9 +251,10 @@ public class Main2 extends JFrame {
 		shopTabbedPane.addTab("장바구니", null, cartPanel, null);
 		shopTabbedPane.setEnabledAt(3, false);
 		
-		orderPanel1 = new OrderPanel1();
-		shopTabbedPane.addTab("주문", null, orderPanel1, null);
-		shopTabbedPane.setEnabledAt(4, false);
+		orderPanel = new OrderPanel();
+		shopTabbedPane.addTab("주문", null, orderPanel, null);
+		
+		
 		
 		
 		productTabbedPane.setSelectedIndex(-1);
@@ -276,6 +277,7 @@ public class Main2 extends JFrame {
 		memberCreatePanel.setMainFrame(this);
 		
 		memberInfoPanel.setMainFrame(this);
+		
 		
 		
 		
