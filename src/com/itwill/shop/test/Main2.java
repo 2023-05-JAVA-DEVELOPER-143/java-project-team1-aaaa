@@ -227,6 +227,7 @@ public class Main2 extends JFrame {
 		
 
 		productDetailPanel = new ProductDetailPanel();
+		productDetailPanel.setBackground(Color.WHITE);
 		productTabbedPane.addTab("상세보기", null, productDetailPanel, null);
 		productTabbedPane.setEnabledAt(3, false);
 
