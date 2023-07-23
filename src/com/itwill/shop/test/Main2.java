@@ -4,8 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.util.HashMap;
-import java.util.List;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -22,6 +23,8 @@ import javax.swing.event.ChangeListener;
 import com.itwill.shop.cart.CartService;
 import com.itwill.shop.member.Member;
 import com.itwill.shop.member.MemberService;
+import com.itwill.shop.order.Order;
+import com.itwill.shop.order.OrderItem;
 import com.itwill.shop.order.OrderService;
 import com.itwill.shop.product.Product;
 import com.itwill.shop.product.ProductService;
@@ -33,11 +36,8 @@ import com.itwill.shop.ui.이동현.ProductNovelListPanel;
 import com.itwill.shop.ui.이동현.ProductSearchPanel;
 import com.itwill.shop.ui.이동현.ProductSelfImprovementListPanel;
 import com.itwill.shop.ui.임범준.MemberCreatePanel;
-import com.itwill.shop.ui.임범준.MemberLoginPanel;
 import com.itwill.shop.ui.임범준.MemberInfoPanel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.SwingConstants;
+import com.itwill.shop.ui.임범준.MemberLoginPanel;
 import com.itwill.shop.ui.임범준.OrderPanel;
 
 public class Main2 extends JFrame {
@@ -46,6 +46,8 @@ public class Main2 extends JFrame {
 	public OrderService orderService;
 	public MemberService memberService;
 	public CartService cartService;
+	public OrderItem orderItem;
+	public Order order;
 	
 	public Main2 mainFrame;
 
