@@ -92,7 +92,7 @@ public class CartPanel extends JPanel {
 		cartContentPanel.add(cartBottomPanel, BorderLayout.SOUTH);
 		cartBottomPanel.setLayout(null);
 		
-		JLabel cartTotalLabel = new JLabel("총 상품금액");
+		JLabel cartTotalLabel = new JLabel("총 상품금액 : ");
 		cartTotalLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		cartTotalLabel.setFont(new Font("굴림", Font.BOLD, 15));
 		cartTotalLabel.setBounds(10, 22, 115, 30);
