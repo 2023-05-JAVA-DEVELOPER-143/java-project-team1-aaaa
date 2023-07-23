@@ -72,8 +72,8 @@ public class Main2 extends JFrame {
 	public CartPanel cartPanel;
 	private MainCategoryPanel mainCategoryPanel;
 	private ProductSearchPanel productSearchPanel;
-	private MemberInfoPanel memberInfoPanel;
 	public OrderPanel orderPanel;
+	public MemberInfoPanel memberInfoPanel;
 
 	/**
 	 * Launch the application.
@@ -182,10 +182,10 @@ public class Main2 extends JFrame {
 
 		memberCreatePanel = new MemberCreatePanel();
 		memberTabbedpane.addTab("회원가입", null, memberCreatePanel, null);
-
+		
 		memberInfoPanel = new MemberInfoPanel();
 		memberTabbedpane.addTab("회원정보", null, memberInfoPanel, null);
-
+		
 		productTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		productTabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -280,7 +280,9 @@ public class Main2 extends JFrame {
 		memberLoginPanel.setMainFrame(this);
 		memberCreatePanel.setMainFrame(this);
 		
-		memberInfoPanel.setMainFrame(this);
+		
+		
+		
 		
 		
 		

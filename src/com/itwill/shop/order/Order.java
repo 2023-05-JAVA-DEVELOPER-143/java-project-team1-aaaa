@@ -10,13 +10,14 @@ public class Order {
 	private int o_price;
 	private Date o_date;
 	private String m_id;
+	
 	private List<OrderItem> orderItemList;
 	
 	public Order() {
 		orderItemList= new ArrayList<OrderItem>();
 	}
 	
-	public Order(int o_no, String o_desc, int o_price, Date o_date, String m_id, List<OrderItem> orderItemList) {
+	public Order(int o_no, String o_desc, int o_price, Date o_date, String m_id ,  List<OrderItem> orderItemList) {
 		super();
 		this.o_no = o_no;
 		this.o_desc = o_desc;
@@ -29,6 +30,24 @@ public class Order {
 			this.orderItemList=new ArrayList<OrderItem>();
 		}
 	}
+	
+	public Order(int o_no, String o_desc, int o_price, Date o_date, String m_id) {
+		super();
+		this.o_no = o_no;
+		this.o_desc = o_desc;
+		this.o_price = o_price;
+		this.o_date = o_date;
+		this.m_id = m_id;
+		if(orderItemList!=null) {
+			this.orderItemList = orderItemList;
+		}else {
+			this.orderItemList=new ArrayList<OrderItem>();
+		}
+	}
+	
+	
+	
+	
 
 
 	public int getO_no() {

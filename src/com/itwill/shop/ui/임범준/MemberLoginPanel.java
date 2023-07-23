@@ -93,7 +93,7 @@ public class MemberLoginPanel extends JPanel {
 						mainFrame.shopTabbedPane.setSelectedIndex(0);
 						
 					} else if (result == 0) {
-						memberLoginIdMsgLB.setText("정보 다틀린데?");
+						memberLoginIdMsgLB.setText("정보가 틀리네??");
 						memberLoginIdTF.requestFocus();
 						memberLoginIdTF.setSelectionStart(0);
 						memberLoginIdTF.setSelectionEnd(userid.length());
@@ -178,10 +178,9 @@ public class MemberLoginPanel extends JPanel {
 			mainFrame.memberTabbedpane.setEnabledAt(0,false );
 			mainFrame.memberTabbedpane.setEnabledAt(1,false );
 			mainFrame.memberTabbedpane.setEnabledAt(2,true);
-			
 			mainFrame.memberTabbedpane.setSelectedIndex(2);
-
-
+			mainFrame.shopTabbedPane.setSelectedIndex(0);
+			mainFrame.memberInfoPanel.memberInfo(mainFrame.loginMember);
 		
 		}
 	}

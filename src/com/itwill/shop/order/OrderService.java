@@ -33,8 +33,11 @@ public class OrderService {
 	/*
 	 * 주문목록
 	 */
+//	public List<Order> orderList(String m_id) throws Exception{
+//		return orderDao.findOrderByUserId(m_id);
+//	}
 	public List<Order> orderList(String m_id) throws Exception{
-		return orderDao.findOrderByUserId(m_id);
+		return orderDao.findOrderBym_Id(m_id);
 	}
 	/*
 	 * 주문+주문아이템 목록

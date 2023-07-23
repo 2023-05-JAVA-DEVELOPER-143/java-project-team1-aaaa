@@ -24,8 +24,11 @@ import javax.swing.SwingConstants;
 import com.itwill.shop.member.Member;
 import com.itwill.shop.order.Order;
 import com.itwill.shop.order.OrderItem;
+import com.itwill.shop.order.OrderService;
 import com.itwill.shop.product.Product;
 import com.itwill.shop.test.Main2;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class OrderPanel extends JPanel {
 	private JTextField orderDeliveryAddressTF;
@@ -33,20 +36,21 @@ public class OrderPanel extends JPanel {
 	private JTextField orderDeliveryPhoneTF;
 	
 	public Main2 mainFrame;
-	
-	/*******loginMember 객체 선언***********/
-	
-	private JPanel orderListTitlePanel;
-	private JPanel orderListPanel;
-	private JPanel orderTotalPricePanel;
-	private JPanel orderDeliveryPanel;
 	private JPanel orderListPanelScroll;
+	private JPanel orderListTitlePanel;
 	private JPanel orderPanel;
+	
+	
+	
+
+	
 
 	/**
 	 * Create the panel.
+	 * @throws Exception 
 	 */
-	public OrderPanel() {
+	public OrderPanel() throws Exception {
+		
 		setLayout(new BorderLayout(0, 0));
 		
 		orderPanel = new JPanel();
@@ -64,7 +68,7 @@ public class OrderPanel extends JPanel {
 		orderItemLB.setBounds(117, 0, 189, 25);
 		orderListTitlePanel.add(orderItemLB);
 		
-		orderListPanel = new JPanel();
+		JPanel orderListPanel = new JPanel();
 		orderListPanel.setBounds(12, 49, 434, 205);
 		orderPanel.add(orderListPanel);
 		orderListPanel.setLayout(new BorderLayout(0, 0));
@@ -105,7 +109,7 @@ public class OrderPanel extends JPanel {
 		orderCancelbtn.setBounds(353, 10, 50, 30);
 		orderItemPanel.add(orderCancelbtn);
 		
-		orderTotalPricePanel = new JPanel();
+		JPanel orderTotalPricePanel = new JPanel();
 		orderTotalPricePanel.setLayout(null);
 		orderTotalPricePanel.setBounds(12, 263, 434, 34);
 		orderPanel.add(orderTotalPricePanel);
@@ -121,7 +125,7 @@ public class OrderPanel extends JPanel {
 		orderTotalPriceLB.setBounds(250, 10, 159, 23);
 		orderTotalPricePanel.add(orderTotalPriceLB);
 		
-		orderDeliveryPanel = new JPanel();
+		JPanel orderDeliveryPanel = new JPanel();
 		orderDeliveryPanel.setLayout(null);
 		orderDeliveryPanel.setBorder(null);
 		orderDeliveryPanel.setBackground(new Color(226, 226, 226));
@@ -136,7 +140,7 @@ public class OrderPanel extends JPanel {
 		
 		JCheckBox orderDeliveryCKB = new JCheckBox("기본 배송지");
 		orderDeliveryCKB.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				if(orderDeliveryCKB.isSelected()) {
 					orderDeliveryNameTF.setText(mainFrame.loginMember.getM_Name());
 					orderDeliveryAddressTF.setText(mainFrame.loginMember.getM_Address());
@@ -146,7 +150,6 @@ public class OrderPanel extends JPanel {
 					orderDeliveryAddressTF.setText("");
 					orderDeliveryPhoneTF.setText("");
 					orderDeliveryNameTF.requestFocus();
-					
 				}
 			}
 		});
@@ -196,6 +199,7 @@ public class OrderPanel extends JPanel {
 		JButton orderCancelBtn = new JButton("취소하기");
 		orderCancelBtn.setBounds(251, 489, 114, 23);
 		orderPanel.add(orderCancelBtn);
+		
 
 	} // 생성자 종료
 	
@@ -205,79 +209,8 @@ public class OrderPanel extends JPanel {
 	
 	
 	public void displayOrderList() throws Exception {
-//		orderListTitlePanel = new JPanel();
-//		orderListTitlePanel.setLayout(null);
-//		orderListTitlePanel.setBounds(12, 10, 434, 29);
-//		orderPanel.add(orderListTitlePanel);
-//		JLabel orderItemLB = new JLabel("주문 내역");
-//		orderItemLB.setHorizontalAlignment(SwingConstants.CENTER);
-//		orderItemLB.setFont(new Font("굴림", Font.BOLD, 20));
-//		orderItemLB.setBounds(117, 0, 189, 25);
-//		orderListTitlePanel.add(orderItemLB);
-//		
+		List<Order> orderList= mainFrame.orderService.orderList(mainFrame.loginMember.getM_Id());
 		
-//		String orderName = null;
-//		int orderNo = 0;
-//		
-//		Order tempOrder = null;
-//		List<Order> orderList = mainFrame.orderService.orderWithOrderItemList(mainFrame.loginMember.getM_Id());
-//		for (Order order : orderList) {
-//			orderName = order.getO_desc();
-//			orderNo = order.getO_no();
-//		}
-//		tempOrder = mainFrame.orderService.orderWithOrderItem(mainFrame.loginMember.getM_Id(), orderNo);
-//			orderListPanel.removeAll();
-//			
-//			JLabel orderItemImage = new JLabel("이미지");
-//			orderItemImage.setPreferredSize(new Dimension(120, 175));
-//			orderItemImage.setIcon(new ImageIcon(OrderPanel.class.getResource("/images/50"+tempOrder.getOrderItemList().get(0).getProduct().getP_price())));
-//			orderItemImage.setBounds(12, 10, 120, 175);
-//			orderListPanelScroll.add(orderItemImage);
-//			
-//			JLabel orderDescLB = new JLabel(orderName + "외 "+(orderList.size()-1)+"건");
-//			orderDescLB.setHorizontalAlignment(SwingConstants.CENTER);
-//			orderDescLB.setBounds(191, 68, 180, 15);
-//			orderListPanelScroll.add(orderDescLB);
-//			
-//			JLabel orderItemPriceTitleLB = new JLabel("총 주문금액:");
-//			orderItemPriceTitleLB.setFont(new Font("굴림", Font.BOLD, 12));
-//			orderItemPriceTitleLB.setBounds(173, 127, 105, 41);
-//			orderListPanelScroll.add(orderItemPriceTitleLB);
-//			
-//			JLabel orderItemPriceLB = new JLabel(new DecimalFormat("#,###원").format(mainFrame.orderService.orderWithOrderItemList(loginMember.getM_Id())));
-//			orderItemPriceLB.setBounds(300, 127, 93, 41);
-//			orderListPanelScroll.add(orderItemPriceLB);
-//			
-//			JButton orderCancelbtn = new JButton("");
-//			orderCancelbtn.addMouseListener(new MouseAdapter() {
-//				@Override
-//				public void mouseClicked(MouseEvent arg0) {
-//					try {
-////						mainFrame.orderService.deleteByOrderNo(.getO_no());
-//						mainFrame.shopTabbedPane.setSelectedIndex(0);
-//						mainFrame.shopTabbedPane.setSelectedIndex(4);
-//						
-//						displayOrderList();
-//					} catch (Exception e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//				}
-//			});
-//			orderCancelbtn.setBounds(353, 10, 50, 30);
-//			orderListPanelScroll.add(orderCancelbtn);
-//			
-//		
-		
-		String orderName = null;
-		int orderNo=0;
-		Order itemOrder = null;
-		List<Order> orderList=mainFrame.orderService.orderList(mainFrame.loginMember.getM_Id());
-		System.out.println(orderList);
-		for (Order order : orderList) {
-			orderName = order.getO_desc();
-			orderNo = order.getO_no();
-		}
 		
 		JLabel orderItemImage = new JLabel("이미지");
 		orderItemImage.setPreferredSize(new Dimension(120, 175));
@@ -319,6 +252,9 @@ public class OrderPanel extends JPanel {
 		orderListPanelScroll.add(orderCancelbtn);
 		
 	}	
+	
+	
+	
 			
 				
 }

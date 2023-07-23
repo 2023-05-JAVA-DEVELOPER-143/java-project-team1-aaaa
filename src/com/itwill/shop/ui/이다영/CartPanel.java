@@ -20,11 +20,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 import com.itwill.shop.cart.Cart;
 import com.itwill.shop.member.Member;
 import com.itwill.shop.test.Main2;
-import javax.swing.SwingConstants;
 
 public class CartPanel extends JPanel {
 	
@@ -110,6 +110,7 @@ public class CartPanel extends JPanel {
 				
 				try {
 					mainFrame.orderService.create(mainFrame.loginMember.getM_Id());
+					mainFrame.orderPanel.displayOrderList();
 					displayCartList();
 					mainFrame.shopTabbedPane.setSelectedIndex(4);
 				}catch(Exception e2) {
@@ -268,6 +269,7 @@ public class CartPanel extends JPanel {
 								bookPriceLabel.setText(new DecimalFormat("#,###원").format(c.getProduct().getP_price() * cartSelectedQty));
 								totPrice = totPrice + c.getProduct().getP_price() * cartSelectedQty;
 								cartTotalPriceLabel.setText(new DecimalFormat("#,###원").format(totPrice));
+								
 								
 								
 							}catch (Exception e1) {
