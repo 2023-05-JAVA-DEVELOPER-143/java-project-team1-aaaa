@@ -108,8 +108,8 @@ public class OrderDao {
 	/*
 	 * 주문전체(특정사용자)
 	 */
-	public List<Order> findOrderByUserId(String sUserId) throws Exception {
-		ArrayList<Order> orderList = new ArrayList<Order>();
+	public List<Order> findOrderByUserId(String m_id) throws Exception {
+		List<Order> orderList = new ArrayList<Order>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -120,7 +120,7 @@ public class OrderDao {
 			 * select * from orders where m_id='guard1'
 			 */
 			pstmt = con.prepareStatement(OrderSQL.ORDER_SELECT_BY_USERID);
-			pstmt.setString(1, sUserId);
+			pstmt.setString(1, m_id);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				orderList.add(new Order(
@@ -142,7 +142,7 @@ public class OrderDao {
 	/*
 	 * 주문+주문아이템 전체(특정사용자)
 	 */
-	public List<Order> findOrderWithOrderItemByUserId(String sUserId) throws Exception {
+	public List<Order> findOrderWithOrderItemByUserId(String m_id) throws Exception {
 		
 		List<Order> orderList = new ArrayList<Order>();
 		Connection con = null;
@@ -156,7 +156,7 @@ public class OrderDao {
 			 * select * from orders where m_id='guard1'
 			 */
 			pstmt1 = con.prepareStatement(OrderSQL.ORDER_SELECT_BY_USERID);
-			pstmt1.setString(1, sUserId);
+			pstmt1.setString(1, m_id);
 			rs1 = pstmt1.executeQuery();
 			while (rs1.next()) {
 				orderList.add(new Order(

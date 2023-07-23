@@ -122,9 +122,10 @@ public class CartPanel extends JPanel {
 				try {
 					mainFrame.orderService.create(mainFrame.loginMember.getM_Id());
 					
+					mainFrame.orderPanel.displayOrderList();
+					
 					mainFrame.shopTabbedPane.setSelectedIndex(0);
 					mainFrame.shopTabbedPane.setSelectedIndex(4);
-					displayCartList();
 				}catch(Exception e2) {
 					e2.printStackTrace();
 				}

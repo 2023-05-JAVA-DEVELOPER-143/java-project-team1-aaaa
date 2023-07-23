@@ -76,16 +76,30 @@ public class OrderService {
 		List<Cart> cartList=cartDao.findSelectAll(m_id);
 		ArrayList<OrderItem> orderItemList=new ArrayList<OrderItem>();
 		int o_tot_price=0;
-		int oi_tot_count=0;
+		int oi_tot_qty=0;
+		String o_desc=null;
+//		for (Cart cart : cartList) {
+//			OrderItem orderItem=new OrderItem(0,cart.getCart_qty(),0, cart.getProduct());
+//			orderItemList.add(orderItem);
+//			o_tot_price+=orderItem.getOi_qty()*orderItem.getProduct().getP_price();
+//			oi_tot_count+=orderItem.getOi_qty();
+//		}
+//		String o_desc = orderItemList.get(0).getProduct().getP_name()+"외 "+(oi_tot_count)+" 개";
 		for (Cart cart : cartList) {
-			OrderItem orderItem=new OrderItem(0,cart.getCart_qty(),0, cart.getProduct());
+			OrderItem orderItem = new OrderItem(0,cart.getCart_qty(),0,cart.getProduct());
 			orderItemList.add(orderItem);
-			o_tot_price+=orderItem.getOi_qty()*orderItem.getProduct().getP_price();
-			oi_tot_count+=orderItem.getOi_qty();
+			oi_tot_qty += cart.getCart_qty();
+			o_tot_price += cart.getCart_qty()*cart.getProduct().getP_price();
 		}
-		String o_desc = orderItemList.get(0).getProduct().getP_name()+"외 "+(oi_tot_count-1)+" 개";
+		if(oi_tot_qty==1) {
+			o_desc = orderItemList.get(0).getProduct().getP_name();
+		}else if(oi_tot_qty==0){
+			
+		}else {
+			o_desc = orderItemList.get(0).getProduct().getP_name()+" 총 "+oi_tot_qty+" 권";
+		}
 		
-		Order newOrder=new Order(0,o_desc, o_tot_price, null , m_id,orderItemList);
+		Order newOrder=new Order(0,o_desc, o_tot_price, null , m_id , orderItemList);
 		orderDao.insert(newOrder);
 		cartDao.deleteByAll(m_id);
 		return 0;
