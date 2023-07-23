@@ -22,38 +22,25 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import com.itwill.shop.cart.Cart;
-import com.itwill.shop.cart.CartService;
 import com.itwill.shop.member.Member;
-import com.itwill.shop.product.ProductService;
 import com.itwill.shop.test.Main2;
 import javax.swing.SwingConstants;
 
 public class CartPanel extends JPanel {
 	
 	/********Service************/
-	private ProductService productService;
-	private CartService cartService;
 	
 	public JButton deleteAllButton;
-	private JLabel cartTotalLabel;
 	private JLabel cartTotalPriceLabel;
 	private JPanel cartListContentPanel;
 	private JPanel cartListPanel;
-	private JPanel itemPanel;
-	private JLabel bookItemImageLabel;
-	private JLabel bookTitleLabel;
-	private JComboBox itemQtyComboBox;
-	private JButton deleteButton;
-	private JLabel priceLabel;
 	/****Frame*****/
 	private Main2 mainFrame;
 	
 	int totPrice = 0;
-	private JLabel bookPriceLabel;
 	private JPanel cartBottomPanel;
 	private JPanel cartContentPanel;
 	private JScrollPane scrollPane;
-	private JCheckBox itemCheckBox;
 	
 	/**
 	 * Create the panel.
@@ -68,13 +55,15 @@ public class CartPanel extends JPanel {
 		cartContentPanel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel cartTopPanel = new JPanel();
+		cartTopPanel.setBackground(new Color(224, 255, 255));
 		cartTopPanel.setPreferredSize(new Dimension(10, 50));
 		cartContentPanel.add(cartTopPanel, BorderLayout.NORTH);
 		cartTopPanel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("알라딘 배송");
-		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 13));
-		lblNewLabel.setBounds(179, 10, 77, 30);
+		JLabel lblNewLabel = new JLabel("장바구니");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("휴먼엑스포", Font.PLAIN, 25));
+		lblNewLabel.setBounds(116, 7, 150, 30);
 		cartTopPanel.add(lblNewLabel);
 		
 		// 카트 전체삭제
@@ -85,8 +74,9 @@ public class CartPanel extends JPanel {
 					mainFrame.cartService.deleteCartItemByUserId(mainFrame.loginMember.getM_Id());
 					JOptionPane.showMessageDialog(null, "전체상품이 삭제되었습니다.");
 					displayCartList();
-					
-					
+					mainFrame.shopTabbedPane.setSelectedIndex(-1);
+					mainFrame.shopTabbedPane.setSelectedIndex(3);
+					cartTotalPriceLabel.setText("");
 				} catch (Exception e1) {
 					//
 				}
@@ -96,23 +86,22 @@ public class CartPanel extends JPanel {
 		deleteAllButton.setBounds(325, 14, 89, 23);
 		cartTopPanel.add(deleteAllButton);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("");
-		chckbxNewCheckBox.setBounds(12, 21, 29, 23);
-		cartTopPanel.add(chckbxNewCheckBox);
-		
 		cartBottomPanel = new JPanel();
+		cartBottomPanel.setBackground(new Color(224, 255, 255));
 		cartBottomPanel.setPreferredSize(new Dimension(10, 80));
 		cartContentPanel.add(cartBottomPanel, BorderLayout.SOUTH);
 		cartBottomPanel.setLayout(null);
 		
-		cartTotalLabel = new JLabel("총 상품금액");
-		cartTotalLabel.setFont(new Font("굴림", Font.PLAIN, 14));
-		cartTotalLabel.setBounds(25, 22, 97, 26);
+		JLabel cartTotalLabel = new JLabel("총 상품금액");
+		cartTotalLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		cartTotalLabel.setFont(new Font("굴림", Font.BOLD, 15));
+		cartTotalLabel.setBounds(10, 22, 115, 30);
 		cartBottomPanel.add(cartTotalLabel);
 		
 		// 카트 총 상품금액이 나오는 곳
 		cartTotalPriceLabel = new JLabel("");
-		cartTotalPriceLabel.setBounds(134, 10, 132, 47);
+		cartTotalPriceLabel.setFont(new Font("굴림", Font.PLAIN, 15));
+		cartTotalPriceLabel.setBounds(134, 22, 130, 30);
 		cartBottomPanel.add(cartTotalPriceLabel);
 		
 		JButton selectedItemOrderButton = new JButton("주문하기");
@@ -121,10 +110,8 @@ public class CartPanel extends JPanel {
 				
 				try {
 					mainFrame.orderService.create(mainFrame.loginMember.getM_Id());
-					
-					mainFrame.shopTabbedPane.setSelectedIndex(0);
-					mainFrame.shopTabbedPane.setSelectedIndex(4);
 					displayCartList();
+					mainFrame.shopTabbedPane.setSelectedIndex(4);
 				}catch(Exception e2) {
 					e2.printStackTrace();
 				}
@@ -133,11 +120,12 @@ public class CartPanel extends JPanel {
 				
 			}
 		});
-		selectedItemOrderButton.setFont(new Font("굴림", Font.PLAIN, 15));
+		selectedItemOrderButton.setFont(new Font("굴림", Font.PLAIN, 20));
 		selectedItemOrderButton.setBounds(294, 10, 142, 60);
 		cartBottomPanel.add(selectedItemOrderButton);
 		
 		cartListPanel = new JPanel();
+		cartListPanel.setBackground(new Color(224, 255, 255));
 		cartContentPanel.add(cartListPanel, BorderLayout.CENTER);
 		cartListPanel.setLayout(null);
 		
@@ -148,54 +136,53 @@ public class CartPanel extends JPanel {
 		
 		// 카트 리스트
 		cartListContentPanel = new JPanel();
+		cartListContentPanel.setBackground(new Color(224, 255, 255));
 		cartListContentPanel.setPreferredSize(new Dimension(350, 2000));
 		scrollPane.setViewportView(cartListContentPanel);
 		
-		itemPanel = new JPanel(); // 카트 상품 디테일
-		itemPanel.setBackground(new Color(255, 255, 255));
+		JPanel itemPanel = new JPanel(); // 카트 상품 디테일
+		itemPanel.setBackground(Color.WHITE);
 		itemPanel.setPreferredSize(new Dimension(440, 230));
 		itemPanel.setLayout(null);
 		cartListContentPanel.add(itemPanel);
 		
-		itemCheckBox = new JCheckBox("");
-		itemCheckBox.setBackground(Color.WHITE);
-		itemCheckBox.setBounds(8, 94, 21, 23);
-		itemPanel.add(itemCheckBox);
-		
 		// 카트 상품 이미지 
-		bookItemImageLabel = new JLabel("이미지");
+		JLabel bookItemImageLabel = new JLabel("이미지");
 		bookItemImageLabel.setBounds(82, 50, 81, 96);
 		itemPanel.add(bookItemImageLabel);
 		
-		bookTitleLabel = new JLabel("책 이름");
+		JLabel bookTitleLabel = new JLabel("책 이름");
+		bookTitleLabel.setFont(new Font("굴림", Font.BOLD, 15));
 		bookTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		bookTitleLabel.setBounds(186, 49, 228, 30);
+		bookTitleLabel.setBounds(186, 49, 230, 40);
 		itemPanel.add(bookTitleLabel);
 		
-		bookPriceLabel = new JLabel("");
-		bookPriceLabel.setBounds(322, 108, 81, 23);
+		JLabel bookPriceLabel = new JLabel("");
+		bookPriceLabel.setFont(new Font("굴림", Font.PLAIN, 15));
+		bookPriceLabel.setBounds(296, 115, 120, 23);
 		itemPanel.add(bookPriceLabel);
 		
 		// 카트 상품 수량
-		itemQtyComboBox = new JComboBox();
+		JComboBox itemQtyComboBox = new JComboBox();
 		itemQtyComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
 		itemQtyComboBox.setBounds(244, 176, 40, 30);
 		itemPanel.add(itemQtyComboBox);
 		
 		
-		deleteButton = new JButton("삭제");
-		deleteButton.setBounds(296, 175, 95, 30);
+		JButton	deleteButton = new JButton("삭제");
+		deleteButton.setBounds(296, 175, 80, 30);
 		itemPanel.add(deleteButton);
 		
-		priceLabel = new JLabel("상품금액  :");
+		JLabel priceLabel = new JLabel("상품금액  : ");
 		priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		priceLabel.setFont(new Font("굴림", Font.BOLD, 15));
-		priceLabel.setBounds(219, 108, 81, 30);
+		priceLabel.setBounds(199, 116, 100, 30);
 		itemPanel.add(priceLabel);
+		
+		itemPanel.removeAll();
 
 	
 			
-		this.cartService = new CartService();
 		
 			
 	} // 생성자 끝
@@ -217,7 +204,7 @@ public class CartPanel extends JPanel {
 			/*********************for문 시작*****************/
 			for(Cart cart : cartList) {
 				// 카트 상품 디테일 패널
-				itemPanel = new JPanel();
+				JPanel itemPanel = new JPanel();
 				itemPanel.setBackground(new Color(255, 255, 255));
 				itemPanel.setPreferredSize(new Dimension(420, 230));
 				itemPanel.setLayout(null);
@@ -226,64 +213,62 @@ public class CartPanel extends JPanel {
 				
 				
 				// 카트 상품 이미지 가져오기
-				bookItemImageLabel = new JLabel();
+				JLabel bookItemImageLabel = new JLabel();
 				bookItemImageLabel.setIcon(new ImageIcon(CartPanel.class.getResource("/com/itwill/shop/image/"+cart.getProduct().getP_image())));
 				bookItemImageLabel.setBounds(50, 10, 120, 175);
 				itemPanel.add(bookItemImageLabel);
 
 				
-				totPrice += cart.getCart_qty() * cart.getProduct().getP_price();
-				cartBottomPanel.remove(cartTotalPriceLabel);
-				cartTotalPriceLabel = new JLabel("");
-				cartTotalPriceLabel.setBounds(134, 10, 132, 47);
+				totPrice = totPrice + cart.getCart_qty() * cart.getProduct().getP_price();
 				cartTotalPriceLabel.setText(new DecimalFormat("#,###원").format(totPrice));
-				cartBottomPanel.add(cartTotalPriceLabel);
 				
 				
 				//카트 상품 수량에따른 가격
-				bookPriceLabel = new JLabel();
+				JLabel bookPriceLabel = new JLabel("");
 				bookPriceLabel.setText(new DecimalFormat("#,###원").format(cart.getProduct().getP_price() * cart.getCart_qty()));
-				bookPriceLabel.setBounds(322, 108, 81, 23);
+				bookPriceLabel.setFont(new Font("굴림", Font.PLAIN, 15));
+				bookPriceLabel.setBounds(296, 116, 120, 30);
 				itemPanel.add(bookPriceLabel);
 				
 				// 카트 상품 제목 가져오기
-				bookTitleLabel = new JLabel("책 이름");
+				JLabel bookTitleLabel = new JLabel("책 이름");
 				bookTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 				bookTitleLabel.setText(cart.getProduct().getP_name());
-				bookTitleLabel.setBounds(186, 49, 228, 30);
+				bookTitleLabel.setFont(new Font("굴림", Font.BOLD, 16));
+				bookTitleLabel.setBounds(186, 49, 230, 40);
 				itemPanel.add(bookTitleLabel);
 				
-				itemCheckBox = new JCheckBox("");
-				itemCheckBox.setBackground(Color.WHITE);
-				itemCheckBox.setBounds(8, 94, 21, 23);
-				itemPanel.add(itemCheckBox);
 				
-				
-				priceLabel = new JLabel("상품금액  :");
+				JLabel priceLabel = new JLabel("상품금액  : ");
 				priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 				priceLabel.setFont(new Font("굴림", Font.BOLD, 15));
-				priceLabel.setBounds(219, 108, 81, 30);
+				priceLabel.setBounds(176, 116, 120, 30);
 				itemPanel.add(priceLabel);
 				
 				
 				// 카트 상품 수량 수정 (콤보박스)
-				itemQtyComboBox = new JComboBox();
+				JComboBox itemQtyComboBox = new JComboBox();
 				itemQtyComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
 				itemQtyComboBox.setBounds(244, 176, 40, 30);
 				itemQtyComboBox.setSelectedItem(cart.getCart_qty() + "");
+				itemPanel.add(itemQtyComboBox);
 				itemQtyComboBox.addItemListener(new ItemListener() {
 					private Cart c = cart;
-					
 					public void itemStateChanged(ItemEvent e) {
 						if(e.getStateChange() == ItemEvent.SELECTED) {
 							//카트 갯수에따른 총금액
 							try {
+								c.setCart_qty(c.getCart_qty());
+								totPrice = totPrice - c.getCart_qty() * c.getProduct().getP_price();
 								String cartSelectedQtyStr = (String)itemQtyComboBox.getSelectedItem();
 								int cartSelectedQty = Integer.parseInt(cartSelectedQtyStr);
-								int updateCartCount = cartService.updateCart(c.getCart_no(), cartSelectedQty);
+								int updateCartQty = mainFrame.cartService.updateCart(c.getCart_no(), cartSelectedQty);
+								c.setCart_qty(cartSelectedQty);
 								// 카트아이템총가격변경
 								bookPriceLabel.setText(new DecimalFormat("#,###원").format(c.getProduct().getP_price() * cartSelectedQty));
-
+								totPrice = totPrice + c.getProduct().getP_price() * cartSelectedQty;
+								cartTotalPriceLabel.setText(new DecimalFormat("#,###원").format(totPrice));
+								
 								
 							}catch (Exception e1) {
 								e1.printStackTrace();
@@ -291,12 +276,10 @@ public class CartPanel extends JPanel {
 						}
 					}
 				});
-				/*********카트 상품이 수정이 되고 카트 총액이 바뀌고 ************/
-				itemPanel.add(itemQtyComboBox); // 상품 수정 후 마지막에 콤보박스가 추가되야함.
-
+				
 				
 				// 카트 리스트 안에서 삭제 버튼 누르면 상품 삭제
-				deleteButton = new JButton("삭제");
+				JButton	deleteButton = new JButton("삭제");
 				deleteButton.addActionListener(new ActionListener() {
 					private Cart c = cart;			
 					public void actionPerformed(ActionEvent e) {
@@ -305,14 +288,12 @@ public class CartPanel extends JPanel {
 						try {
 							int deleteItemCount = mainFrame.cartService.deleteCartItemByCartNo(cart.getCart_no());
 							JOptionPane.showMessageDialog(null, "상품이 삭제되었습니다");
-
+							
 							
 							displayCartList();
 							cartTotalPriceLabel.setText(new DecimalFormat("#,###원").format(totPrice));
-							cartTotalPriceLabel.setBounds(110, 25, 99, 28);
-							cartBottomPanel.add(cartTotalPriceLabel);
 							
-							mainFrame.shopTabbedPane.setSelectedIndex(0);
+							mainFrame.shopTabbedPane.setSelectedIndex(-1);
 							mainFrame.shopTabbedPane.setSelectedIndex(3);
 							
 							
@@ -323,9 +304,10 @@ public class CartPanel extends JPanel {
 					}
 				});
 				
-				deleteButton.setBounds(296, 175, 95, 30);
+				deleteButton.setBounds(296, 175, 80, 30);
+				deleteButton.setFont(new Font("굴림", Font.BOLD, 15));
 				itemPanel.add(deleteButton);
-
+				
 				cartListContentPanel.add(itemPanel);
 				
 				//카트 아이템 디테일 끝
@@ -337,7 +319,6 @@ public class CartPanel extends JPanel {
 	} // displayCartList() 끝
 	
 	public String addCartListTotal() throws Exception {
-		mainFrame.loginMember = new Member();
 		return Integer.toString(mainFrame.cartService.addCartListTotal(mainFrame.loginMember.getM_Id()));
 		
 	}

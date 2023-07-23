@@ -41,7 +41,7 @@ public class CartService {
 		return cartDao.findSelectAll(u_id);
 	}
 	
-	// 카트 리스르 가격 총합
+	// 카트 리스트 가격 총합
 	public int addCartListTotal(String m_id) throws Exception {
 		int total =0;
 		List<Cart> cartList = cartDao.findSelectAll(m_id);

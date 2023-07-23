@@ -254,6 +254,7 @@ public class Main2 extends JFrame {
 		
 		orderPanel = new OrderPanel();
 		shopTabbedPane.addTab("주문", null, orderPanel, null);
+		shopTabbedPane.setEnabledAt(4, false);
 		
 		
 		

@@ -28,7 +28,7 @@ public class ProductDetailPanel extends JPanel {
 	public Main2 mainFrame;
 	Product product;
 	private JScrollPane scrollPane;
-	private JPanel panel;
+	private JPanel detailPanel;
 	/**
 	 * Create the panel.
 	 */
@@ -39,68 +39,68 @@ public class ProductDetailPanel extends JPanel {
 		scrollPane.setBounds(-1, 0, 464, 503);
 		add(scrollPane);
 		
-		panel = new JPanel();
-		panel.setBackground(new Color(255, 245, 238));
-		panel.setLayout(null);
-		panel.setPreferredSize(new Dimension(446, 800));
-		scrollPane.setViewportView(panel);
+		detailPanel = new JPanel();
+		detailPanel.setBackground(new Color(255, 245, 238));
+		detailPanel.setLayout(null);
+		detailPanel.setPreferredSize(new Dimension(446, 800));
+		scrollPane.setViewportView(detailPanel);
 		
 		JLabel productDetailImageLabel = new JLabel("");
 		productDetailImageLabel.setIcon(new ImageIcon(ProductDetailPanel.class.getResource("/com/itwill/shop/image/bestSeller1.jpg")));
 		
 		productDetailImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		productDetailImageLabel.setBounds(0, 0, 446, 300);
-		panel.add(productDetailImageLabel);
+		detailPanel.add(productDetailImageLabel);
 		
 		JLabel productDetailNameLabel = new JLabel("제목");
 		productDetailNameLabel.setFont(new Font("맑은 고딕", Font.BOLD, 25));
 	
 		productDetailNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		productDetailNameLabel.setBounds(0, 310, 446, 50);
-		panel.add(productDetailNameLabel);
+		detailPanel.add(productDetailNameLabel);
 		
 		JComboBox cartComboBox = new JComboBox();
 		cartComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
 		cartComboBox.setBounds(88, 438, 60, 35);
-		panel.add(cartComboBox);
+		detailPanel.add(cartComboBox);
 		
 		JButton cartAddButton = new JButton("장바구니");
 		cartAddButton.setFont(new Font("굴림", Font.PLAIN, 15));
 		cartAddButton.setIcon(new ImageIcon(ProductBestSellerListPanel.class.getResource("/com/itwill/shop/image/shopping_cart_icon.png")));
 		cartAddButton.setBounds(160, 430, 130, 50);
-		panel.add(cartAddButton);
+		detailPanel.add(cartAddButton);
 		
 		JButton buyButton = new JButton("바로구매");
 		buyButton.setFont(new Font("굴림", Font.PLAIN, 16));
 		buyButton.setBounds(300, 430, 130, 50);
-		panel.add(buyButton);
+		detailPanel.add(buyButton);
 		
 		JLabel saleLabel = new JLabel("판매가");
 		saleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		saleLabel.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		saleLabel.setBounds(121, 370, 66, 50);
-		panel.add(saleLabel);
+		detailPanel.add(saleLabel);
 		
 		JLabel priceLabel = new JLabel("priceLabel");
 		priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		priceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		priceLabel.setBounds(199, 370, 231, 50);
-		panel.add(priceLabel);
+		detailPanel.add(priceLabel);
 		
 		JLabel ProductDescLabel = new JLabel("책소개");
 		ProductDescLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ProductDescLabel.setFont(new Font("굴림", Font.PLAIN, 16));
 		ProductDescLabel.setBounds(0, 500, 86, 35);
-		panel.add(ProductDescLabel);
+		detailPanel.add(ProductDescLabel);
 		
 		JScrollPane ProductDescScrollPane = new JScrollPane();
 		ProductDescScrollPane.setBounds(98, 510, 300, 200);
-		panel.add(ProductDescScrollPane);
+		detailPanel.add(ProductDescScrollPane);
 		
 		JTextArea ProductDesctextArea = new JTextArea();
 		ProductDesctextArea.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		ProductDesctextArea.setBounds(98, 510, 300, 200);
-		panel.add(ProductDesctextArea);
+		detailPanel.add(ProductDesctextArea);
 
 	}
 	
@@ -114,13 +114,13 @@ public class ProductDetailPanel extends JPanel {
 	}
 
 	public void displayProductDetail() {
-		panel.removeAll();
+		detailPanel.removeAll();
 		JLabel productDetailImageLabel = new JLabel("");
 		productDetailImageLabel.setIcon(new ImageIcon(ProductDetailPanel.class.getResource("/com/itwill/shop/image/"+product.getP_image())));
 		
 		productDetailImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		productDetailImageLabel.setBounds(0, 0, 446, 300);
-		panel.add(productDetailImageLabel);
+		detailPanel.add(productDetailImageLabel);
 		
 		
 		JLabel productDetailNameLabel = new JLabel(product.getP_name());
@@ -128,12 +128,12 @@ public class ProductDetailPanel extends JPanel {
 		
 		productDetailNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		productDetailNameLabel.setBounds(0, 310, 446, 50);
-		panel.add(productDetailNameLabel);
+		detailPanel.add(productDetailNameLabel);
 		
 		JComboBox cartComboBox = new JComboBox();
 		cartComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
 		cartComboBox.setBounds(88, 438, 60, 35);
-		panel.add(cartComboBox);
+		detailPanel.add(cartComboBox);
 		
 		JButton cartAddButton = new JButton("장바구니");
 		cartAddButton.setFont(new Font("굴림", Font.PLAIN, 15));
@@ -150,6 +150,7 @@ public class ProductDetailPanel extends JPanel {
 					mainFrame.cartService.addCart(new Cart(0, cartQty, mainFrame.loginMember.getM_Id(), 
 										new Product(p.getP_no(), p.getP_name(), p.getP_price(),
 													p.getP_image(), p.getP_desc(), p.getP_category())));
+					mainFrame.cartPanel.displayCartList();
 					JOptionPane.showMessageDialog(null, "장바구니에 상품이 담겼습니다.");
 					cartComboBox.setSelectedItem("1");
 				} catch (Exception e1) {
@@ -164,7 +165,7 @@ public class ProductDetailPanel extends JPanel {
 		}
 		});
 		cartAddButton.setBounds(160, 430, 130, 50);
-		panel.add(cartAddButton);
+		detailPanel.add(cartAddButton);
 		
 		JButton buyButton = new JButton("바로구매");
 		buyButton.setFont(new Font("굴림", Font.PLAIN, 15));
@@ -193,30 +194,30 @@ public class ProductDetailPanel extends JPanel {
 		}
 		});
 		buyButton.setBounds(300, 430, 130, 50);
-		panel.add(buyButton);
+		detailPanel.add(buyButton);
 		
 		JLabel saleLabel = new JLabel("판매가");
 		saleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		saleLabel.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		saleLabel.setBounds(121, 370, 66, 50);
-		panel.add(saleLabel);
+		detailPanel.add(saleLabel);
 		
 		JLabel priceLabel = new JLabel(product.getP_price()+"원");
 		priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		priceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 25));
 		priceLabel.setBounds(199, 370, 231, 50);
-		panel.add(priceLabel);
+		detailPanel.add(priceLabel);
 		
 		
 		JLabel ProductDescLabel = new JLabel("책소개");
 		ProductDescLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ProductDescLabel.setFont(new Font("굴림", Font.PLAIN, 16));
 		ProductDescLabel.setBounds(0, 500, 86, 35);
-		panel.add(ProductDescLabel);
+		detailPanel.add(ProductDescLabel);
 		
 		JScrollPane ProductDescScrollPane = new JScrollPane();
 		ProductDescScrollPane.setBounds(98, 510, 300, 200);
-		panel.add(ProductDescScrollPane);
+		detailPanel.add(ProductDescScrollPane);
 		
 		JTextArea ProductDesctextArea = new JTextArea();
 		ProductDesctextArea.setFont(new Font("Monospaced", Font.PLAIN, 16));
