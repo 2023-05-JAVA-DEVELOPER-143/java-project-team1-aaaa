@@ -21,8 +21,5 @@ public class ProductSQL {
 	
 	public static final String PRODUCT_CATEGORY =
 			"select * from product where p_category = ?";
-	
-//	public static final String PRODUCT_ALL_SALECOUNT =
-//			"select * from product order by p_salecount"; // 전체 상품 리스트 판매량순
 			
 }

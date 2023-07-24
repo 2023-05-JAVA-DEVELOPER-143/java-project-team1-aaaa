@@ -1,6 +1,5 @@
 package com.itwill.shop.order;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,9 +32,6 @@ public class OrderService {
 	/*
 	 * 주문목록
 	 */
-//	public List<Order> orderList(String m_id) throws Exception{
-//		return orderDao.findOrderByUserId(m_id);
-//	}
 	public List<Order> orderList(String m_id) throws Exception{
 		return orderDao.findOrderBym_Id(m_id);
 	}
@@ -60,7 +56,6 @@ public class OrderService {
 		OrderItem orderItem=new OrderItem(0, oi_qty, p_no, product);
 		ArrayList<OrderItem> orderItemList=new ArrayList<OrderItem>();
 		orderItemList.add(orderItem);
-//		(int o_no, String o_desc, int o_price, Date o_date, String m_id, List<OrderItem> orderItemList)
 		Order newOrder=
 				new Order(0,
 						orderItemList.get(0).getProduct().getP_name()+"외 "+(oi_qty-1)+" 개", 
@@ -81,13 +76,6 @@ public class OrderService {
 		int o_tot_price=0;
 		int oi_tot_qty=0;
 		String o_desc=null;
-//		for (Cart cart : cartList) {
-//			OrderItem orderItem=new OrderItem(0,cart.getCart_qty(),0, cart.getProduct());
-//			orderItemList.add(orderItem);
-//			o_tot_price+=orderItem.getOi_qty()*orderItem.getProduct().getP_price();
-//			oi_tot_count+=orderItem.getOi_qty();
-//		}
-//		String o_desc = orderItemList.get(0).getProduct().getP_name()+"외 "+(oi_tot_count)+" 개";
 		for (Cart cart : cartList) {
 			OrderItem orderItem = new OrderItem(0,cart.getCart_qty(),0,cart.getProduct());
 			orderItemList.add(orderItem);

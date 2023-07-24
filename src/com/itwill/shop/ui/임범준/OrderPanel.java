@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -16,7 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import com.itwill.shop.order.Order;
-import com.itwill.shop.test.Main2;
+import com.itwill.shop.ui.Main2;
 
 public class OrderPanel extends JPanel {
 	

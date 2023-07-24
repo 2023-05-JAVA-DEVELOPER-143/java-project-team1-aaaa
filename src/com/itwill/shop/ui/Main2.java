@@ -1,4 +1,4 @@
-package com.itwill.shop.test;
+package com.itwill.shop.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -42,6 +42,7 @@ import com.itwill.shop.ui.임범준.OrderPanel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Cursor;
 
 public class Main2 extends JFrame {
 	/************ 1.Service객체멤버변수선언 ************/
@@ -77,6 +78,7 @@ public class Main2 extends JFrame {
 	private ProductSearchPanel productSearchPanel;
 	public OrderPanel orderPanel;
 	public MemberInfoPanel memberInfoPanel;
+	private JLabel logoutLabel;
 
 	/**
 	 * Launch the application.
@@ -168,14 +170,19 @@ public class Main2 extends JFrame {
 		searchLabel.setBounds(277, 0, 26, 40);
 		northPanel.add(searchLabel);
 		
-		JButton logOutBtn = new JButton("로그아웃");
-		logOutBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				logoutProcess();
+		logoutLabel = new JLabel("");
+		logoutLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		logoutLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				memberLoginPanel.logoutProcess();
+				shopTabbedPane.setSelectedIndex(1);
+				memberTabbedpane.setSelectedIndex(0);
 			}
 		});
-		logOutBtn.setBounds(344, 0, 62, 40);
-		northPanel.add(logOutBtn);
+		logoutLabel.setIcon(new ImageIcon(Main2.class.getResource("/com/itwill/shop/image/logout.png")));
+		logoutLabel.setBounds(315, 10, 102, 30);
+		northPanel.add(logoutLabel);
 
 		shopTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addChangeListener(new ChangeListener() {
@@ -379,18 +386,6 @@ public class Main2 extends JFrame {
 			
 		}
 
-	}
-	
-public void logoutProcess() {
-		
-		this.loginMember = null;
-		
-		mainFrame.memberTabbedpane.setEnabledAt(0, true);
-		mainFrame.memberTabbedpane.setEnabledAt(1, true);
-		mainFrame.memberTabbedpane.setEnabledAt(2, false);
-		
-		mainFrame.memberTabbedpane.setSelectedIndex(0);
-		
 	}
 	
 	

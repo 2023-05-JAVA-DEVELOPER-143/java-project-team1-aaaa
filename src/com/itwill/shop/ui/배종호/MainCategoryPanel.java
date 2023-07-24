@@ -17,13 +17,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import com.itwill.shop.test.Main2;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import java.awt.Rectangle;
 import javax.swing.border.LineBorder;
+
+import com.itwill.shop.ui.Main2;
 
 public class MainCategoryPanel extends JPanel {
 	

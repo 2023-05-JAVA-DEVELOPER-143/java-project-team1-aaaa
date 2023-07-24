@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 
 import com.itwill.shop.member.Member;
 import com.itwill.shop.member.MemberService;
-import com.itwill.shop.test.Main2;
+import com.itwill.shop.ui.Main2;
 
 public class MemberCreatePanel extends JPanel {
 	private JTextField memberJoinIdTF;
