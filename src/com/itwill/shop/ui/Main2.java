@@ -128,6 +128,7 @@ public class Main2 extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(loginMember != null) {
 					shopTabbedPane.setSelectedIndex(3);
+					
 				} else {
 					shopTabbedPane.setSelectedIndex(1);
 					memberTabbedpane.setSelectedIndex(0);
