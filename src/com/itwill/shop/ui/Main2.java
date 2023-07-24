@@ -122,6 +122,7 @@ public class Main2 extends JFrame {
 		northPanel.add(logoLabel);
 
 		JLabel cartLogoLabel = new JLabel("");
+		cartLogoLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cartLogoLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -130,6 +131,7 @@ public class Main2 extends JFrame {
 				} else {
 					shopTabbedPane.setSelectedIndex(1);
 					memberTabbedpane.setSelectedIndex(0);
+					JOptionPane.showMessageDialog(null, "로그인이 필요한 서비스입니다.");
 				}
 				
 			}
