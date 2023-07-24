@@ -166,6 +166,7 @@ public class MemberLoginPanel extends JPanel {
 		mainFrame.shopTabbedPane.setEnabledAt(3, true);
 		mainFrame.shopTabbedPane.setEnabledAt(4, true);
 		mainFrame.cartPanel.displayCartList();
+		mainFrame.orderPanel.displayOrderList();
 		if(mainFrame.loginMember.getM_Id().equals("admin")) {
 			mainFrame.memberTabbedpane.setEnabledAt(0,false);
 			mainFrame.memberTabbedpane.setEnabledAt(1,false );

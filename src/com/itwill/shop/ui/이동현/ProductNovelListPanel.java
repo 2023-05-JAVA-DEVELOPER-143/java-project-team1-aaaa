@@ -154,6 +154,7 @@ public class ProductNovelListPanel extends JPanel {
 						String cartQtyStr = (String)cartComboBox.getSelectedItem();
 						int cartQty = Integer.parseInt(cartQtyStr);
 						mainFrame.orderService.create(mainFrame.loginMember.getM_Id(), product.getP_no(), cartQty);
+						mainFrame.orderPanel.displayOrderList();
 						mainFrame.changePanel(4, -1, -1, null);
 						cartComboBox.setSelectedItem("1");
 						
