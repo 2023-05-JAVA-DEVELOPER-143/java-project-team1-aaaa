@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import com.itwill.shop.test.Main2;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Color;
@@ -27,6 +26,8 @@ import javax.swing.border.LineBorder;
 import java.awt.Font;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+
+import com.itwill.shop.ui.Main2;
 
 public class MainCategoryPanel extends JPanel {
 	

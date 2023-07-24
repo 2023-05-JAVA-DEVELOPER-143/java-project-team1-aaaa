@@ -13,7 +13,8 @@ import javax.swing.JTextField;
 
 import com.itwill.shop.member.Member;
 import com.itwill.shop.member.MemberService;
-import com.itwill.shop.test.Main2;
+import com.itwill.shop.ui.Main2;
+
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
@@ -188,19 +189,21 @@ public class MemberLoginPanel extends JPanel {
 	}
 	
 	
-//	public void logoutProcess() {
-//		
-//		mainFrame.loginMember = null;
-//		
-//		
-//		
-//		mainFrame.memberTabbedpane.setEnabledAt(0, true);
-//		mainFrame.memberTabbedpane.setEnabledAt(1, true);
-//		mainFrame.memberTabbedpane.setEnabledAt(2, false);
-//		
-//		mainFrame.memberTabbedpane.setSelectedIndex(0);
-//		
-//	}
+	public void logoutProcess() {
+		
+		mainFrame.loginMember = null;
+		
+		memberLoginIdTF.setText("");
+		memberLoginPwTF.setText("");
+		
+		
+		mainFrame.memberTabbedpane.setEnabledAt(0, true);
+		mainFrame.memberTabbedpane.setEnabledAt(1, true);
+		mainFrame.memberTabbedpane.setEnabledAt(2, false);
+		
+		mainFrame.shopTabbedPane.setEnabledAt(3, false);
+		mainFrame.shopTabbedPane.setEnabledAt(4, false);
+	}
 	
 	
 	

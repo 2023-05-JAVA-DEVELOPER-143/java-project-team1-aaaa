@@ -24,7 +24,7 @@ import javax.swing.SwingConstants;
 
 import com.itwill.shop.cart.Cart;
 import com.itwill.shop.member.Member;
-import com.itwill.shop.test.Main2;
+import com.itwill.shop.ui.Main2;
 
 public class CartPanel extends JPanel {
 	

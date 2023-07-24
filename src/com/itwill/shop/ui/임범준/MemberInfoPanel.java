@@ -13,7 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import com.itwill.shop.member.Member;
-import com.itwill.shop.test.Main2;
+import com.itwill.shop.ui.Main2;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 

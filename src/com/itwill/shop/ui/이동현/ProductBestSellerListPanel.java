@@ -9,7 +9,7 @@ import com.itwill.shop.member.Member;
 import com.itwill.shop.member.MemberService;
 import com.itwill.shop.product.Product;
 import com.itwill.shop.product.ProductService;
-import com.itwill.shop.test.Main2;
+import com.itwill.shop.ui.Main2;
 
 import java.awt.Color;
 
