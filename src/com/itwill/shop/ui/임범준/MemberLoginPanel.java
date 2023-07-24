@@ -180,10 +180,26 @@ public class MemberLoginPanel extends JPanel {
 			mainFrame.memberTabbedpane.setEnabledAt(2,true);
 			mainFrame.memberTabbedpane.setSelectedIndex(2);
 			mainFrame.shopTabbedPane.setSelectedIndex(0);
+//			mainFrame.memberInfoPanel.memberInfo(mainFrame.loginMember);
 			mainFrame.memberInfoPanel.memberInfo(mainFrame.loginMember);
 		
 		}
 	}
+	
+	
+//	public void logoutProcess() {
+//		
+//		mainFrame.loginMember = null;
+//		
+//		
+//		
+//		mainFrame.memberTabbedpane.setEnabledAt(0, true);
+//		mainFrame.memberTabbedpane.setEnabledAt(1, true);
+//		mainFrame.memberTabbedpane.setEnabledAt(2, false);
+//		
+//		mainFrame.memberTabbedpane.setSelectedIndex(0);
+//		
+//	}
 	
 	
 	

@@ -39,6 +39,9 @@ import com.itwill.shop.ui.임범준.MemberCreatePanel;
 import com.itwill.shop.ui.임범준.MemberInfoPanel;
 import com.itwill.shop.ui.임범준.MemberLoginPanel;
 import com.itwill.shop.ui.임범준.OrderPanel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Main2 extends JFrame {
 	/************ 1.Service객체멤버변수선언 ************/
@@ -52,7 +55,7 @@ public class Main2 extends JFrame {
 	public Main2 mainFrame;
 
 	/********* 2.로그인한회원 멤버필드선언 *****/
-	public Member loginMember = null;
+	public Member loginMember =null; 
 
 	private JPanel contentPane;
 	public JTextField searchTextField;
@@ -152,17 +155,51 @@ public class Main2 extends JFrame {
 				}else {
 					productTabbedPane.setSelectedIndex(-1);
 					productTabbedPane.setSelectedIndex(4);
-					changePanel(2, 4, -1, null);
+					try {
+						changePanel(2, 4, -1, null);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					productTabbedPane.setEnabledAt(4, true);
 				}
 			}
 		});
 		searchLabel.setBounds(277, 0, 26, 40);
 		northPanel.add(searchLabel);
+		
+		JButton logOutBtn = new JButton("로그아웃");
+		logOutBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				logoutProcess();
+			}
+		});
+		logOutBtn.setBounds(344, 0, 62, 40);
+		northPanel.add(logOutBtn);
 
 		shopTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		shopTabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
+				if (shopTabbedPane.getSelectedIndex() == 0) {
+					
+				}
+				if (shopTabbedPane.getSelectedIndex() == 1) {
+					
+				}
+				if (shopTabbedPane.getSelectedIndex() == 2) {
+					
+				}
+				if (shopTabbedPane.getSelectedIndex() == 3) {
+					
+				}
+				if (shopTabbedPane.getSelectedIndex() == 4) {
+					try {
+						orderPanel.displayOrderList();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 				if (shopTabbedPane.getSelectedIndex() == 2) {
 					productTabbedPane.setSelectedIndex(0);
 				}
@@ -279,8 +316,8 @@ public class Main2 extends JFrame {
 		cartPanel.setMainFrame(this);
 		memberLoginPanel.setMainFrame(this);
 		memberCreatePanel.setMainFrame(this);
+		memberInfoPanel.setMainFrame(this);
 		orderPanel.setMainFrame(this);
-		
 		
 		
 		
@@ -290,12 +327,15 @@ public class Main2 extends JFrame {
 		
 
 	}// 생성자
+	
+	
+	
 	public void setMainFrame(Main2 mainFrame) {
 		this.mainFrame = mainFrame;
 	}
 	
 
-	public void changePanel(int shopTabbedPaneNo, int productTabbedPaneNo, int memberTabbedPaneNo, Map data) {
+	public void changePanel(int shopTabbedPaneNo, int productTabbedPaneNo, int memberTabbedPaneNo, Map data){
 		if (shopTabbedPaneNo == 0) {
 
 			// 메인
@@ -336,40 +376,27 @@ public class Main2 extends JFrame {
 		} else if (shopTabbedPaneNo == 4) {
 			// 주문내역
 			shopTabbedPane.setSelectedIndex(shopTabbedPaneNo);
+			
 		}
 
 	}
+	
+public void logoutProcess() {
+		
+		this.loginMember = null;
+		
+		mainFrame.memberTabbedpane.setEnabledAt(0, true);
+		mainFrame.memberTabbedpane.setEnabledAt(1, true);
+		mainFrame.memberTabbedpane.setEnabledAt(2, false);
+		
+		mainFrame.memberTabbedpane.setSelectedIndex(0);
+		
+	}
+	
+	
+	
+	
 }
 
-//	/**************로그인성공시 호출할메쏘드***************/
-//	void loginProcess(Member loginMember) throws Exception{
-//		/***********로그인성공시 해야할일***********
-//		 1.로그인성공한 멤버객체 멤버필드에저장
-//		 2.MemberMainFrame타이틀변경
-//		 3.로그인,회원가입탭 불활성화
-//		   회원정보       탭 활성화
-//		   로그인,회원가입 메뉴아이템 불활성화
-//		   로그아웃 메뉴아이템 활성화
-//		   
-//		   
-//		 4.회원정보보기 화면전환
-//		********************************************/
-//		this.loginMember=loginMember;
-//		setTitle(loginMember.getM_Id()+ " 님 로그인");
-//		if(loginMember.getM_Id().equals("admin")) {
-//			MemberTabbedpane.setEnabledAt(0,false);
-//			MemberTabbedpane.setEnabledAt(1,false );
-//			MemberTabbedpane.setEnabledAt(2,true);
-//			
-////			memberTabbedPane.setEnabledAt(4,true);
-//			MemberTabbedpane.setSelectedIndex(2);
-//
-//		}else {
-//			MemberTabbedpane.setEnabledAt(0,false );
-//			MemberTabbedpane.setEnabledAt(1,false );
-//			MemberTabbedpane.setEnabledAt(2,true);
-//			
-//			MemberTabbedpane.setSelectedIndex(2);
 
-//		}
-//	}
+

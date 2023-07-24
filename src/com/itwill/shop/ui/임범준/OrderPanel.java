@@ -5,30 +5,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import com.itwill.shop.member.Member;
 import com.itwill.shop.order.Order;
-import com.itwill.shop.order.OrderItem;
-import com.itwill.shop.order.OrderService;
-import com.itwill.shop.product.Product;
 import com.itwill.shop.test.Main2;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 public class OrderPanel extends JPanel {
 	
@@ -48,11 +36,13 @@ public class OrderPanel extends JPanel {
 	 * @throws Exception 
 	 */
 	public OrderPanel() throws Exception {
+		setPreferredSize(new Dimension(460, 500));
 		
 		setLayout(new BorderLayout(0, 0));
 		
 		orderPanel = new JPanel();
-		orderPanel.setPreferredSize(new Dimension(10, 400));
+		orderPanel.setPreferredSize(new Dimension(10, 500));
+		//orderPanel.setPreferredSize(new Dimension(10, 600));
 		add(orderPanel, BorderLayout.CENTER);
 		orderPanel.setLayout(null);
 		
@@ -69,7 +59,7 @@ public class OrderPanel extends JPanel {
 		
 		JPanel orderListPanel = new JPanel();
 		orderListPanel.setBackground(new Color(255, 255, 255));
-		orderListPanel.setBounds(12, 49, 434, 205);
+		orderListPanel.setBounds(12, 49, 434, 452);
 		orderPanel.add(orderListPanel);
 		orderListPanel.setLayout(new BorderLayout(0, 0));
 		
@@ -106,11 +96,6 @@ public class OrderPanel extends JPanel {
 		JLabel orderItemPriceLB = new JLabel("10000원");
 		orderItemPriceLB.setBounds(300, 127, 93, 41);
 		orderItemPanel.add(orderItemPriceLB);
-		
-		JButton orderCancelbtn = new JButton("New button");
-		orderCancelbtn.setBounds(353, 10, 50, 30);
-		orderItemPanel.add(orderCancelbtn);
-		orderItemListPanel.removeAll();
 
 	} // 생성자 종료
 	
@@ -121,8 +106,7 @@ public class OrderPanel extends JPanel {
 	
 	public void displayOrderList() throws Exception {
 		orderItemListPanel.removeAll();
-		
-		List<Order> orderList = mainFrame.orderService.orderList(mainFrame.loginMember.getM_Id());
+		List<Order> orderList = mainFrame.orderService.orderWithOrderItemList(mainFrame.loginMember.getM_Id());
 		
 		for (Order order : orderList) {
 			/**********************order item********************/
@@ -132,7 +116,7 @@ public class OrderPanel extends JPanel {
 			orderItemPanel.setLayout(null);
 			
 			JLabel orderItemImage = new JLabel("");
-//			orderItemImage.setIcon(new ImageIcon(OrderPanel.class.getResource("/com/itwill/shop/image/"+order.getOrderItemList().get(0).getProduct().getP_image())));
+			orderItemImage.setIcon(new ImageIcon(OrderPanel.class.getResource("/com/itwill/shop/image/"+order.getOrderItemList().get(0).getProduct().getP_image())));
 			orderItemImage.setPreferredSize(new Dimension(120, 175));
 			orderItemImage.setBounds(12, 10, 120, 175);
 			orderItemPanel.add(orderItemImage);
@@ -150,10 +134,6 @@ public class OrderPanel extends JPanel {
 			JLabel orderItemPriceLB = new JLabel(new DecimalFormat("#,###원").format(mainFrame.orderService.orderNoPrice(mainFrame.loginMember.getM_Id(), order.getO_no())));
 			orderItemPriceLB.setBounds(300, 127, 93, 41);
 			orderItemPanel.add(orderItemPriceLB);
-			
-			JButton orderCancelbtn = new JButton("New button");
-			orderCancelbtn.setBounds(353, 10, 50, 30);
-			orderItemPanel.add(orderCancelbtn);
 			
 			
 			/**************************************/

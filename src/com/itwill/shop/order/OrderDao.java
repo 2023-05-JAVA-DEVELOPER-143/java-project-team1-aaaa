@@ -134,7 +134,7 @@ public class OrderDao {
 				con.close();
 			}
 		}
-		
+		System.out.println(orderList);
 		return orderList;
 	}
 	
@@ -197,6 +197,7 @@ public class OrderDao {
 			}
 				
 			pstmt2 = con.prepareStatement(OrderSQL.ORDER_SELECT_WITH_ORDERITEM_BY_O_NO);
+			
 			for (int i = 0; i < orderList.size(); i++) {
 				Order tempOrder = orderList.get(i);
 				/*
@@ -247,8 +248,8 @@ public class OrderDao {
 		 * oi.p_no=p.p_no where o.userid=? and o.o_no = ?
 		 */
 		pstmt = con.prepareStatement(OrderSQL.ORDER_SELECT_WITH_ORDERITEM_BY_O_NO);
-		pstmt.setString(1, m_id);
-		pstmt.setInt(2, o_no);
+		
+		pstmt.setInt(1, o_no);
 		
 		rs = pstmt.executeQuery();
 		/*

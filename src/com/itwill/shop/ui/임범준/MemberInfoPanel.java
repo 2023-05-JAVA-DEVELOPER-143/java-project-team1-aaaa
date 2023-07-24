@@ -114,16 +114,19 @@ public class MemberInfoPanel extends JPanel {
 		updateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					
 					String id = memberInfoIdTF.getText();
 					String pw = memberInfoPwTF.getText();
 					String name = memberInfoNameTF.getText();
 					String phone = memberInfoPhoneTF.getText();
 					String email = memberInfoEmailTF.getText();
 					String address = memberInfoAddressTF.getText();
-//					int updateCount =  mainFrame.memberService.update(new Member(id, pw, name, phone, email, address));
+					
 					Member updateMember = new Member(id, pw, name, phone, email, address);
 					mainFrame.memberService.update(updateMember);
 					mainFrame.loginMember = mainFrame.memberService.findUser(id);
+
+					
 					memberInfoIdTF.setEditable(false);
 					memberInfoPwTF.setEditable(false);
 					memberInfoNameTF.setEditable(false);
@@ -149,11 +152,8 @@ public class MemberInfoPanel extends JPanel {
 				String btnText = updateBtn1.getText();
 				if(btnText.equals("수정")) {
 					updateInfoEnable(true);
-				} else if(btnText.equals("수정취소")) {
-					memberInfo(mainFrame.loginMember);
-				}
+				} 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				}
 			}	
@@ -168,6 +168,16 @@ public class MemberInfoPanel extends JPanel {
 	}
 	
 	// 로그인후 회원정보 확인
+//	public void memberInfo() throws Exception {
+//		memberInfoIdTF.setText(mainFrame.loginMember.getM_Id());
+//		memberInfoPwTF.setText(mainFrame.loginMember.getM_Pw());
+//		memberInfoNameTF.setText(mainFrame.loginMember.getM_Name());
+//		memberInfoPhoneTF.setText(mainFrame.loginMember.getM_Phone());
+//		memberInfoEmailTF.setText(mainFrame.loginMember.getM_Email());
+//		memberInfoAddressTF.setText(mainFrame.loginMember.getM_Address());
+//		
+//	}
+	
 	public void memberInfo(Member member) throws Exception {
 		memberInfoIdTF.setText(member.getM_Id());
 		memberInfoPwTF.setText(member.getM_Pw());
@@ -175,7 +185,6 @@ public class MemberInfoPanel extends JPanel {
 		memberInfoPhoneTF.setText(member.getM_Phone());
 		memberInfoEmailTF.setText(member.getM_Email());
 		memberInfoAddressTF.setText(member.getM_Address());
-		
 	}
 	
 	public void updateInfoEnable(boolean b) {
@@ -185,7 +194,7 @@ public class MemberInfoPanel extends JPanel {
 			memberInfoPhoneTF.setEditable(true);
 			memberInfoEmailTF.setEditable(true);
 			memberInfoAddressTF.setEditable(true);
-			updateBtn1.setText("수정취소");
+			
 			memberInfoTitleLB.setText("회원정보수정");
 			updateBtn.setEnabled(true);
 		} else {
@@ -202,5 +211,7 @@ public class MemberInfoPanel extends JPanel {
 		}
 		
 	}
+	
+
 	
 }
