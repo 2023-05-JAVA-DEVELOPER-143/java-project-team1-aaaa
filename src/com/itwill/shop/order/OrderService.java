@@ -48,8 +48,8 @@ public class OrderService {
 	/*
 	 * 주문+주문아이템 상세보기
 	 */
-	public Order orderWithOrderItem(int o_no)throws Exception{
-		return orderDao.findByOrderNo(o_no);
+	public Order orderWithOrderItem(String m_id, int o_no)throws Exception{
+		return orderDao.findByOrderNo(m_id, o_no);
 	}
 	/*
 	 * 상품에서 직접주문
@@ -131,5 +131,21 @@ public class OrderService {
 			cartDao.deleteByCartNo(Integer.parseInt(cart_item_noStr_array[i]));
 		}
 		return 0;
+	}
+	
+	
+	
+	//오더 총액 계산
+	public int orderTotPrice(String userId) throws Exception {
+		int totPrice = 0;
+		List<Order> orderList = orderDao.findOrderByUserId(userId);
+		for (Order order : orderList) {
+			totPrice += order.getO_price();
+		}
+		return totPrice;
+	}
+	public int orderNoPrice(String m_id,int o_no) throws Exception {
+		Order order = orderDao.findByOrderNo(m_id, o_no);
+		return order.getO_price();
 	}
 }

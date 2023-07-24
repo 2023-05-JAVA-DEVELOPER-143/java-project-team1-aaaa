@@ -111,7 +111,6 @@ public class CartPanel extends JPanel {
 				try {
 					mainFrame.orderService.create(mainFrame.loginMember.getM_Id());
 					mainFrame.orderPanel.displayOrderList();
-					displayCartList();
 					mainFrame.shopTabbedPane.setSelectedIndex(4);
 				}catch(Exception e2) {
 					e2.printStackTrace();

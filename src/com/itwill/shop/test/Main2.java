@@ -279,6 +279,7 @@ public class Main2 extends JFrame {
 		cartPanel.setMainFrame(this);
 		memberLoginPanel.setMainFrame(this);
 		memberCreatePanel.setMainFrame(this);
+		orderPanel.setMainFrame(this);
 		
 		
 		

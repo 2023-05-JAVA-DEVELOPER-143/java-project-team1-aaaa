@@ -118,7 +118,7 @@ public class OrderDao {
 			/*
 			 * select * from orders where m_id='guard1'
 			 */
-			pstmt = con.prepareStatement(OrderSQL.ORDER_SELECT_BY_M_ID);
+			pstmt = con.prepareStatement(OrderSQL.ORDER_SELECT_BY_USERID);
 			pstmt.setString(1, m_id);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -193,7 +193,7 @@ public class OrderDao {
 			while (rs1.next()) {
 				orderList.add(new Order(rs1.getInt("o_no"), rs1.getString("o_desc"), rs1.getInt("o_price"),
 						rs1.getDate("o_date"),
-						rs1.getString("userid"),null));
+						rs1.getString("m_id"),null));
 			}
 				
 			pstmt2 = con.prepareStatement(OrderSQL.ORDER_SELECT_WITH_ORDERITEM_BY_O_NO);
@@ -234,7 +234,7 @@ public class OrderDao {
 	/*
 	 * 주문1개보기(주문상세리스트)
 	 */
-	public Order findByOrderNo(int o_no) throws Exception {
+	public Order findByOrderNo(String m_id, int o_no) throws Exception {
 
 		Order order = null;
 		Connection con = null;
@@ -247,7 +247,9 @@ public class OrderDao {
 		 * oi.p_no=p.p_no where o.userid=? and o.o_no = ?
 		 */
 		pstmt = con.prepareStatement(OrderSQL.ORDER_SELECT_WITH_ORDERITEM_BY_O_NO);
-		pstmt.setInt(1, o_no);
+		pstmt.setString(1, m_id);
+		pstmt.setInt(2, o_no);
+		
 		rs = pstmt.executeQuery();
 		/*
 		  O_NO   O_DESC 	  O_DATE 	O_PRICE  USERID  OI_NO  OI_QTY O_NO P_NO P_NAME 	  P_PRICE   P_IMAGE 	P_DESC 
