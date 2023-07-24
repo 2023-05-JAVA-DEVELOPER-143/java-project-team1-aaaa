@@ -86,7 +86,7 @@ public class MainCategoryPanel extends JPanel {
 			categoryPane.add(backGroud);
 			
 			JScrollPane scrollPane = new JScrollPane(backGroud);
-			scrollPane.setBounds(0, 0, 460, 700);
+			scrollPane.setBounds(0, 0, 460, 500);
 			categoryPane.add(scrollPane);
 		
 		}
